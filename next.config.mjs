@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
+  distDir: 'out',
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -9,6 +11,10 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-}
+  basePath: '/resume',
+  assetPrefix: '/resume/',
+  trailingSlash: true,
+};
 
-export default nextConfig
+export default nextConfig;
+
