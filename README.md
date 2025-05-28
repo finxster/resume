@@ -48,21 +48,21 @@ Before you begin, make sure you have the following installed on your computer:
 
 Open your terminal/command prompt and run:
 
-\`\`\`bash
+```bash
 # Clone the repository
 git clone https://github.com/finxster/resume.git
 
 # Navigate to the project directory
 cd resume
-\`\`\`
+```
 
 ### Step 2: Install Dependencies
 
 Install all the required packages:
 
-\`\`\`bash
+```bash
 npm install
-\`\`\`
+```
 
 This will download and install all the dependencies listed in \`package.json\`.
 
@@ -70,9 +70,9 @@ This will download and install all the dependencies listed in \`package.json\`.
 
 Start the local development server:
 
-\`\`\`bash
+```bash
 npm run dev
-\`\`\`
+```
 
 Open your browser and go to [http://localhost:3000](http://localhost:3000) to see the website running locally.
 
@@ -84,7 +84,7 @@ Open your browser and go to [http://localhost:3000](http://localhost:3000) to se
 
 ## 📁 Project Structure
 
-\`\`\`
+```
 resume/
 ├── app/                    # Next.js App Router pages
 │   ├── globals.css        # Global styles
@@ -103,13 +103,13 @@ resume/
 ├── tailwind.config.ts    # Tailwind CSS configuration
 ├── package.json          # Dependencies and scripts
 └── README.md            # This file
-\`\`\`
+```
 
 ## 🎨 Customization
 
 ### Personal Information
 
-Edit \`app/page.tsx\` to update:
+Edit `app/page.tsx` to update:
 - Your name and title
 - About section content
 - Contact information
@@ -117,9 +117,9 @@ Edit \`app/page.tsx\` to update:
 
 ### Experience Timeline
 
-Edit the \`experiences\` array in \`app/page.tsx\` to add/modify your work history:
+Edit the `experiences` array in `app/page.tsx` to add/modify your work history:
 
-\`\`\`typescript
+```typescript
 const experiences = [
   {
     id: 1,
@@ -131,13 +131,13 @@ const experiences = [
   },
   // Add more experiences...
 ]
-\`\`\`
+```
 
 ### Projects
 
-Update the \`projects\` array in \`app/page.tsx\` to showcase your work:
+Update the `projects` array in `app/page.tsx` to showcase your work:
 
-\`\`\`typescript
+```typescript
 const projects = [
   {
     title: "Project Name",
@@ -147,24 +147,24 @@ const projects = [
   },
   // Add more projects...
 ]
-\`\`\`
+```
 
 ### Skills
 
-Modify the \`skills\` array to reflect your technical expertise:
+Modify the `skills` array to reflect your technical expertise:
 
-\`\`\`typescript
+```typescript
 const skills = [
   { name: "JavaScript", category: "frontend" },
   { name: "Python", category: "backend" },
   // Add your skills...
 ]
-\`\`\`
+```
 
 ### Colors and Styling
 
-- Edit \`tailwind.config.ts\` to change the color scheme
-- Modify \`app/globals.css\` for global style changes
+- Edit `tailwind.config.ts` to change the color scheme
+- Modify `app/globals.css` for global style changes
 - Update individual components for specific styling
 
 ## 🚀 Deployment
@@ -182,16 +182,16 @@ The site is automatically deployed to GitHub Pages when you push changes to the 
 
 If you need to deploy manually:
 
-\`\`\`bash
+```bash
 # Build the static site
 npm run build
 
 # The built files will be in the 'out' directory
-\`\`\`
+```
 
 ## 🌐 Domain Setup
 
-The custom domain \`finx.dev\` is configured through:
+The custom domain `finx.dev` is configured through:
 
 1. **GoDaddy DNS Settings**:
    - A records pointing to GitHub Pages IPs
@@ -203,30 +203,30 @@ The custom domain \`finx.dev\` is configured through:
 
 ## 📦 Available Scripts
 
-- \`npm run dev\` - Start development server
-- \`npm run build\` - Build for production
-- \`npm run start\` - Start production server
-- \`npm run lint\` - Run ESLint for code quality
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint for code quality
 
 ## 🔧 Troubleshooting
 
 ### Common Issues:
 
 1. **Port 3000 already in use**:
-   \`\`\`bash
+   ```bash
    # Kill the process using port 3000
    npx kill-port 3000
    # Or use a different port
    npm run dev -- -p 3001
-   \`\`\`
+   ```
 
 2. **Dependencies not installing**:
-   \`\`\`bash
+   ```bash
    # Clear npm cache and reinstall
    npm cache clean --force
    rm -rf node_modules package-lock.json
    npm install
-   \`\`\`
+   ```
 
 3. **Build errors**:
    - Check the console for specific error messages
