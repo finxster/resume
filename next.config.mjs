@@ -11,8 +11,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: '/resume',
-  assetPrefix: '/resume/',
+//  basePath: '/resume',
+//  assetPrefix: '/resume/',
   trailingSlash: true,
 };
 
