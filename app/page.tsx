@@ -98,7 +98,7 @@ export default function Home() {
             <div className="flex justify-center lg:justify-end">
               <div className="relative w-[280px] h-[280px] md:w-[320px] md:h-[320px] rounded-full overflow-hidden border-4 border-white shadow-xl">
                 <Image
-                  src="/placeholder.svg?height=320&width=320"
+                  src="/profile.jpg"
                   alt="Luis Alves"
                   fill
                   className="object-cover"
