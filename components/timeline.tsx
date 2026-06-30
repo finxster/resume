@@ -33,12 +33,14 @@ const preset = {
 };
 
 // ── Layout constants ────────────────────────────────────────────────────────
+// Side ventures sit ABOVE the trunk — parallel/entrepreneurial work reads as
+// something that rises and adds to the career, not a dip below it.
 const PAD_X = 64;
-const MAIN_Y = 140; // full-time trunk
-const CLIENT_Y = 96; // base Y for client labels (row 1 sits 24px higher)
-const SIDE_Y = 260; // side-branch lane
-const YEAR_Y = 332; // year-tick ruler
-const SVG_H = 364;
+const MAIN_Y = 196; // full-time trunk
+const CLIENT_Y = 244; // base Y for client labels — BELOW the trunk (row 1 sits 24px lower)
+const SIDE_Y = 56; // side-venture lane — above the trunk
+const YEAR_Y = 300; // year-tick ruler
+const SVG_H = 320;
 const MAP_MIN_WIDTH = 900; // horizontal-scroll floor on narrow screens
 
 // ── Scale (proportional) ────────────────────────────────────────────────────
@@ -220,12 +222,13 @@ function BranchPath({ exp, scale, dimmed }: { exp: Experience; scale: Scale; dim
   const paint = preset.ink; // uniform mode — trunk + branches share neutral ink
   const paintOpacity = 0.78;
   const mergesBack = exp.mergesBack !== false;
-  const dy = SIDE_Y - MAIN_Y;
+  const dy = SIDE_Y - MAIN_Y; // negative — the lane is above the trunk
+  const adyl = Math.abs(dy);
   const tailGap = 22;
   const tailLen = 36;
 
   if (exp.dip) {
-    const half = Math.max(78, dy * 1.05);
+    const half = Math.max(78, adyl * 1.05);
     const fx1 = midX - half;
     const fx2 = midX + half;
     const cW = half * 0.62;
@@ -277,7 +280,7 @@ function BranchPath({ exp, scale, dimmed }: { exp: Experience; scale: Scale; dim
       `Q ${fx2},${MAIN_Y} ${fx2 + peel},${MAIN_Y}`;
   } else {
     const fx1 = Math.max(x1, hostX1 + 30);
-    const dxs = Math.min(dy * 0.55, Math.max(24, midX - fx1));
+    const dxs = Math.min(adyl * 0.55, Math.max(24, midX - fx1));
     const rr = Math.max(6, Math.min(14, dxs * 0.5));
     const len = Math.hypot(dxs, dy);
     const ux = dxs / len;
@@ -334,8 +337,8 @@ function ClientLane({ exp, scale }: { exp: Experience; scale: Scale }) {
   const seg = getSegment(scale, exp);
   const capX1 = seg[0] + 27;
   const capX2 = seg[1] - 27;
-  const capTop = CLIENT_Y - ROW_GAP - 18;
-  const capBottom = MAIN_Y + 16;
+  const capTop = MAIN_Y - 2; // box hangs below the trunk
+  const capBottom = CLIENT_Y + ROW_GAP + 14;
 
   const fteXs = EXPERIENCES.filter((e) => e.track === "fte").map((e) => getStationX(scale, e));
   const LOGO_CLEAR = 32;
@@ -377,9 +380,9 @@ function ClientLane({ exp, scale }: { exp: Experience; scale: Scale }) {
         const cx = placed.cx;
         const showStop = !placed.hidden;
         const row = i % 2;
-        const labelY = CLIENT_Y - row * ROW_GAP;
-        const connectorEnd = labelY + 15;
-        const connectorStart = showStop ? MAIN_Y - stopR - 4 : MAIN_Y - 7;
+        const labelY = CLIENT_Y + row * ROW_GAP; // rows stagger downward
+        const connectorStart = showStop ? MAIN_Y + stopR + 4 : MAIN_Y + 7;
+        const connectorEnd = labelY - 6;
         return (
           <g key={i}>
             <line x1={x1} y1={MAIN_Y - 5} x2={x1} y2={MAIN_Y + 5} stroke={preset.surface} strokeWidth="2.5" />
@@ -447,6 +450,7 @@ function LogoNode({
   labelX,
   color,
   compact,
+  labelAbove,
   isHovered,
   isSelected,
   dimmed,
@@ -459,6 +463,7 @@ function LogoNode({
   labelX?: number;
   color: string;
   compact?: boolean;
+  labelAbove?: boolean;
   isHovered: boolean;
   isSelected: boolean;
   dimmed: boolean;
@@ -469,8 +474,9 @@ function LogoNode({
   const r = compact ? (active ? 18 : 16) : active ? 23 : 21;
   const ring = preset.stationStroke + 1;
   const labelGap = 14;
-  const companyY = y + (r + labelGap + 4);
-  const yearsY = companyY + 14;
+  const dir = labelAbove ? -1 : 1; // company name nearest the disc, years beyond
+  const companyY = y + dir * (r + labelGap + 4);
+  const yearsY = companyY + dir * 14;
   const lx = labelX ?? x;
   const initialFill = active ? "#fff" : color;
 
@@ -622,6 +628,7 @@ function TimelineMap({
           y={MAIN_Y}
           labelX={getLabelX(scale, exp)}
           color={preset.fte}
+          labelAbove
           isHovered={hovered === exp.id}
           isSelected={selected === exp.id}
           dimmed={!!hovered && hovered !== exp.id}
