@@ -14,7 +14,7 @@ A modern, responsive portfolio website built with Next.js 15 and React 19, showc
 - **Typography**: [Inter Font](https://fonts.google.com/specimen/Inter) - Modern, readable font
 - **Deployment**: [GitHub Pages](https://pages.github.com/) - Free static site hosting
 - **Domain**: [GoDaddy](https://godaddy.com/) - Custom domain management
-- **AI Assistant**: Built with guidance from [v0 by Vercel](https://v0.dev/) - AI-powered development
+- **AI Assistant**: Bootstrapped with [v0 by Vercel](https://v0.dev/), now lovingly maintained with [Claude Code](https://claude.com/claude-code) 🤖❤️
 
 ## ✨ Features
 
@@ -253,9 +253,10 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 🙏 Acknowledgments
 
-- **v0 by Vercel** - AI assistant that helped build this portfolio
+- **v0 by Vercel** - Where this portfolio first took shape
+- **Claude Code** - My current pair-programming partner, helping evolve and maintain the project ❤️
 - **shadcn/ui** - For the beautiful component library
-- **Vercel** - For the amazing Next.js framework
+- **Next.js** - For the amazing React framework
 - **GitHub** - For free hosting via GitHub Pages
 - **Tailwind CSS** - For the utility-first CSS framework
 
