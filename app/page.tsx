@@ -22,80 +22,6 @@ export default function Home() {
     { name: "PostgreSQL", category: "database" },
   ]
 
-  const experiences = [
-    {
-      id: 1,
-      title: "Founding Engineer",
-      company: "X4Fare",
-      period: "2020 - 2021",
-      location: "Brazil (Remote)",
-      description: "Led the technical development of the startup. Responsible for hiring and onboarding developers, defining team processes, and developing the Evompass (white-label digital wallet) and Mobipix (transaction management system) platforms.",
-      roles: ["Scrum Master", "Tech Lead", "Mentor"],
-      technologies: ["Java", "Flutter", "React", "SpringBoot", "AWS", "CI/CD (GitHub Actions)", "JHipster", "Liquibase"],
-      parallel: false,
-    },
-    {
-      id: 2,
-      title: "Tech Lead / Senior Software Engineer",
-      company: "Avenue Code",
-      period: "2015 - 2023",
-      location: "Brazil / USA (Remote and On-site)",
-      description: "Acted as tech lead and senior engineer on projects for major international clients, delivering robust microservices, data processing platforms, and enterprise integrations. Also worked as a mentor and agile facilitator.",
-      roles: ["Tech Lead", "Senior Developer", "Scrum Master", "Mentor"],
-      clients: ["Williams Sonoma", "GAP", "SquareTrade", "Merchant e-Solutions"],
-      technologies: [
-        "Java", "SpringBoot", "Kafka", "JMS", "Databricks", "Python",
-        "JUnit", "Mockito", "Gradle", "Swagger", "Bash", "Jenkins",
-        "Oracle", "SQL Server", "PostgreSQL"
-      ],
-      parallel: false,
-    },
-    {
-      id: 3,
-      title: "Co-founder",
-      company: "fleeber (now amy.network)",
-      period: "2013",
-      location: "Brazil",
-      description: "Co-founded a social network for musicians. Responsible for all technical decisions and backend development, infrastructure, and service integrations, with focus on performance and scalability.",
-      roles: ["Co-founder", "Backend Engineer"],
-      technologies: ["Java", "AWS (EC2, RDS, SQS, S3)", "BDD", "Lucene", "JBehave", "Maven", "Mercurial", "Wicket"],
-      parallel: true,
-    },
-    {
-      id: 4,
-      title: "Senior Software Engineer / Tech Lead / Scrum Master",
-      company: "MAPS Soluções e Serviços S/A",
-      period: "2010 - 2015",
-      location: "Brazil",
-      description: "Held multiple roles in finance-related projects, including technical leadership, agile management, and requirements analysis. Led teams, managed planning, and ensured delivery of critical solutions for investment funds.",
-      roles: ["Tech Lead", "Senior Developer", "Scrum Master", "Product Owner"],
-      technologies: ["Java", "Spring", "Hibernate", "Jetty", "Wicket", "AWS", "Maven", "Jenkins", "Mercurial", "PostgreSQL", "Oracle"],
-      parallel: false,
-    },
-    {
-      id: 5,
-      title: "Software Engineer",
-      company: "MAPS Soluções e Serviços S/A",
-      period: "2005 - 2010",
-      location: "Brazil",
-      description: "Started as an intern and progressed to software engineer, contributing to projects in fund control, payment systems, and banking. Worked across multiple layers of backend systems.",
-      roles: ["Intern", "Software Engineer"],
-      technologies: ["Java", "Hibernate", "Spring", "Velocity", "JSF", "Ant", "SVN", "Jenkins", "Oracle", "PostgreSQL"],
-      parallel: false,
-    },
-    {
-      id: 6,
-      title: "Intern",
-      company: "Faculdade Cásper Líbero",
-      period: "2002 - 2005",
-      location: "Brazil",
-      description: "Internship in the university's IT department. Responsible for maintaining computer labs, supporting students with tech issues, and automating administrative routines.",
-      roles: ["Intern"],
-      technologies: ["Bash Scripting", "JavaScript"],
-      parallel: false,
-    },
-  ]
-  
   const projects = [
     {
       title: "E-commerce Platform",
@@ -145,7 +71,7 @@ export default function Home() {
               </div>
               <div className="flex gap-4 mt-4">
                 <a
-                  href="https://github.com/"
+                  href="https://github.com/finxster"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-500 hover:text-gray-900"
@@ -162,7 +88,7 @@ export default function Home() {
                   <Linkedin className="h-6 w-6" />
                   <span className="sr-only">LinkedIn</span>
                 </a>
-                <a href="mailto:contact@example.com" className="text-gray-500 hover:text-gray-900">
+                <a href="mailto:mail.for.luis.alves@gmail.com" className="text-gray-500 hover:text-gray-900">
                   <Mail className="h-6 w-6" />
                   <span className="sr-only">Email</span>
                 </a>
@@ -229,11 +155,11 @@ export default function Home() {
                 <div className="grid grid-cols-2 gap-y-2 mb-6">
                   <div>
                     <h4 className="font-medium">Location</h4>
-                    <p className="text-gray-500">Portugal</p>
+                    <p className="text-gray-500">Bay Area, California, US</p>
                   </div>
                   <div>
                     <h4 className="font-medium">Experience</h4>
-                    <p className="text-gray-500">8+ Years</p>
+                    <p className="text-gray-500">20+ Years</p>
                   </div>
                   <div>
                     <h4 className="font-medium">Education</h4>
@@ -256,15 +182,8 @@ export default function Home() {
       </section>
 
       {/* Experience Timeline Section */}
-      <section id="experience" className="py-16 md:py-24 bg-gray-50">
-        <div className="container px-4 md:px-6">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-8">Experience</h2>
-          <p className="text-gray-500 md:text-lg mb-12 max-w-3xl">
-            My career path has included both traditional roles and parallel entrepreneurial ventures. The timeline below
-            illustrates my professional journey.
-          </p>
-          <Timeline experiences={experiences} />
-        </div>
+      <section id="experience">
+        <Timeline />
       </section>
 
       {/* Projects Section */}
@@ -296,8 +215,8 @@ export default function Home() {
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <Mail className="h-5 w-5 text-gray-500" />
-                  <a href="mailto:contact@example.com" className="text-gray-500 hover:text-gray-900">
-                    contact@example.com
+                  <a href="mailto:mail.for.luis.alves@gmail.com" className="text-gray-500 hover:text-gray-900">
+                    mail.for.luis.alves@gmail.com
                   </a>
                 </div>
                 <div className="flex items-center gap-3">
@@ -314,12 +233,12 @@ export default function Home() {
                 <div className="flex items-center gap-3">
                   <Github className="h-5 w-5 text-gray-500" />
                   <a
-                    href="https://github.com/"
+                    href="https://github.com/finxster"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-500 hover:text-gray-900"
                   >
-                    github.com/username
+                    github.com/finxster
                   </a>
                 </div>
               </div>
@@ -381,7 +300,7 @@ export default function Home() {
             </div>
             <div className="flex gap-4">
               <a
-                href="https://github.com/"
+                href="https://github.com/finxster"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white"
@@ -398,7 +317,7 @@ export default function Home() {
                 <Linkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </a>
-              <a href="mailto:contact@example.com" className="text-gray-400 hover:text-white">
+              <a href="mailto:mail.for.luis.alves@gmail.com" className="text-gray-400 hover:text-white">
                 <Mail className="h-5 w-5" />
                 <span className="sr-only">Email</span>
               </a>

@@ -14,6 +14,15 @@ const nextConfig = {
 //  basePath: '/resume',
 //  assetPrefix: '/resume/',
   trailingSlash: true,
+  webpack: (config, { dev }) => {
+    if (dev) {
+      config.watchOptions = {
+        ...config.watchOptions,
+        ignored: ['**/out/**', '**/node_modules/**'],
+      };
+    }
+    return config;
+  },
 };
 
 export default nextConfig;
