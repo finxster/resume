@@ -6,7 +6,7 @@ interface Project {
   title: string
   description: string
   tags: string[]
-  link: string
+  link?: string
 }
 
 interface ProjectCardProps {
@@ -27,16 +27,18 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           ))}
         </div>
       </CardContent>
-      <CardFooter className="p-6 pt-0">
-        <a
-          href={project.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-600 hover:text-blue-800 flex items-center text-sm font-medium"
-        >
-          View Project <ExternalLink className="ml-1 h-3 w-3" />
-        </a>
-      </CardFooter>
+      {project.link && project.link !== "#" && (
+        <CardFooter className="p-6 pt-0">
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800 flex items-center text-sm font-medium"
+          >
+            View Project <ExternalLink className="ml-1 h-3 w-3" />
+          </a>
+        </CardFooter>
+      )}
     </Card>
   )
 }

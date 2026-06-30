@@ -24,22 +24,23 @@ export default function Home() {
 
   const projects = [
     {
-      title: "E-commerce Platform",
-      description: "A scalable e-commerce solution with advanced search and recommendation features.",
-      tags: ["React", "Node.js", "MongoDB", "AWS"],
-      link: "#",
+      title: "Piggly",
+      description:
+        "A family app for managing kids' allowances — \"mesada, now with wishes.\" Built as a full product: a React/Supabase web app, a marketing landing page, and a Cloudflare Worker that schedules recurring deposits.",
+      tags: ["React", "Vite", "Supabase", "Tailwind", "Cloudflare Workers"],
+      link: "https://piggly.pages.dev",
     },
     {
-      title: "Contact Center Analytics",
-      description: "Real-time analytics dashboard for contact center performance monitoring.",
-      tags: ["TypeScript", "Next.js", "PostgreSQL", "Docker"],
-      link: "#",
+      title: "Atipically",
+      description:
+        "An ongoing parallel venture started in 2025, running alongside my full-time work. Building a product end to end on a modern TypeScript stack.",
+      tags: ["TypeScript", "React", "Node", "PostgreSQL"],
     },
     {
-      title: "Startup Incubator Platform",
-      description: "Platform connecting founders, mentors, and investors in the startup ecosystem.",
-      tags: ["React", "GraphQL", "AWS", "Kubernetes"],
-      link: "#",
+      title: "USCIS Silent Update Tracker",
+      description:
+        "A local Python tool that monitors multiple USCIS receipts for \"silent\" case updates across different endpoints and surfaces every change in a dashboard.",
+      tags: ["Python", "Automation", "Dashboard"],
     },
   ]
 
