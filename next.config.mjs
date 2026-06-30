@@ -2,6 +2,7 @@
 const nextConfig = {
   output: 'export',
   distDir: 'out',
+  devIndicators: false,
   eslint: {
     ignoreDuringBuilds: true,
   },
