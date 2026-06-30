@@ -685,17 +685,24 @@ function Tooltip({ x, y, exp }: { x: number; y: number; exp: Experience }) {
   );
 }
 
-function DetailPanel({ exp, onClose }: { exp: Experience; onClose: () => void }) {
+function DetailModal({ exp, onClose }: { exp: Experience; onClose: () => void }) {
   const c = exp.track === "fte" ? preset.fte : preset.side;
-  const ref = useRef<HTMLDivElement>(null);
-  // Bring the panel into view on open — it renders below the (tall) map, so a
-  // click near the top of the trunk would otherwise scroll out of sight.
+  // Esc to close + lock background scroll while the modal is open.
   useEffect(() => {
-    ref.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  }, [exp.id]);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
   return (
-    <div ref={ref} className="tl-detail" style={{ borderColor: c }}>
-      <div className="tl-detail-bar" style={{ background: c }} />
+    <div className="tl-modal-overlay" onClick={onClose}>
+      <div className="tl-detail tl-modal-card" style={{ borderColor: c }} onClick={(e) => e.stopPropagation()}>
+        <div className="tl-detail-bar" style={{ background: c }} />
       <div className="tl-detail-inner">
         <div className="tl-d-head">
           <div>
@@ -761,6 +768,7 @@ function DetailPanel({ exp, onClose }: { exp: Experience; onClose: () => void })
             ))}
           </div>
         </div>
+        </div>
       </div>
     </div>
   );
@@ -769,6 +777,7 @@ function DetailPanel({ exp, onClose }: { exp: Experience; onClose: () => void })
 // ── Main ─────────────────────────────────────────────────────────────────────
 export default function Timeline() {
   const wrapRef = useRef<HTMLDivElement>(null);
+  const outerRef = useRef<HTMLDivElement>(null);
   const [wrapW, setWrapW] = useState(MAP_MIN_WIDTH);
   const [hovered, setHovered] = useState<string | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
@@ -823,28 +832,31 @@ export default function Timeline() {
           parallel.
         </p>
 
-        {/* Horizontal-scroll container for narrow screens */}
-        <div style={{ overflowX: "auto", overflowY: "hidden" }}>
-          <div ref={wrapRef} className="tl-map-wrap" style={{ minWidth: MAP_MIN_WIDTH, position: "relative" }}>
-            <TimelineMap
-              W={wrapW}
-              scale={scale}
-              hovered={hovered}
-              selected={selected}
-              onHover={(exp, e) => {
-                setHovered(exp?.id ?? null);
-                if (exp && e && wrapRef.current) {
-                  const rect = wrapRef.current.getBoundingClientRect();
-                  setTooltipPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-                }
-              }}
-              onSelect={(id) => setSelected((cur) => (cur === id ? null : id))}
-            />
-            {hoveredExp && !selected && <Tooltip x={tooltipPos.x} y={tooltipPos.y} exp={hoveredExp} />}
+        {/* Relative wrapper so the hover tooltip can sit OUTSIDE the
+            horizontal-scroll container (which clips on the y-axis). */}
+        <div ref={outerRef} style={{ position: "relative" }}>
+          <div style={{ overflowX: "auto", overflowY: "hidden" }}>
+            <div ref={wrapRef} className="tl-map-wrap" style={{ minWidth: MAP_MIN_WIDTH, position: "relative" }}>
+              <TimelineMap
+                W={wrapW}
+                scale={scale}
+                hovered={hovered}
+                selected={selected}
+                onHover={(exp, e) => {
+                  setHovered(exp?.id ?? null);
+                  if (exp && e && outerRef.current) {
+                    const rect = outerRef.current.getBoundingClientRect();
+                    setTooltipPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+                  }
+                }}
+                onSelect={(id) => setSelected((cur) => (cur === id ? null : id))}
+              />
+            </div>
           </div>
+          {hoveredExp && !selected && <Tooltip x={tooltipPos.x} y={tooltipPos.y} exp={hoveredExp} />}
         </div>
 
-        {selectedExp && <DetailPanel exp={selectedExp} onClose={() => setSelected(null)} />}
+        {selectedExp && <DetailModal exp={selectedExp} onClose={() => setSelected(null)} />}
       </div>
     </div>
   );
@@ -875,10 +887,18 @@ const TIMELINE_CSS = `
   .tl-tt-short { font-size: 12.5px; line-height: 1.45; color: var(--ink); opacity: 0.85;
     padding-top: 8px; border-top: 0.5px solid var(--hairline); }
 
+  .tl-modal-overlay { position: fixed; inset: 0; z-index: 1000;
+    background: rgba(26,26,31,0.45); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+    display: flex; align-items: center; justify-content: center; padding: 24px;
+    animation: tlFadeIn 150ms ease; }
+  @keyframes tlFadeIn { from { opacity: 0; } to { opacity: 1; } }
   .tl-detail { position: relative; margin-top: 12px; background: var(--surface);
     border: 0.5px solid var(--hairline); border-radius: 14px; overflow: hidden;
     box-shadow: 0 1px 0 rgba(0,0,0,0.02), 0 12px 32px rgba(0,0,0,0.06);
     animation: tlDetailIn 240ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+  .tl-modal-card { margin-top: 0; width: 100%; max-width: 560px;
+    max-height: calc(100vh - 48px); overflow-y: auto;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.25), 0 2px 8px rgba(0,0,0,0.1); }
   @keyframes tlDetailIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
   .tl-detail-bar { height: 4px; width: 100%; }
   .tl-detail-inner { padding: 22px 24px 24px; }
