@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -5,8 +7,13 @@ import { Github, Linkedin, Mail, Download } from "lucide-react"
 import Timeline from "@/components/timeline"
 import ProjectCard from "@/components/project-card"
 import SkillBadge from "@/components/skill-badge"
+import { useLang, tx, type L } from "@/lib/i18n"
+import { getDict } from "@/lib/dictionary"
 
 export default function Home() {
+  const { lang } = useLang()
+  const t = getDict(lang)
+
   const skills = [
     { name: "JavaScript", category: "frontend" },
     { name: "TypeScript", category: "frontend" },
@@ -22,27 +29,35 @@ export default function Home() {
     { name: "PostgreSQL", category: "database" },
   ]
 
-  const projects = [
+  const projectsData: { title: string; description: L; tags: string[]; link?: string }[] = [
     {
       title: "Piggly",
-      description:
-        "A family app for managing kids' allowances — \"mesada, now with wishes.\" Built as a full product: a React/Supabase web app, a marketing landing page, and a Cloudflare Worker that schedules recurring deposits.",
+      description: {
+        en: "A family app for managing kids' allowances — \"mesada, now with wishes.\" Built as a full product: a React/Supabase web app, a marketing landing page, and a Cloudflare Worker that schedules recurring deposits.",
+        pt: "Um app family para gerenciar a mesada das crianças — \"mesada, agora com desejos.\" Construído como produto completo: um web app em React/Supabase, uma landing page de marketing e um Cloudflare Worker que agenda depósitos recorrentes.",
+      },
       tags: ["React", "Vite", "Supabase", "Tailwind", "Cloudflare Workers"],
       link: "https://piggly.pages.dev",
     },
     {
       title: "Atipically",
-      description:
-        "An ongoing parallel venture started in 2025, running alongside my full-time work. Building a product end to end on a modern TypeScript stack.",
+      description: {
+        en: "An ongoing parallel venture started in 2025, running alongside my full-time work. Building a product end to end on a modern TypeScript stack.",
+        pt: "Um projeto paralelo em andamento, iniciado em 2025, em paralelo ao meu trabalho full-time. Construindo um produto de ponta a ponta em uma stack moderna de TypeScript.",
+      },
       tags: ["TypeScript", "React", "Node", "PostgreSQL"],
     },
     {
       title: "USCIS Silent Update Tracker",
-      description:
-        "A local Python tool that monitors multiple USCIS receipts for \"silent\" case updates across different endpoints and surfaces every change in a dashboard.",
+      description: {
+        en: "A local Python tool that monitors multiple USCIS receipts for \"silent\" case updates across different endpoints and surfaces every change in a dashboard.",
+        pt: "Uma ferramenta local em Python que monitora múltiplos recibos do USCIS em busca de atualizações \"silenciosas\" de processos em diferentes endpoints e exibe cada mudança em um dashboard.",
+      },
       tags: ["Python", "Automation", "Dashboard"],
     },
   ]
+
+  const projects = projectsData.map((p) => ({ ...p, description: tx(p.description, lang) }))
 
   return (
     <main className="min-h-screen bg-white">
@@ -53,20 +68,19 @@ export default function Home() {
             <div className="flex flex-col justify-center space-y-4">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">Luis Alves</h1>
-                <p className="text-xl text-gray-500 md:text-2xl">Software Engineer & Startup Founder</p>
+                <p className="text-xl text-gray-500 md:text-2xl">{t.hero.role}</p>
               </div>
               <p className="max-w-[600px] text-gray-500 md:text-xl">
-                Building innovative solutions with modern technologies. Passionate about creating impactful software and
-                helping startups grow.
+                {t.hero.tagline}
               </p>
               <div className="flex flex-wrap gap-3">
                 <Button asChild>
-                  <a href="#contact">Get in touch</a>
+                  <a href="#contact">{t.hero.getInTouch}</a>
                 </Button>
                 <Button variant="outline" asChild>
                   <a href="/resume.pdf" download>
                     <Download className="mr-2 h-4 w-4" />
-                    Download Resume
+                    {t.hero.downloadResume}
                   </a>
                 </Button>
               </div>
@@ -124,7 +138,7 @@ export default function Home() {
             >
               <path d="M12 5v14M5 12l7 7 7-7" />
             </svg>
-            <span className="sr-only">Scroll down</span>
+            <span className="sr-only">{t.hero.scrollDown}</span>
           </a>
         </div>
       </section>
@@ -132,43 +146,32 @@ export default function Home() {
       {/* About Section */}
       <section id="about" className="py-16 md:py-24 bg-white">
         <div className="container px-4 md:px-6">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-8">About Me</h2>
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-8">{t.about.title}</h2>
           <div className="grid gap-6 lg:grid-cols-2 items-start">
             <div className="space-y-4">
-              <p className="text-gray-500 md:text-lg">
-                I'm a software engineer with extensive experience in full-stack development, cloud architecture, and
-                startup leadership. My journey spans from developing mission-critical applications at established
-                companies to founding and advising technology startups.
-              </p>
-              <p className="text-gray-500 md:text-lg">
-                With a passion for building scalable and innovative solutions, I've worked across various domains
-                including e-commerce, contact centers, and enterprise software. I enjoy tackling complex problems and
-                mentoring other developers.
-              </p>
-              <p className="text-gray-500 md:text-lg">
-                When I'm not coding, you can find me exploring new technologies, contributing to open-source projects,
-                or advising early-stage startups on their technical challenges.
-              </p>
+              <p className="text-gray-500 md:text-lg">{t.about.p1}</p>
+              <p className="text-gray-500 md:text-lg">{t.about.p2}</p>
+              <p className="text-gray-500 md:text-lg">{t.about.p3}</p>
             </div>
             <Card>
               <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-4">Skills & Expertise</h3>
+                <h3 className="text-xl font-bold mb-4">{t.about.skillsTitle}</h3>
                 <div className="grid grid-cols-2 gap-y-2 mb-6">
                   <div>
-                    <h4 className="font-medium">Location</h4>
-                    <p className="text-gray-500">Bay Area, California, US</p>
+                    <h4 className="font-medium">{t.about.location}</h4>
+                    <p className="text-gray-500">{t.about.locationValue}</p>
                   </div>
                   <div>
-                    <h4 className="font-medium">Experience</h4>
-                    <p className="text-gray-500">20+ Years</p>
+                    <h4 className="font-medium">{t.about.experience}</h4>
+                    <p className="text-gray-500">{t.about.experienceValue}</p>
                   </div>
                   <div>
-                    <h4 className="font-medium">Education</h4>
-                    <p className="text-gray-500">Computer Science</p>
+                    <h4 className="font-medium">{t.about.education}</h4>
+                    <p className="text-gray-500">{t.about.educationValue}</p>
                   </div>
                   <div>
-                    <h4 className="font-medium">Languages</h4>
-                    <p className="text-gray-500">English, Portuguese</p>
+                    <h4 className="font-medium">{t.about.languages}</h4>
+                    <p className="text-gray-500">{t.about.languagesValue}</p>
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-2">
@@ -190,10 +193,9 @@ export default function Home() {
       {/* Projects Section */}
       <section id="projects" className="py-16 md:py-24 bg-white">
         <div className="container px-4 md:px-6">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-8">Projects</h2>
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-8">{t.projectsSection.title}</h2>
           <p className="text-gray-500 md:text-lg mb-12 max-w-3xl">
-            A selection of projects I've worked on throughout my career. Each represents different challenges and
-            technologies.
+            {t.projectsSection.subtitle}
           </p>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {projects.map((project, index) => (
@@ -208,10 +210,9 @@ export default function Home() {
         <div className="container px-4 md:px-6">
           <div className="grid gap-6 lg:grid-cols-2 items-center">
             <div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">Get In Touch</h2>
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">{t.contact.title}</h2>
               <p className="text-gray-500 md:text-lg mb-6 max-w-md">
-                Interested in working together or have a question? Feel free to reach out through any of the channels
-                below.
+                {t.contact.subtitle}
               </p>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
@@ -250,40 +251,40 @@ export default function Home() {
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div className="space-y-2">
                       <label htmlFor="name" className="text-sm font-medium">
-                        Name
+                        {t.contact.name}
                       </label>
-                      <input id="name" className="w-full p-2 border rounded-md" placeholder="Your name" />
+                      <input id="name" className="w-full p-2 border rounded-md" placeholder={t.contact.namePlaceholder} />
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="email" className="text-sm font-medium">
-                        Email
+                        {t.contact.email}
                       </label>
                       <input
                         id="email"
                         type="email"
                         className="w-full p-2 border rounded-md"
-                        placeholder="Your email"
+                        placeholder={t.contact.emailPlaceholder}
                       />
                     </div>
                   </div>
                   <div className="space-y-2">
                     <label htmlFor="subject" className="text-sm font-medium">
-                      Subject
+                      {t.contact.subject}
                     </label>
-                    <input id="subject" className="w-full p-2 border rounded-md" placeholder="Subject" />
+                    <input id="subject" className="w-full p-2 border rounded-md" placeholder={t.contact.subjectPlaceholder} />
                   </div>
                   <div className="space-y-2">
                     <label htmlFor="message" className="text-sm font-medium">
-                      Message
+                      {t.contact.message}
                     </label>
                     <textarea
                       id="message"
                       className="w-full p-2 border rounded-md min-h-[120px]"
-                      placeholder="Your message"
+                      placeholder={t.contact.messagePlaceholder}
                     ></textarea>
                   </div>
                   <Button type="submit" className="w-full">
-                    Send Message
+                    {t.contact.send}
                   </Button>
                 </form>
               </CardContent>
@@ -297,7 +298,7 @@ export default function Home() {
         <div className="container px-4 md:px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
-              <p>&copy; {new Date().getFullYear()} Luis Alves. All rights reserved.</p>
+              <p>&copy; {new Date().getFullYear()} Luis Alves. {t.footer.rights}</p>
             </div>
             <div className="flex gap-4">
               <a

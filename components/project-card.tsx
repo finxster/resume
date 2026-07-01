@@ -1,6 +1,10 @@
+"use client"
+
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ExternalLink } from "lucide-react"
+import { useLang } from "@/lib/i18n"
+import { getDict } from "@/lib/dictionary"
 
 interface Project {
   title: string
@@ -14,6 +18,8 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
+  const { lang } = useLang()
+  const t = getDict(lang).projectsSection
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-all">
       <CardContent className="p-6">
@@ -35,7 +41,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             rel="noopener noreferrer"
             className="text-blue-600 hover:text-blue-800 flex items-center text-sm font-medium"
           >
-            View Project <ExternalLink className="ml-1 h-3 w-3" />
+            {t.viewProject} <ExternalLink className="ml-1 h-3 w-3" />
           </a>
         </CardFooter>
       )}

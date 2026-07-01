@@ -3,6 +3,8 @@ import type { Metadata } from "next"
 import { Inter, Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { LanguageProvider } from "@/lib/i18n"
+import LanguageSwitcher from "@/components/language-switcher"
 
 const inter = Inter({ subsets: ["latin"] })
 const geist = Geist({ subsets: ["latin"], variable: "--font-ui" })
@@ -23,7 +25,14 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} ${geist.variable} ${geistMono.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          {children}
+          <LanguageProvider>
+            {/* Floating switcher — the site has no mounted navbar, so the
+                language toggle lives fixed in the top-right corner. */}
+            <div className="fixed top-4 right-4 z-[60]">
+              <LanguageSwitcher />
+            </div>
+            {children}
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

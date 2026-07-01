@@ -4,8 +4,13 @@ import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
+import { useLang } from "@/lib/i18n"
+import { getDict } from "@/lib/dictionary"
+import LanguageSwitcher from "@/components/language-switcher"
 
 export default function Navbar() {
+  const { lang } = useLang()
+  const t = getDict(lang).nav
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const toggleMenu = () => {
@@ -23,29 +28,33 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
             <Link href="/#about" className="text-gray-600 hover:text-gray-900">
-              About
+              {t.about}
             </Link>
             <Link href="/#experience" className="text-gray-600 hover:text-gray-900">
-              Experience
+              {t.experience}
             </Link>
             <Link href="/#projects" className="text-gray-600 hover:text-gray-900">
-              Projects
+              {t.projects}
             </Link>
             <Link href="/#contact" className="text-gray-600 hover:text-gray-900">
-              Contact
+              {t.contact}
             </Link>
             <Button asChild variant="outline">
               <a href="/resume.pdf" download>
-                Resume
+                {t.resume}
               </a>
             </Button>
+            <LanguageSwitcher />
           </nav>
 
           {/* Mobile Menu Button */}
-          <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleMenu}>
-            {isMenuOpen ? <X /> : <Menu />}
-            <span className="sr-only">Toggle menu</span>
-          </Button>
+          <div className="flex items-center gap-2 md:hidden">
+            <LanguageSwitcher />
+            <Button variant="ghost" size="icon" onClick={toggleMenu}>
+              {isMenuOpen ? <X /> : <Menu />}
+              <span className="sr-only">{t.toggleMenu}</span>
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -58,32 +67,32 @@ export default function Navbar() {
               className="text-gray-600 hover:text-gray-900 py-2"
               onClick={() => setIsMenuOpen(false)}
             >
-              About
+              {t.about}
             </Link>
             <Link
               href="/#experience"
               className="text-gray-600 hover:text-gray-900 py-2"
               onClick={() => setIsMenuOpen(false)}
             >
-              Experience
+              {t.experience}
             </Link>
             <Link
               href="/#projects"
               className="text-gray-600 hover:text-gray-900 py-2"
               onClick={() => setIsMenuOpen(false)}
             >
-              Projects
+              {t.projects}
             </Link>
             <Link
               href="/#contact"
               className="text-gray-600 hover:text-gray-900 py-2"
               onClick={() => setIsMenuOpen(false)}
             >
-              Contact
+              {t.contact}
             </Link>
             <Button asChild variant="outline" className="w-full">
               <a href="/resume.pdf" download>
-                Resume
+                {t.resume}
               </a>
             </Button>
           </nav>

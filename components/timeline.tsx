@@ -17,6 +17,11 @@ import {
   COUNTRY_PALETTE,
   type Experience,
 } from "@/lib/data";
+import { useLang, tx, type Lang } from "@/lib/i18n";
+import { getDict, type Dictionary } from "@/lib/dictionary";
+
+// The timeline slice of the dictionary, threaded through the sub-components.
+type TL = Dictionary["timeline"];
 
 // ── Production preset (BART) ────────────────────────────────────────────────
 const preset = {
@@ -95,21 +100,21 @@ function branchMidX(exp: Experience, scale: Scale) {
   return (a + b) / 2;
 }
 
-function formatYears(exp: Experience) {
+function formatYears(exp: Experience, t: TL) {
   if (exp.pointYear && exp.end - exp.start <= 1) return String(exp.pointYear);
   if (exp.start === exp.end) return String(exp.start);
-  return `${exp.start} – ${exp.end >= 2026 ? "now" : exp.end}`;
+  return `${exp.start} – ${exp.end >= 2026 ? t.now : exp.end}`;
 }
-function formatRange(exp: Experience) {
+function formatRange(exp: Experience, t: TL) {
   if (exp.pointYear && exp.end - exp.start <= 1) return String(exp.pointYear);
   if (exp.start === exp.end) return String(exp.start);
-  const end = exp.end >= 2026 ? "Present" : exp.end;
+  const end = exp.end >= 2026 ? t.present : exp.end;
   return `${exp.start} – ${end}`;
 }
 
 // ── Sub-components ───────────────────────────────────────────────────────────
 
-function CountryZones({ scale, yTop, yBottom }: { scale: Scale; yTop: number; yBottom: number }) {
+function CountryZones({ scale, yTop, yBottom, lang }: { scale: Scale; yTop: number; yBottom: number; lang: Lang }) {
   return (
     <g style={{ pointerEvents: "none" }}>
       {COUNTRY_PERIODS.map((p, i) => {
@@ -142,7 +147,7 @@ function CountryZones({ scale, yTop, yBottom }: { scale: Scale; yTop: number; yB
               fontWeight="600"
               style={{ fontFamily: "var(--font-mono)", letterSpacing: "0.16em" }}
             >
-              {w > 64 ? p.label.toUpperCase() : p.code}
+              {w > 64 ? tx(p.label, lang).toUpperCase() : p.code}
             </text>
           </g>
         );
@@ -190,7 +195,7 @@ function YearTickAxis({ scale, W, y }: { scale: Scale; W: number; y: number }) {
   );
 }
 
-function PresentChip({ x, y }: { x: number; y: number }) {
+function PresentChip({ x, y, t }: { x: number; y: number; t: TL }) {
   const cx = x - 38;
   const fill = preset.fte;
   return (
@@ -206,7 +211,7 @@ function PresentChip({ x, y }: { x: number; y: number }) {
         fontWeight="600"
         style={{ fontFamily: "var(--font-mono)" }}
       >
-        TODAY
+        {t.today}
       </text>
       <path d={`M ${cx},${y - 11} L ${cx - 4},${y - 16} L ${cx + 4},${y - 16} Z`} fill={fill} />
     </g>
@@ -326,7 +331,7 @@ function BranchPath({ exp, scale, dimmed }: { exp: Experience; scale: Scale; dim
 
 // Client engagements annotated on the trunk as a dashed rounded container with
 // per-period labels (staggered onto two rows) and small "stop" marks.
-function ClientLane({ exp, scale }: { exp: Experience; scale: Scale }) {
+function ClientLane({ exp, scale, t }: { exp: Experience; scale: Scale; t: TL }) {
   const periods = exp.clientPeriods || [];
   if (!periods.length) return null;
   const trunkPaint = preset.ink;
@@ -422,7 +427,7 @@ function ClientLane({ exp, scale }: { exp: Experience; scale: Scale }) {
               fill={preset.muted}
               style={{ fontFamily: "var(--font-mono)", letterSpacing: "0.06em" }}
             >
-              {p.start}–{p.end >= 2026 ? "now" : p.end}
+              {p.start}–{p.end >= 2026 ? t.now : p.end}
             </text>
           </g>
         );
@@ -456,6 +461,7 @@ function LogoNode({
   dimmed,
   onHover,
   onSelect,
+  t,
 }: {
   exp: Experience;
   x: number;
@@ -469,6 +475,7 @@ function LogoNode({
   dimmed: boolean;
   onHover: (exp: Experience | null, e?: React.MouseEvent) => void;
   onSelect: (id: string) => void;
+  t: TL;
 }) {
   const active = isHovered || isSelected;
   const r = compact ? (active ? 18 : 16) : active ? 23 : 21;
@@ -543,7 +550,7 @@ function LogoNode({
         strokeWidth="3"
         style={{ paintOrder: "stroke", strokeLinejoin: "round", fontFamily: "var(--font-mono)" }}
       >
-        {formatYears(exp)}
+        {formatYears(exp, t)}
       </text>
     </g>
   );
@@ -557,6 +564,8 @@ function TimelineMap({
   selected,
   onHover,
   onSelect,
+  lang,
+  t,
 }: {
   W: number;
   scale: Scale;
@@ -564,6 +573,8 @@ function TimelineMap({
   selected: string | null;
   onHover: (exp: Experience | null, e?: React.MouseEvent) => void;
   onSelect: (id: string) => void;
+  lang: Lang;
+  t: TL;
 }) {
   const ftes = EXPERIENCES.filter((e) => e.track === "fte");
   const sides = EXPERIENCES.filter((e) => e.track === "side");
@@ -577,7 +588,7 @@ function TimelineMap({
 
   return (
     <svg className="map" width={W} height={SVG_H} viewBox={`0 0 ${W} ${SVG_H}`} onMouseLeave={() => onHover(null)}>
-      <CountryZones scale={scale} yTop={20} yBottom={YEAR_Y - 14} />
+      <CountryZones scale={scale} yTop={20} yBottom={YEAR_Y - 14} lang={lang} />
       <YearGrid scale={scale} yTop={44} yBottom={YEAR_Y} />
       <YearTickAxis scale={scale} W={W} y={YEAR_Y} />
 
@@ -616,7 +627,7 @@ function TimelineMap({
 
       {/* Client containers */}
       {ftes.filter((e) => e.clientPeriods).map((exp) => (
-        <ClientLane key={exp.id} exp={exp} scale={scale} />
+        <ClientLane key={exp.id} exp={exp} scale={scale} t={t} />
       ))}
 
       {/* FTE stations */}
@@ -634,6 +645,7 @@ function TimelineMap({
           dimmed={!!hovered && hovered !== exp.id}
           onHover={onHover}
           onSelect={onSelect}
+          t={t}
         />
       ))}
 
@@ -651,16 +663,17 @@ function TimelineMap({
           dimmed={!!hovered && hovered !== exp.id}
           onHover={onHover}
           onSelect={onSelect}
+          t={t}
         />
       ))}
 
-      <PresentChip x={arrowTipX} y={MAIN_Y} />
+      <PresentChip x={arrowTipX} y={MAIN_Y} t={t} />
     </svg>
   );
 }
 
 // ── Tooltip & detail panel ───────────────────────────────────────────────────
-function Tooltip({ x, y, exp }: { x: number; y: number; exp: Experience }) {
+function Tooltip({ x, y, exp, lang, t }: { x: number; y: number; exp: Experience; lang: Lang; t: TL }) {
   const c = exp.track === "fte" ? preset.fte : preset.side;
   const w = 280;
   const left = Math.max(8, x - w / 2);
@@ -671,21 +684,21 @@ function Tooltip({ x, y, exp }: { x: number; y: number; exp: Experience }) {
         <span className="tl-tt-chip" style={{ background: c }}>
           {exp.code}
         </span>
-        <span className="tl-tt-track">{exp.track === "fte" ? "Full-time" : "Side venture"}</span>
+        <span className="tl-tt-track">{exp.track === "fte" ? t.fullTime : t.sideVenture}</span>
       </div>
-      <div className="tl-tt-title">{exp.title}</div>
+      <div className="tl-tt-title">{tx(exp.title, lang)}</div>
       <div className="tl-tt-co">{exp.company}</div>
       <div className="tl-tt-meta">
-        <span>{formatRange(exp)}</span>
+        <span>{formatRange(exp, t)}</span>
         <span className="tl-tt-dot">·</span>
-        <span>{exp.location}</span>
+        <span>{tx(exp.location, lang)}</span>
       </div>
-      <div className="tl-tt-short">{exp.short}</div>
+      <div className="tl-tt-short">{tx(exp.short, lang)}</div>
     </div>
   );
 }
 
-function DetailModal({ exp, onClose }: { exp: Experience; onClose: () => void }) {
+function DetailModal({ exp, onClose, lang, t }: { exp: Experience; onClose: () => void; lang: Lang; t: TL }) {
   const c = exp.track === "fte" ? preset.fte : preset.side;
   // Esc to close + lock background scroll while the modal is open.
   useEffect(() => {
@@ -710,27 +723,27 @@ function DetailModal({ exp, onClose }: { exp: Experience; onClose: () => void })
               <span className="tl-d-chip" style={{ background: c }}>
                 {exp.code}
               </span>
-              <span className="tl-d-track-label">{exp.track === "fte" ? "Full-time" : "Side venture"}</span>
+              <span className="tl-d-track-label">{exp.track === "fte" ? t.fullTime : t.sideVenture}</span>
             </div>
-            <h3 className="tl-d-title">{exp.title}</h3>
+            <h3 className="tl-d-title">{tx(exp.title, lang)}</h3>
             <div className="tl-d-co">
               <strong>{exp.company}</strong>
               <span className="tl-d-dot">·</span>
-              <span>{formatRange(exp)}</span>
+              <span>{formatRange(exp, t)}</span>
               <span className="tl-d-dot">·</span>
-              <span>{exp.location}</span>
+              <span>{tx(exp.location, lang)}</span>
             </div>
           </div>
-          <button className="tl-d-close" onClick={onClose} aria-label="Close">
+          <button className="tl-d-close" onClick={onClose} aria-label={t.close}>
             ×
           </button>
         </div>
 
-        <p className="tl-d-desc">{exp.description}</p>
+        <p className="tl-d-desc">{tx(exp.description, lang)}</p>
 
         {exp.progression ? (
           <div className="tl-d-section">
-            <div className="tl-d-label">Progression</div>
+            <div className="tl-d-label">{t.progression}</div>
             <ol className="tl-d-progression" style={{ borderLeftColor: c }}>
               {exp.progression.map((p, i) => (
                 <li key={i}>
@@ -738,9 +751,9 @@ function DetailModal({ exp, onClose }: { exp: Experience; onClose: () => void })
                   <div>
                     <div className="tl-d-prog-head">
                       <span className="tl-d-prog-years">{p.years}</span>
-                      <span className="tl-d-prog-title">{p.title}</span>
+                      <span className="tl-d-prog-title">{tx(p.title, lang)}</span>
                     </div>
-                    <div className="tl-d-prog-note">{p.note}</div>
+                    <div className="tl-d-prog-note">{tx(p.note, lang)}</div>
                   </div>
                 </li>
               ))}
@@ -750,8 +763,8 @@ function DetailModal({ exp, onClose }: { exp: Experience; onClose: () => void })
           exp.roles && (
             <div className="tl-d-roles">
               {exp.roles.map((rr) => (
-                <span className="tl-d-role" key={rr}>
-                  {rr}
+                <span className="tl-d-role" key={tx(rr, lang)}>
+                  {tx(rr, lang)}
                 </span>
               ))}
             </div>
@@ -759,7 +772,7 @@ function DetailModal({ exp, onClose }: { exp: Experience; onClose: () => void })
         )}
 
         <div className="tl-d-section">
-          <div className="tl-d-label">Skills &amp; technologies</div>
+          <div className="tl-d-label">{t.skillsTech}</div>
           <div className="tl-d-tech">
             {exp.tech.map((tt) => (
               <span className="tl-d-techchip" key={tt}>
@@ -776,6 +789,8 @@ function DetailModal({ exp, onClose }: { exp: Experience; onClose: () => void })
 
 // ── Main ─────────────────────────────────────────────────────────────────────
 export default function Timeline() {
+  const { lang } = useLang();
+  const t = getDict(lang).timeline;
   const wrapRef = useRef<HTMLDivElement>(null);
   const outerRef = useRef<HTMLDivElement>(null);
   const [wrapW, setWrapW] = useState(MAP_MIN_WIDTH);
@@ -825,11 +840,10 @@ export default function Timeline() {
             lineHeight: 1.1,
           }}
         >
-          Experience
+          {t.title}
         </h2>
         <p style={{ fontSize: 18, color: preset.muted, maxWidth: 640, lineHeight: 1.6, margin: "0 0 32px" }}>
-          A non-linear journey, drawn linearly — a main trunk of full-time roles, with side ventures forking off in
-          parallel.
+          {t.subtitle}
         </p>
 
         {/* Relative wrapper so the hover tooltip can sit OUTSIDE the
@@ -840,6 +854,8 @@ export default function Timeline() {
               <TimelineMap
                 W={wrapW}
                 scale={scale}
+                lang={lang}
+                t={t}
                 hovered={hovered}
                 selected={selected}
                 onHover={(exp, e) => {
@@ -853,10 +869,14 @@ export default function Timeline() {
               />
             </div>
           </div>
-          {hoveredExp && !selected && <Tooltip x={tooltipPos.x} y={tooltipPos.y} exp={hoveredExp} />}
+          {hoveredExp && !selected && (
+            <Tooltip x={tooltipPos.x} y={tooltipPos.y} exp={hoveredExp} lang={lang} t={t} />
+          )}
         </div>
 
-        {selectedExp && <DetailModal exp={selectedExp} onClose={() => setSelected(null)} />}
+        {selectedExp && (
+          <DetailModal exp={selectedExp} onClose={() => setSelected(null)} lang={lang} t={t} />
+        )}
       </div>
     </div>
   );
