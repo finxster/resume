@@ -205,19 +205,11 @@ export const experiences: Experience[] = [
     roles: [R.techLead, R.seniorDeveloper, R.scrumMaster, R.mentor],
     progression: [
       {
-        years: "2022 – 2023",
-        title: { en: "GAP · Hands Free Planning", pt: "GAP · Hands Free Planning" },
+        years: "2025 – now",
+        title: { en: "Tech Lead · AI Rules Engine", pt: "Tech Lead · Motor de Regras com IA" },
         note: {
-          en: "Built a Databricks/Python simulation platform so the data-science team could normalize data from many sources and optimize purchasing decisions.",
-          pt: "Construí uma plataforma de simulação em Databricks/Python para o time de data science normalizar dados de várias fontes e otimizar decisões de compra.",
-        },
-      },
-      {
-        years: "2023 – 2024",
-        title: { en: "Williams Sonoma · Supply Chain", pt: "Williams Sonoma · Supply Chain" },
-        note: {
-          en: "Supply-chain microservices integrating warehouse systems (PKMS/WMOS) with personalization (Pulse); built a reusable file-upload framework and automated the back-order flow.",
-          pt: "Microsserviços de supply chain integrando sistemas de armazém (PKMS/WMOS) com personalização (Pulse); criei um framework reutilizável de file upload e automatizei o fluxo de back-order.",
+          en: "Hands-on tech lead and lead developer of the internal rules-engine product — 100% AI/agentic with Codex, pioneering AI across the supply-chain vertical, defining AI processes, sharing best practices, and mentoring a 3-dev team.",
+          pt: "Tech lead hands-on e principal desenvolvedor do produto interno de motor de regras — 100% IA/agentic com Codex, pioneiro em IA na vertical de supply chain, definindo processos de IA, compartilhando boas práticas e mentorando um time de 3 devs.",
         },
       },
       {
@@ -229,11 +221,19 @@ export const experiences: Experience[] = [
         },
       },
       {
-        years: "2025 – now",
-        title: { en: "Tech Lead · AI Rules Engine", pt: "Tech Lead · Motor de Regras com IA" },
+        years: "2023 – 2024",
+        title: { en: "Williams Sonoma · Supply Chain", pt: "Williams Sonoma · Supply Chain" },
         note: {
-          en: "Hands-on tech lead and lead developer of the internal rules-engine product — 100% AI/agentic with Codex, pioneering AI across the supply-chain vertical, defining AI processes, sharing best practices, and mentoring a 3-dev team.",
-          pt: "Tech lead hands-on e principal desenvolvedor do produto interno de motor de regras — 100% IA/agentic com Codex, pioneiro em IA na vertical de supply chain, definindo processos de IA, compartilhando boas práticas e mentorando um time de 3 devs.",
+          en: "Supply-chain microservices integrating warehouse systems (PKMS/WMOS) with personalization (Pulse); built a reusable file-upload framework and automated the back-order flow.",
+          pt: "Microsserviços de supply chain integrando sistemas de armazém (PKMS/WMOS) com personalização (Pulse); criei um framework reutilizável de file upload e automatizei o fluxo de back-order.",
+        },
+      },
+      {
+        years: "2022 – 2023",
+        title: { en: "GAP · Hands Free Planning", pt: "GAP · Hands Free Planning" },
+        note: {
+          en: "Built a Databricks/Python simulation platform so the data-science team could normalize data from many sources and optimize purchasing decisions.",
+          pt: "Construí uma plataforma de simulação em Databricks/Python para o time de data science normalizar dados de várias fontes e otimizar decisões de compra.",
         },
       },
     ],

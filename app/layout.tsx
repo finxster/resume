@@ -11,8 +11,8 @@ const geist = Geist({ subsets: ["latin"], variable: "--font-ui" })
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" })
 
 export const metadata: Metadata = {
-  title: "Luis Alves | Software Engineer & Startup Founder",
-  description: "Portfolio website of Luis Alves, Software Engineer and Startup Founder based in Portugal.",
+  title: "Luis Alves | Staff Engineer & Founder",
+  description: "Portfolio website of Luis Alves, Staff Software Engineer and founder based in the San Francisco Bay Area.",
     generator: 'v0.dev'
 }
 
