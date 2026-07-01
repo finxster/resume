@@ -802,7 +802,7 @@ export default function Timeline() {
         {
           background: preset.bg,
           color: preset.ink,
-          padding: "64px 24px 80px",
+          padding: "64px 0 80px",
           "--ink": preset.ink,
           "--muted": preset.muted,
           "--bg": preset.bg,
@@ -815,7 +815,7 @@ export default function Timeline() {
     >
       <style>{TIMELINE_CSS}</style>
 
-      <div style={{ maxWidth: 1180, margin: "0 auto" }}>
+      <div className="container px-4 md:px-6">
         <h2
           style={{
             fontSize: "clamp(1.875rem, 4vw, 3rem)",
