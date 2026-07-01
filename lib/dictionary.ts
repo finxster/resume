@@ -24,7 +24,7 @@ export const dictionary = {
     about: {
       title: "About Me",
       p1: "I'm a staff software engineer with 21+ years of experience covering the full software lifecycle — analysis, architecture, development, testing, and delivery. My career started in 2005 building financial systems in Brazil (investment funds, custody, and payments) and grew from engineer into tech lead, Scrum Master, and product owner.",
-      p2: "Over the last decade I've delivered microservices, data platforms, and enterprise integrations for major clients — SquareTrade, Merchant e-Solutions, Williams Sonoma, and GAP — as a tech lead at Avenue Code, relocating from Brazil to the US along the way. I care deeply about a strong testing culture (TDD/BDD), clean architecture, and mentoring engineers.",
+      p2: "Over the last decade I've delivered microservices, data platforms, and enterprise integrations for major clients — SquareTrade, Merchant e-Solutions, Williams Sonoma, and GAP — as a tech lead at Avenue Code, relocating from Brazil to the US along the way. Most recently I've been leading AI-first, agentic development — building an internal rules engine end to end and pioneering AI practices across a supply-chain vertical. I care deeply about a strong testing culture (TDD/BDD), clean architecture, and mentoring engineers.",
       p3: "I also have a strong entrepreneurial streak: I was the founding engineer at X4Fare (a transit fintech), co-founded fleeber (now amy.network), and I'm currently building AtipicALI alongside my full-time work. I lead by example, enjoy talking to non-technical people, and like solving hard problems.",
       skillsTitle: "Skills & Expertise",
       location: "Location",
@@ -93,7 +93,7 @@ export const dictionary = {
     about: {
       title: "Sobre Mim",
       p1: "Sou um staff software engineer com mais de 21 anos de experiência cobrindo todo o ciclo de software — análise, arquitetura, desenvolvimento, testes e entrega. Minha carreira começou em 2005 construindo sistemas financeiros no Brasil (fundos de investimento, custódia e pagamentos) e evoluiu de engenheiro para tech lead, Scrum Master e product owner.",
-      p2: "Na última década, entreguei microsserviços, plataformas de dados e integrações corporativas para grandes clientes — SquareTrade, Merchant e-Solutions, Williams Sonoma e GAP — como tech lead na Avenue Code, mudando do Brasil para os EUA no caminho. Tenho grande apreço por cultura de testes (TDD/BDD), arquitetura limpa e mentoria de engenheiros.",
+      p2: "Na última década, entreguei microsserviços, plataformas de dados e integrações corporativas para grandes clientes — SquareTrade, Merchant e-Solutions, Williams Sonoma e GAP — como tech lead na Avenue Code, mudando do Brasil para os EUA no caminho. Mais recentemente, venho liderando desenvolvimento AI-first e agentic — construindo um motor de regras interno de ponta a ponta e sendo pioneiro em práticas de IA numa vertical de supply chain. Tenho grande apreço por cultura de testes (TDD/BDD), arquitetura limpa e mentoria de engenheiros.",
       p3: "Também tenho um forte perfil empreendedor: fui engenheiro fundador na X4Fare (fintech de mobilidade), cofundei a fleeber (hoje amy.network) e atualmente construo a AtipicALI em paralelo ao meu trabalho full-time. Lidero pelo exemplo, gosto de conversar com pessoas não-técnicas e de resolver problemas difíceis.",
       skillsTitle: "Habilidades & Especialidades",
       location: "Localização",

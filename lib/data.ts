@@ -187,27 +187,61 @@ export const experiences: Experience[] = [
     track: "fte",
     code: "AC",
     initial: "AC",
-    title: { en: "Senior Software Engineer · Tech Lead", pt: "Engenheiro de Software Sênior · Tech Lead" },
+    title: { en: "Senior Engineer → Tech Lead · AI", pt: "Engenheiro Sênior → Tech Lead · IA" },
     company: "Avenue Code",
     shortCompany: "Avenue Code",
     short: {
-      en: "Returned to consultancy — GAP, then Williams Sonoma",
-      pt: "Voltei à consultoria — GAP, depois Williams Sonoma",
+      en: "Return to consultancy — from GAP data platforms to leading an AI-built rules engine",
+      pt: "Volta à consultoria — de plataformas de dados na GAP a liderar um motor de regras feito com IA",
     },
     start: 2022,
     end: 2026,
     country: "US",
     location: { en: "USA — Remote", pt: "EUA — Remoto" },
     description: {
-      en: "Returned to Avenue Code from X4Fare as a hands-on tech lead — fully remote from the US. At GAP, built a Databricks/Python simulation platform (Hands Free Planning) so the data-science team could normalize data from many sources and make optimal purchasing decisions. At Williams Sonoma, led the Supply Chain / Logistics microservice integrating the warehouse systems (PKMS/WMOS) with the personalization system (Pulse), and built a reusable generic file-upload framework while automating the back-order notification flow.",
-      pt: "Voltei à Avenue Code depois da X4Fare como tech lead hands-on — totalmente remoto a partir dos EUA. Na GAP, construí uma plataforma de simulação em Databricks/Python (Hands Free Planning) para o time de data science normalizar dados de várias fontes e tomar decisões ótimas de compra. Na Williams Sonoma, liderei o microsserviço de Supply Chain / Logística integrando os sistemas de armazém (PKMS/WMOS) com o sistema de personalização (Pulse), e construí um framework genérico e reutilizável de file upload enquanto automatizava o fluxo de notificação de back-order.",
+      en: "Returned to Avenue Code from X4Fare as a hands-on tech lead, fully remote from the US. Started on GAP's Hands Free Planning simulation platform (Databricks/Python), then moved into Williams Sonoma's supply-chain domain — microservices, a reusable file-upload framework, and back-order automation. Led a 3-person team migrating ~20 microservices from Java 11 to 21, drove early AI initiatives, and after a successful Drools proof-of-concept now lead an AI-built internal rules-engine product that replaced a third-party vendor — pioneering AI-first, agentic development across the supply-chain vertical.",
+      pt: "Voltei à Avenue Code depois da X4Fare como tech lead hands-on, totalmente remoto a partir dos EUA. Comecei na plataforma de simulação Hands Free Planning da GAP (Databricks/Python) e depois entrei no domínio de supply chain da Williams Sonoma — microsserviços, um framework reutilizável de file upload e automação de back-order. Liderei um time de 3 pessoas migrando ~20 microsserviços de Java 11 para 21, conduzi as primeiras iniciativas de IA e, após um POC bem-sucedido com Drools, hoje lidero um produto interno de motor de regras construído com IA que substituiu um fornecedor externo — sendo pioneiro em desenvolvimento AI-first e agentic em toda a vertical de supply chain.",
     },
     roles: [R.techLead, R.seniorDeveloper, R.scrumMaster, R.mentor],
+    progression: [
+      {
+        years: "2022 – 2023",
+        title: { en: "GAP · Hands Free Planning", pt: "GAP · Hands Free Planning" },
+        note: {
+          en: "Built a Databricks/Python simulation platform so the data-science team could normalize data from many sources and optimize purchasing decisions.",
+          pt: "Construí uma plataforma de simulação em Databricks/Python para o time de data science normalizar dados de várias fontes e otimizar decisões de compra.",
+        },
+      },
+      {
+        years: "2023 – 2024",
+        title: { en: "Williams Sonoma · Supply Chain", pt: "Williams Sonoma · Supply Chain" },
+        note: {
+          en: "Supply-chain microservices integrating warehouse systems (PKMS/WMOS) with personalization (Pulse); built a reusable file-upload framework and automated the back-order flow.",
+          pt: "Microsserviços de supply chain integrando sistemas de armazém (PKMS/WMOS) com personalização (Pulse); criei um framework reutilizável de file upload e automatizei o fluxo de back-order.",
+        },
+      },
+      {
+        years: "2024 – 2025",
+        title: { en: "Tech Evolution & AI", pt: "Evolução Técnica & IA" },
+        note: {
+          en: "Led a 3-person team migrating ~20 microservices from Java 11 to 21; built an AI-powered DevOps dashboard used by all teams, authored a Python integration solo, and ran a successful Drools POC to replace a vendor — all with GitHub Copilot.",
+          pt: "Liderei um time de 3 pessoas na migração de ~20 microsserviços de Java 11 para 21; construí um dashboard de DevOps com IA usado por todos os times, escrevi sozinho uma integração em Python e conduzi um POC bem-sucedido com Drools para substituir um fornecedor — tudo com GitHub Copilot.",
+        },
+      },
+      {
+        years: "2025 – now",
+        title: { en: "Tech Lead · AI Rules Engine", pt: "Tech Lead · Motor de Regras com IA" },
+        note: {
+          en: "Hands-on tech lead and lead developer of the internal rules-engine product — 100% AI/agentic with Codex, pioneering AI across the supply-chain vertical, defining AI processes, sharing best practices, and mentoring a 3-dev team.",
+          pt: "Tech lead hands-on e principal desenvolvedor do produto interno de motor de regras — 100% IA/agentic com Codex, pioneiro em IA na vertical de supply chain, definindo processos de IA, compartilhando boas práticas e mentorando um time de 3 devs.",
+        },
+      },
+    ],
     clientPeriods: [
       { client: "GAP", start: 2022, end: 2023, country: "US" },
       { client: "Williams Sonoma", start: 2023, end: 2026, country: "US" },
     ],
-    tech: ["Java", "Spring Boot", "Spring WebFlux", "Kafka", "Databricks", "Python", "Nutter", "AWS", "Gradle", "Jenkins", "Oracle", "SQL Server"],
+    tech: ["Java 21", "Spring Boot", "Spring WebFlux", "Kafka", "Drools", "AI / LLMs", "Agentic AI", "GitHub Copilot", "Codex", "Databricks", "Python", "AWS", "Jenkins", "Oracle", "SQL Server"],
   },
   // ── Side projects (parallel) ─────────────────────────────────────────
   {
