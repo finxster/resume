@@ -4,6 +4,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Github, Linkedin, Mail, Download, Server, Smartphone, Cloud, GitBranch, Sparkles } from "lucide-react"
+import HeroGraph from "@/components/hero-graph"
 import Timeline from "@/components/timeline"
 import ProjectCard from "@/components/project-card"
 import SkillBadge from "@/components/skill-badge"
@@ -56,8 +57,9 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative h-[90vh] flex items-center justify-center bg-gradient-to-r from-gray-50 to-gray-100">
-        <div className="container px-4 md:px-6">
+      <section className="relative h-[90vh] flex items-center justify-center bg-gradient-to-r from-gray-50 to-gray-100 overflow-hidden">
+        <HeroGraph />
+        <div className="container relative z-10 px-4 md:px-6">
           <div className="grid gap-8 lg:gap-16 lg:grid-cols-[minmax(0,600px)_320px] items-center lg:justify-center">
             <div className="flex flex-col justify-center space-y-4">
               <div className="space-y-2">
