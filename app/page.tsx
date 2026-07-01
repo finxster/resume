@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Github, Linkedin, Mail, Download } from "lucide-react"
+import { Github, Linkedin, Mail, Download, Server, Smartphone, Cloud, GitBranch, Sparkles } from "lucide-react"
 import Timeline from "@/components/timeline"
 import ProjectCard from "@/components/project-card"
 import SkillBadge from "@/components/skill-badge"
@@ -14,19 +14,12 @@ export default function Home() {
   const { lang } = useLang()
   const t = getDict(lang)
 
-  const skills = [
-    { name: "Java", category: "backend" },
-    { name: "Spring Boot", category: "backend" },
-    { name: "Python", category: "backend" },
-    { name: "Kafka", category: "backend" },
-    { name: "Flutter", category: "frontend" },
-    { name: "React", category: "frontend" },
-    { name: "TypeScript", category: "frontend" },
-    { name: "AWS", category: "cloud" },
-    { name: "Databricks", category: "cloud" },
-    { name: "CI/CD", category: "devops" },
-    { name: "PostgreSQL", category: "database" },
-    { name: "Oracle", category: "database" },
+  const skillGroups = [
+    { key: "backend" as const, category: "backend", icon: Server, items: ["Java", "Spring Boot", "Kafka", "Python", "Drools"] },
+    { key: "frontend" as const, category: "frontend", icon: Smartphone, items: ["React", "TypeScript", "Flutter", "JavaScript"] },
+    { key: "cloud" as const, category: "cloud", icon: Cloud, items: ["AWS", "Databricks", "PostgreSQL", "Oracle"] },
+    { key: "devops" as const, category: "devops", icon: GitBranch, items: ["CI/CD", "Jenkins", "Git", "Gradle"] },
+    { key: "ai" as const, category: "ai", icon: Sparkles, items: ["AI / LLMs", "Agentic AI", "GitHub Copilot", "TDD/BDD", "Scrum"] },
   ]
 
   const projectsData: { title: string; description: L; tags: string[]; link?: string }[] = [
@@ -65,7 +58,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-[90vh] flex items-center justify-center bg-gradient-to-r from-gray-50 to-gray-100">
         <div className="container px-4 md:px-6">
-          <div className="grid gap-6 lg:grid-cols-[1fr_400px] items-center">
+          <div className="grid gap-8 lg:gap-16 lg:grid-cols-[minmax(0,600px)_320px] items-center lg:justify-center">
             <div className="flex flex-col justify-center space-y-4">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">Luis Alves</h1>
@@ -110,7 +103,7 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div className="flex justify-center lg:justify-end">
+            <div className="flex justify-center lg:justify-start">
               <div className="relative w-[280px] h-[280px] md:w-[320px] md:h-[320px] rounded-full overflow-hidden border-4 border-white shadow-xl">
                 <Image
                   src="/profile.jpg"
@@ -175,10 +168,23 @@ export default function Home() {
                     <p className="text-gray-500">{t.about.languagesValue}</p>
                   </div>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {skills.map((skill) => (
-                    <SkillBadge key={skill.name} name={skill.name} category={skill.category} />
-                  ))}
+                <div className="space-y-4">
+                  {skillGroups.map((group) => {
+                    const Icon = group.icon
+                    return (
+                      <div key={group.key}>
+                        <div className="flex items-center gap-2 mb-2 text-sm font-medium text-gray-700">
+                          <Icon className="h-4 w-4 text-gray-400" />
+                          {t.about.skillGroups[group.key]}
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {group.items.map((name) => (
+                            <SkillBadge key={name} name={name} category={group.category} />
+                          ))}
+                        </div>
+                      </div>
+                    )
+                  })}
                 </div>
               </CardContent>
             </Card>

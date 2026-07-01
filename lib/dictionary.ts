@@ -27,6 +27,13 @@ export const dictionary = {
       p2: "Over the last decade I've delivered microservices, data platforms, and enterprise integrations for major clients — GAP, Williams Sonoma, SquareTrade, and Merchant e-Solutions — as a tech lead at Avenue Code, relocating from Brazil to the US along the way. Most recently I've been leading AI-first, agentic development — building an internal rules engine end to end and pioneering AI practices across a supply-chain vertical. I care deeply about a strong testing culture (TDD/BDD), clean architecture, and mentoring engineers.",
       p3: "I also have a strong entrepreneurial streak that helps me solve problems from the ground up: I was the founding engineer at X4Fare (a transit fintech), co-founded fleeber (now amy.network), and I'm currently building AtipicALI alongside my full-time work. I lead by example, enjoy talking to non-technical people, and like turning ambiguity into shipped products.",
       skillsTitle: "Skills & Expertise",
+      skillGroups: {
+        backend: "Backend",
+        frontend: "Frontend & Mobile",
+        cloud: "Cloud & Data",
+        devops: "DevOps & Delivery",
+        ai: "AI & Practices",
+      },
       location: "Location",
       locationValue: "San Francisco Bay Area, CA",
       experience: "Experience",
@@ -85,7 +92,7 @@ export const dictionary = {
     hero: {
       role: "Staff Engineer & Fundador",
       tagline:
-        "Mais de 21 anos cobrindo todo o ciclo de software — de sistemas financeiros e integrações corporativas até fundar meus próprios negócios. Construindo coisas que vão pra produção.",
+        "Mais de 21 anos cobrindo todo o ciclo de software — de sistemas financeiros e integrações corporativas até fundar meus próprios negócios. Construindo coisas que vão para produção.",
       getInTouch: "Entre em contato",
       downloadResume: "Baixar Currículo",
       scrollDown: "Rolar para baixo",
@@ -96,6 +103,13 @@ export const dictionary = {
       p2: "Na última década, entreguei microsserviços, plataformas de dados e integrações corporativas para grandes clientes — GAP, Williams Sonoma, SquareTrade e Merchant e-Solutions — como tech lead na Avenue Code, mudando do Brasil para os EUA no caminho. Mais recentemente, venho liderando desenvolvimento AI-first e agentic — construindo um motor de regras interno de ponta a ponta e sendo pioneiro em práticas de IA numa vertical de supply chain. Tenho grande apreço por cultura de testes (TDD/BDD), arquitetura limpa e mentoria de engenheiros.",
       p3: "Também tenho um forte perfil empreendedor que me ajuda a resolver problemas do zero: fui engenheiro fundador na X4Fare (fintech de mobilidade), cofundei a fleeber (hoje amy.network) e atualmente construo a AtipicALI em paralelo ao meu trabalho full-time. Lidero pelo exemplo, gosto de conversar com pessoas não-técnicas e de transformar ambiguidade em produtos entregues.",
       skillsTitle: "Habilidades & Especialidades",
+      skillGroups: {
+        backend: "Backend",
+        frontend: "Frontend & Mobile",
+        cloud: "Cloud & Dados",
+        devops: "DevOps & Entrega",
+        ai: "IA & Práticas",
+      },
       location: "Localização",
       locationValue: "San Francisco Bay Area, CA",
       experience: "Experiência",

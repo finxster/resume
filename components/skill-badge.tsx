@@ -19,6 +19,8 @@ export default function SkillBadge({ name, category }: SkillBadgeProps) {
         return "bg-cyan-100 text-cyan-800 hover:bg-cyan-200"
       case "database":
         return "bg-amber-100 text-amber-800 hover:bg-amber-200"
+      case "ai":
+        return "bg-rose-100 text-rose-800 hover:bg-rose-200"
       default:
         return "bg-gray-100 text-gray-800 hover:bg-gray-200"
     }
