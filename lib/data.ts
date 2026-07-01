@@ -147,16 +147,17 @@ export const experiences: Experience[] = [
     country: "BR/US",
     location: { en: "São Paulo, Brazil → USA", pt: "São Paulo, Brasil → EUA" },
     description: {
-      en: "Joined Avenue Code as a senior engineer and tech lead — delivering microservices, data processing platforms, and enterprise integrations for major international clients. Relocated to the US partway through this stint.",
-      pt: "Entrei na Avenue Code como engenheiro sênior e tech lead — entregando microsserviços, plataformas de processamento de dados e integrações corporativas para grandes clientes internacionais. Mudei-me para os EUA no meio dessa passagem.",
+      en: "Joined Avenue Code as a senior engineer and tech lead. Started on the SquareTrade account in Brazil — one of the first three engineers, growing the team to 30+ — then relocated to the US: on-site at Merchant e-Solutions for their AMEX certification, microservices at Williams Sonoma, and the PIM / Data Governance (Stibo → Kafka) project at GAP.",
+      pt: "Entrei na Avenue Code como engenheiro sênior e tech lead. Comecei na conta da SquareTrade no Brasil — um dos três primeiros engenheiros, ajudando a crescer o time para mais de 30 pessoas — e depois me mudei para os EUA: on-site na Merchant e-Solutions para a certificação AMEX, microsserviços na Williams Sonoma e o projeto de PIM / Data Governance (Stibo → Kafka) na GAP.",
     },
     roles: [R.techLead, R.seniorDeveloper, R.scrumMaster, R.mentor],
     clientPeriods: [
-      { client: "SquareTrade", start: 2015, end: 2018, country: "BR" },
+      { client: "SquareTrade", start: 2015, end: 2017, country: "BR" },
+      { client: "Merchant e-Solutions", start: 2017, end: 2018, country: "US" },
       { client: "Williams Sonoma", start: 2018, end: 2019, country: "US" },
       { client: "GAP", start: 2019, end: 2020, country: "US" },
     ],
-    tech: ["Java", "Spring Boot", "Kafka", "JMS", "Databricks", "Python", "JUnit", "Mockito", "Gradle", "Swagger", "Bash", "Jenkins", "Oracle", "SQL Server", "PostgreSQL"],
+    tech: ["Java", "Spring Boot", "Kafka", "JMS", "SOAP", "Apache Camel", "EJB", "JUnit", "Mockito", "Gradle", "Swagger", "Bash", "Jenkins", "Oracle", "SQL Server", "PostgreSQL"],
   },
   {
     id: "x4fare",
@@ -198,15 +199,15 @@ export const experiences: Experience[] = [
     country: "US",
     location: { en: "USA — Remote", pt: "EUA — Remoto" },
     description: {
-      en: "Returned to Avenue Code from X4Fare, picking back up the senior engineer / tech lead role for international clients — now fully remote from the US.",
-      pt: "Voltei à Avenue Code depois da X4Fare, retomando o papel de engenheiro sênior / tech lead para clientes internacionais — agora totalmente remoto a partir dos EUA.",
+      en: "Returned to Avenue Code from X4Fare as a hands-on tech lead — fully remote from the US. At GAP, built a Databricks/Python simulation platform (Hands Free Planning) so the data-science team could normalize data from many sources and make optimal purchasing decisions. At Williams Sonoma, led the Supply Chain / Logistics microservice integrating the warehouse systems (PKMS/WMOS) with the personalization system (Pulse), and built a reusable generic file-upload framework while automating the back-order notification flow.",
+      pt: "Voltei à Avenue Code depois da X4Fare como tech lead hands-on — totalmente remoto a partir dos EUA. Na GAP, construí uma plataforma de simulação em Databricks/Python (Hands Free Planning) para o time de data science normalizar dados de várias fontes e tomar decisões ótimas de compra. Na Williams Sonoma, liderei o microsserviço de Supply Chain / Logística integrando os sistemas de armazém (PKMS/WMOS) com o sistema de personalização (Pulse), e construí um framework genérico e reutilizável de file upload enquanto automatizava o fluxo de notificação de back-order.",
     },
     roles: [R.techLead, R.seniorDeveloper, R.scrumMaster, R.mentor],
     clientPeriods: [
       { client: "GAP", start: 2022, end: 2023, country: "US" },
       { client: "Williams Sonoma", start: 2023, end: 2026, country: "US" },
     ],
-    tech: ["Java", "Spring Boot", "Kafka", "Databricks", "Python", "AWS", "Jenkins", "PostgreSQL"],
+    tech: ["Java", "Spring Boot", "Spring WebFlux", "Kafka", "Databricks", "Python", "Nutter", "AWS", "Gradle", "Jenkins", "Oracle", "SQL Server"],
   },
   // ── Side projects (parallel) ─────────────────────────────────────────
   {
@@ -233,7 +234,7 @@ export const experiences: Experience[] = [
     roles: [R.coFounder, R.backendEngineer],
     tech: ["Java", "AWS (EC2, RDS, SQS, S3)", "BDD", "Lucene", "JBehave", "Maven", "Mercurial", "Wicket"],
     interchangeWith: "maps",
-    mergesBack: false, // drawn open like Atipically — fleeber lives on as amy.network
+    mergesBack: false, // drawn open like AtipicALI — fleeber lives on as amy.network
     dip: true, // rendered as a subtle smooth scoop off the trunk
   },
   {
@@ -242,8 +243,8 @@ export const experiences: Experience[] = [
     code: "AT",
     initial: "At",
     title: { en: "Co-founder", pt: "Cofundador" },
-    company: "Atipically",
-    shortCompany: "Atipically",
+    company: "AtipicALI",
+    shortCompany: "AtipicALI",
     short: {
       en: "Ongoing parallel venture — current",
       pt: "Projeto paralelo em andamento — atual",
