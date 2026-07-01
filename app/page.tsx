@@ -15,18 +15,18 @@ export default function Home() {
   const t = getDict(lang)
 
   const skills = [
-    { name: "JavaScript", category: "frontend" },
-    { name: "TypeScript", category: "frontend" },
-    { name: "React", category: "frontend" },
-    { name: "Next.js", category: "frontend" },
-    { name: "Node.js", category: "backend" },
+    { name: "Java", category: "backend" },
+    { name: "Spring Boot", category: "backend" },
     { name: "Python", category: "backend" },
+    { name: "Kafka", category: "backend" },
+    { name: "Flutter", category: "frontend" },
+    { name: "React", category: "frontend" },
+    { name: "TypeScript", category: "frontend" },
     { name: "AWS", category: "cloud" },
-    { name: "Docker", category: "devops" },
-    { name: "Kubernetes", category: "devops" },
+    { name: "Databricks", category: "cloud" },
     { name: "CI/CD", category: "devops" },
-    { name: "MongoDB", category: "database" },
     { name: "PostgreSQL", category: "database" },
+    { name: "Oracle", category: "database" },
   ]
 
   const projectsData: { title: string; description: L; tags: string[]; link?: string }[] = [
@@ -40,7 +40,7 @@ export default function Home() {
       link: "https://piggly.pages.dev",
     },
     {
-      title: "Atipically",
+      title: "AtipicALI",
       description: {
         en: "An ongoing parallel venture started in 2025, running alongside my full-time work. Building a product end to end on a modern TypeScript stack.",
         pt: "Um projeto paralelo em andamento, iniciado em 2025, em paralelo ao meu trabalho full-time. Construindo um produto de ponta a ponta em uma stack moderna de TypeScript.",
@@ -54,6 +54,7 @@ export default function Home() {
         pt: "Uma ferramenta local em Python que monitora múltiplos recibos do USCIS em busca de atualizações \"silenciosas\" de processos em diferentes endpoints e exibe cada mudança em um dashboard.",
       },
       tags: ["Python", "Automation", "Dashboard"],
+      link: "https://github.com/finxster/uscis-tracker",
     },
   ]
 

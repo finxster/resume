@@ -220,6 +220,23 @@ The custom domain `finx.dev` is configured through:
    npm run dev -- -p 3001
    ```
 
+   If `npx kill-port 3000` seems to have no effect, the process is likely
+   respawning or was bound in a way it doesn't catch:
+
+   - **The dev server is supervised** (e.g. started by an editor/agent
+     preview tool). Killing the `node` process just makes the supervisor
+     start it again — stop it from whatever launched it instead of with
+     `kill-port`.
+   - **The listener is IPv6-only.** On macOS the port often shows up in
+     `lsof` as the service name `hbci` under an `IPv6 ... *:hbci (LISTEN)`
+     line, and older `kill-port` versions miss IPv6-only listeners.
+
+   To find and kill it reliably by PID:
+   ```bash
+   lsof -i :3000                  # see what's actually listening
+   lsof -ti tcp:3000 | xargs kill -9
+   ```
+
 2. **Dependencies not installing**:
    ```bash
    # Clear npm cache and reinstall

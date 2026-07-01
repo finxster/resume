@@ -219,7 +219,7 @@ function PresentChip({ x, y, t }: { x: number; y: number; t: TL }) {
 }
 
 // Side branch fork path. fleeber uses a dotted "scoop" that dips and returns;
-// open branches (Atipically) fork off and trail into a dashed tail.
+// open branches (AtipicALI) fork off and trail into a dashed tail.
 function BranchPath({ exp, scale, dimmed }: { exp: Experience; scale: Scale; dimmed: boolean }) {
   const [x1, x2] = branchExtents(exp, scale);
   const midX = (x1 + x2) / 2;
