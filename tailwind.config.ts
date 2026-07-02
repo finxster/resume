@@ -13,6 +13,10 @@ const config: Config = {
   		container: {
   			center: true,
   		},
+  		fontFamily: {
+  			sans: ['var(--font-ui)', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+  			mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+  		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

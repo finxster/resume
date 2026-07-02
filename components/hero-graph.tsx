@@ -16,7 +16,7 @@ const MAX_NODE_COUNT = 120; // guard rail on very large screens
 const LINK_DIST = 130; // px: max distance to draw an edge
 const HOT_DIST = 120; // px: cursor interaction radius
 const SPEED = 0.25; // px/frame drift velocity range (±)
-const INK = "20,20,22"; // #141416 as "r,g,b" for rgba()
+const INK = "20,22,26"; // brand graphite #14161A as "r,g,b" for rgba()
 
 interface Node {
   x: number;

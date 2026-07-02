@@ -9,7 +9,7 @@ export default function LanguageSwitcher({ className = "" }: { className?: strin
 
   return (
     <div
-      className={`inline-flex items-center rounded-full border border-gray-200 bg-white/80 backdrop-blur px-1 py-1 text-sm shadow-sm ${className}`}
+      className={`inline-flex items-center rounded-full border border-border bg-card/80 backdrop-blur px-1 py-1 text-sm shadow-sm ${className}`}
       role="group"
       aria-label="Language"
     >
@@ -18,7 +18,7 @@ export default function LanguageSwitcher({ className = "" }: { className?: strin
         onClick={() => setLang("en")}
         aria-pressed={lang === "en"}
         className={`rounded-full px-2.5 py-0.5 font-medium transition-colors ${
-          lang === "en" ? "bg-gray-900 text-white" : "text-gray-500 hover:text-gray-900"
+          lang === "en" ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"
         }`}
       >
         EN
@@ -28,7 +28,7 @@ export default function LanguageSwitcher({ className = "" }: { className?: strin
         onClick={() => setLang("pt")}
         aria-pressed={lang === "pt"}
         className={`rounded-full px-2.5 py-0.5 font-medium transition-colors ${
-          lang === "pt" ? "bg-gray-900 text-white" : "text-gray-500 hover:text-gray-900"
+          lang === "pt" ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"
         }`}
       >
         PT

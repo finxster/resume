@@ -6,28 +6,15 @@ interface SkillBadgeProps {
 }
 
 export default function SkillBadge({ name, category }: SkillBadgeProps) {
-  // Define color schemes based on category
-  const getColorClass = () => {
-    switch (category) {
-      case "frontend":
-        return "bg-blue-100 text-blue-800 hover:bg-blue-200"
-      case "backend":
-        return "bg-green-100 text-green-800 hover:bg-green-200"
-      case "devops":
-        return "bg-purple-100 text-purple-800 hover:bg-purple-200"
-      case "cloud":
-        return "bg-cyan-100 text-cyan-800 hover:bg-cyan-200"
-      case "database":
-        return "bg-amber-100 text-amber-800 hover:bg-amber-200"
-      case "ai":
-        return "bg-rose-100 text-rose-800 hover:bg-rose-200"
-      default:
-        return "bg-gray-100 text-gray-800 hover:bg-gray-200"
-    }
-  }
-
+  // Cool Graphite brand: neutrals dominate (~10:1) and indigo is reserved for
+  // links / the mark / one primary action — so every category shares the same
+  // neutral chip. The category prop is kept for the callers' data shape.
+  void category
   return (
-    <Badge variant="outline" className={`${getColorClass()} font-normal border-0`}>
+    <Badge
+      variant="outline"
+      className="bg-muted text-muted-foreground hover:bg-muted/70 font-normal border-0"
+    >
       {name}
     </Badge>
   )

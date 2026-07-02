@@ -314,6 +314,8 @@ export const COUNTRY_PALETTE: Record<
   string,
   { tint: string; zone: string; ink: string; accent: string }
 > = {
-  BR: { tint: "rgba(31,138,91,0.10)", zone: "rgba(31,138,91,0.055)", ink: "#1F8A5B", accent: "#1F8A5B" },
-  US: { tint: "rgba(31,79,184,0.10)", zone: "rgba(31,79,184,0.055)", ink: "#1F4FB8", accent: "#1F4FB8" },
+  // Cool Graphite brand: zones are neutral graphite tints (indigo stays
+  // reserved for stations/links); alternating opacity keeps them legible.
+  BR: { tint: "rgba(20,22,26,0.08)", zone: "rgba(20,22,26,0.045)", ink: "#4B5563", accent: "#4B5563" },
+  US: { tint: "rgba(20,22,26,0.04)", zone: "rgba(20,22,26,0.02)", ink: "#4B5563", accent: "#4B5563" },
 };

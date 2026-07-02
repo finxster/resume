@@ -24,15 +24,18 @@ import { getDict, type Dictionary } from "@/lib/dictionary";
 type TL = Dictionary["timeline"];
 
 // ── Production preset (BART) ────────────────────────────────────────────────
+// Colors follow the "Cool Graphite" brand: graphite ink neutrals, brand
+// indigo (#4457E8) for the full-time trunk stations, and a soft graphite for
+// side ventures so indigo stays the only saturated accent on the page.
 const preset = {
-  bg: "#f9fafb", // site neutral (gray-50) — harmonized with the rest of the portfolio
+  bg: "#F7F8FA", // brand canvas
 
   surface: "#FFFFFF",
-  ink: "#1A1A1F",
-  muted: "rgba(26,26,31,0.55)",
-  hairline: "rgba(26,26,31,0.10)",
-  fte: "#1F4FB8",
-  side: "#E08524",
+  ink: "#14161A",
+  muted: "rgba(20,22,26,0.55)",
+  hairline: "rgba(20,22,26,0.10)",
+  fte: "#4457E8",
+  side: "#4B5563",
   lineWeight: 7,
   stationStroke: 3,
 };
