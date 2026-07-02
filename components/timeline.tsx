@@ -749,7 +749,24 @@ function DetailModal({ exp, onClose, lang, t }: { exp: Experience; onClose: () =
 // bottom and trivially machine-readable (real DOM text, semantic markup) for
 // anything crawling the page. Most-recent first; side ventures flagged inline.
 function ListView({ lang, t }: { lang: Lang; t: TL }) {
-  const items = [...EXPERIENCES].sort((a, b) => b.start - a.start || b.end - a.end);
+  // Full-time roles form the spine (most recent first); each side venture is
+  // slotted right after the full-time role it overlapped (its `interchangeWith`
+  // host), so concurrent work always reads full-time first, then the venture.
+  const ftes = EXPERIENCES.filter((e) => e.track === "fte").sort((a, b) => b.start - a.start);
+  const sides = EXPERIENCES.filter((e) => e.track === "side");
+  const items: Experience[] = [];
+  for (const f of ftes) {
+    items.push(f);
+    sides
+      .filter((s) => s.interchangeWith === f.id)
+      .sort((a, b) => b.start - a.start)
+      .forEach((s) => items.push(s));
+  }
+  // Any venture without a matching host lands at the end, most recent first.
+  sides
+    .filter((s) => !ftes.some((f) => f.id === s.interchangeWith))
+    .sort((a, b) => b.start - a.start)
+    .forEach((s) => items.push(s));
   return (
     <ol className="tl-list">
       {items.map((exp) => {

@@ -199,7 +199,7 @@ export const experiences: Experience[] = [
     start: 2022,
     end: 2026,
     country: "US",
-    location: { en: "USA — Remote", pt: "EUA — Remoto" },
+    location: { en: "SF Bay Area, USA", pt: "SF Bay Area, EUA" },
     description: {
       en: "Returned to Avenue Code from X4Fare as a hands-on tech lead, fully remote from the US. Started on GAP's Hands Free Planning simulation platform (Databricks/Python), then moved into Williams Sonoma's supply-chain domain — microservices, a reusable file-upload framework, and back-order automation. Led a 3-person team migrating ~20 microservices from Java 11 to 21, drove early AI initiatives, and after a successful Drools proof-of-concept now lead an AI-built internal rules-engine product that replaced a third-party vendor — pioneering AI-first, agentic development across the supply-chain vertical.",
       pt: "Voltei à Avenue Code depois da X4Fare como tech lead hands-on, totalmente remoto a partir dos EUA. Comecei na plataforma de simulação Hands Free Planning da GAP (Databricks/Python) e depois entrei no domínio de supply chain da Williams Sonoma — microsserviços, um framework reutilizável de file upload e automação de back-order. Liderei um time de 3 pessoas migrando ~20 microsserviços de Java 11 para 21, conduzi as primeiras iniciativas de IA e, após um POC bem-sucedido com Drools, hoje lidero um produto interno de motor de regras construído com IA que substituiu um fornecedor externo — sendo pioneiro em desenvolvimento AI-first e agentic em toda a vertical de supply chain.",
@@ -312,7 +312,7 @@ export const experiences: Experience[] = [
     end: 2026,
     pointYear: 2025,
     country: "US",
-    location: { en: "USA — Remote", pt: "EUA — Remoto" },
+    location: { en: "SF Bay Area, USA", pt: "SF Bay Area, EUA" },
     description: {
       en: "An active parallel venture started in 2025 alongside Avenue Code work. Still running today.",
       pt: "Um projeto paralelo ativo, iniciado em 2025 em paralelo ao trabalho na Avenue Code. Segue em andamento.",
