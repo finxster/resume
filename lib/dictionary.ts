@@ -55,6 +55,10 @@ export const dictionary = {
       present: "Present",
       now: "now",
       close: "Close",
+      viewTimeline: "Timeline",
+      viewList: "List",
+      viewLabel: "View",
+      location: "Location",
     },
     projectsSection: {
       title: "Projects",
@@ -134,6 +138,10 @@ export const dictionary = {
       present: "Atual",
       now: "atual",
       close: "Fechar",
+      viewTimeline: "Linha do tempo",
+      viewList: "Lista",
+      viewLabel: "Visualização",
+      location: "Local",
     },
     projectsSection: {
       title: "Projetos",

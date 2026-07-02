@@ -221,84 +221,35 @@ function PresentChip({ x, y, t }: { x: number; y: number; t: TL }) {
   );
 }
 
-// Side branch fork path. fleeber uses a dotted "scoop" that dips and returns;
-// open branches (AtipicALI) fork off and trail into a dashed tail.
-function BranchPath({ exp, scale, dimmed }: { exp: Experience; scale: Scale; dimmed: boolean }) {
+// Side branch path — a dotted "scoop" off the trunk. Finite ventures (fleeber,
+// PayAqui) rise to the side lane and curve back down; the ongoing venture
+// (AtipicALI) rises and trails off into a dotted, open-ended tail.
+function BranchPath({ exp, scale, dimmed, arrowTipX }: { exp: Experience; scale: Scale; dimmed: boolean; arrowTipX: number }) {
   const [x1, x2] = branchExtents(exp, scale);
   const midX = (x1 + x2) / 2;
   const lw = preset.lineWeight;
   const paint = preset.ink; // uniform mode — trunk + branches share neutral ink
-  const paintOpacity = 0.78;
+  // Ventures render in the lighter "current" shade — same as AtipicALI's open
+  // tail and the trunk's dashed open end, so parallel work reads as secondary.
+  const paintOpacity = 0.78 * 0.7;
   const mergesBack = exp.mergesBack !== false;
-  const dy = SIDE_Y - MAIN_Y; // negative — the lane is above the trunk
-  const adyl = Math.abs(dy);
-  const tailGap = 22;
-  const tailLen = 36;
+  const dotDash = `${lw * 1.1} ${lw * 1.3}`; // soft, evenly spaced dashes
+  const tailGap = 20;
 
-  if (exp.dip) {
-    const half = Math.max(78, adyl * 1.05);
-    const fx1 = midX - half;
-    const fx2 = midX + half;
-    const cW = half * 0.62;
-    const dDip =
-      `M ${fx1},${MAIN_Y} ` +
-      `C ${fx1 + cW},${MAIN_Y} ${midX - cW},${SIDE_Y} ${midX},${SIDE_Y} ` +
-      `C ${midX + cW},${SIDE_Y} ${fx2 - cW},${MAIN_Y} ${fx2},${MAIN_Y}`;
-    return (
-      <g style={{ opacity: dimmed ? 0.35 : 1, transition: "opacity 160ms" }}>
-        <path
-          d={dDip}
-          fill="none"
-          stroke={paint}
-          strokeOpacity={paintOpacity}
-          strokeWidth={lw}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeDasharray={`0.01 ${lw * 2.3}`}
-        />
-      </g>
-    );
-  }
-
-  // Slant fork with filleted corners.
-  const peel = 10; // overlap onto the trunk hides the seam (uniform mode)
-  const host = EXPERIENCES.find((e) => e.id === exp.interchangeWith);
-  const hostX1 = host ? scale.yearToX(host.start) : -Infinity;
-  const hostX2 = host ? scale.yearToX(host.end) : Infinity;
   let d: string;
-
   if (mergesBack) {
-    const EXT = 22;
-    const fx1 = Math.max(x1 - EXT, hostX1 + 30);
-    const fx2 = Math.min(x2 + EXT, hostX2 - 30);
-    const ww = fx2 - fx1;
-    const dxs = Math.min(38, ww * 0.4);
-    const rr = Math.max(6, Math.min(16, (ww - 2 * dxs) * 0.4, dxs * 0.55));
-    const len = Math.hypot(dxs, dy);
-    const ux = dxs / len;
-    const uy = dy / len;
+    // Smooth symmetric scoop: trunk → peak at (midX, SIDE_Y) → back to trunk.
+    const cW = (x2 - x1) * 0.3;
     d =
-      `M ${fx1 - peel},${MAIN_Y} ` +
-      `Q ${fx1},${MAIN_Y} ${fx1 + rr * ux},${MAIN_Y + rr * uy} ` +
-      `L ${fx1 + dxs - rr * ux},${SIDE_Y - rr * uy} ` +
-      `Q ${fx1 + dxs},${SIDE_Y} ${Math.min(fx1 + dxs + rr, midX)},${SIDE_Y} ` +
-      `H ${Math.max(fx2 - dxs - rr, midX)} ` +
-      `Q ${fx2 - dxs},${SIDE_Y} ${fx2 - dxs + rr * ux},${SIDE_Y - rr * uy} ` +
-      `L ${fx2 - rr * ux},${MAIN_Y + rr * uy} ` +
-      `Q ${fx2},${MAIN_Y} ${fx2 + peel},${MAIN_Y}`;
+      `M ${x1},${MAIN_Y} ` +
+      `C ${x1 + cW},${MAIN_Y} ${midX - cW},${SIDE_Y} ${midX},${SIDE_Y} ` +
+      `C ${midX + cW},${SIDE_Y} ${x2 - cW},${MAIN_Y} ${x2},${MAIN_Y}`;
   } else {
-    const fx1 = Math.max(x1, hostX1 + 30);
-    const dxs = Math.min(adyl * 0.55, Math.max(24, midX - fx1));
-    const rr = Math.max(6, Math.min(14, dxs * 0.5));
-    const len = Math.hypot(dxs, dy);
-    const ux = dxs / len;
-    const uy = dy / len;
+    // Half scoop: trunk → peak at (midX, SIDE_Y); the tail continues past it.
+    const rise = midX - x1;
     d =
-      `M ${fx1 - peel},${MAIN_Y} ` +
-      `Q ${fx1},${MAIN_Y} ${fx1 + rr * ux},${MAIN_Y + rr * uy} ` +
-      `L ${fx1 + dxs - rr * ux},${SIDE_Y - rr * uy} ` +
-      `Q ${fx1 + dxs},${SIDE_Y} ${Math.min(fx1 + dxs + rr, midX)},${SIDE_Y} ` +
-      `H ${Math.max(midX, fx1 + dxs + rr)}`;
+      `M ${x1},${MAIN_Y} ` +
+      `C ${x1 + rise * 0.55},${MAIN_Y} ${midX - rise * 0.45},${SIDE_Y} ${midX},${SIDE_Y}`;
   }
 
   return (
@@ -311,23 +262,26 @@ function BranchPath({ exp, scale, dimmed }: { exp: Experience; scale: Scale; dim
         strokeWidth={lw}
         strokeLinecap="round"
         strokeLinejoin="round"
+        strokeDasharray={dotDash}
       />
-      {!mergesBack && (
-        <>
+      {!mergesBack && (() => {
+        // The ongoing tail runs flush to the trunk's arrow tip.
+        const tailStart = midX + tailGap;
+        const tailEnd = Math.max(tailStart + 12, arrowTipX);
+        return (
           <line
-            x1={midX + tailGap}
+            x1={tailStart}
             y1={SIDE_Y}
-            x2={midX + tailGap + tailLen}
+            x2={tailEnd}
             y2={SIDE_Y}
             stroke={paint}
-            strokeOpacity={paintOpacity * 0.7}
+            strokeOpacity={paintOpacity}
             strokeWidth={lw}
             strokeLinecap="round"
-            strokeDasharray={`${lw * 1.2} ${lw * 1.4}`}
+            strokeDasharray={dotDash}
           />
-          <circle cx={midX + tailGap + tailLen + 4} cy={SIDE_Y} r={lw * 0.45} fill={paint} opacity={paintOpacity * 0.55} />
-        </>
-      )}
+        );
+      })()}
     </g>
   );
 }
@@ -597,7 +551,7 @@ function TimelineMap({
 
       {/* Side branches — behind the trunk so discs sit on top */}
       {sides.map((exp) => (
-        <BranchPath key={exp.id} exp={exp} scale={scale} dimmed={!!hovered && hovered !== exp.id} />
+        <BranchPath key={exp.id} exp={exp} scale={scale} dimmed={!!hovered && hovered !== exp.id} arrowTipX={arrowTipX} />
       ))}
 
       {/* Trunk: solid run, dashed open end, arrowhead */}
@@ -659,7 +613,7 @@ function TimelineMap({
           exp={exp}
           x={branchMidX(exp, scale)}
           y={SIDE_Y}
-          color={preset.side}
+          color={preset.ink}
           compact
           isHovered={hovered === exp.id}
           isSelected={selected === exp.id}
@@ -790,6 +744,117 @@ function DetailModal({ exp, onClose, lang, t }: { exp: Experience; onClose: () =
   );
 }
 
+// ── List view ─────────────────────────────────────────────────────────────────
+// A classic, text-first rendering of the same data — easier to scan top-to-
+// bottom and trivially machine-readable (real DOM text, semantic markup) for
+// anything crawling the page. Most-recent first; side ventures flagged inline.
+function ListView({ lang, t }: { lang: Lang; t: TL }) {
+  const items = [...EXPERIENCES].sort((a, b) => b.start - a.start || b.end - a.end);
+  return (
+    <ol className="tl-list">
+      {items.map((exp) => {
+        const c = exp.track === "fte" ? preset.fte : preset.side;
+        return (
+          <li key={exp.id} className="tl-li">
+            <div className="tl-li-rail" style={{ background: c }} />
+            <div className="tl-li-body">
+              <div className="tl-li-head">
+                <span className="tl-li-chip" style={{ background: c }}>{exp.code}</span>
+                <span className="tl-li-track">{exp.track === "fte" ? t.fullTime : t.sideVenture}</span>
+                <span className="tl-li-range">{formatRange(exp, t)}</span>
+              </div>
+              <h3 className="tl-li-title">{tx(exp.title, lang)}</h3>
+              <div className="tl-li-co">
+                <strong>{exp.company}</strong>
+                <span className="tl-d-dot">·</span>
+                <span>{tx(exp.location, lang)}</span>
+              </div>
+              <p className="tl-li-desc">{tx(exp.description, lang)}</p>
+
+              {exp.progression && (
+                <ol className="tl-d-progression tl-li-prog" style={{ borderLeftColor: c }}>
+                  {exp.progression.map((p, i) => (
+                    <li key={i}>
+                      <span className="tl-d-prog-marker" style={{ background: c }} />
+                      <div>
+                        <div className="tl-d-prog-head">
+                          <span className="tl-d-prog-years">{p.years}</span>
+                          <span className="tl-d-prog-title">{tx(p.title, lang)}</span>
+                        </div>
+                        <div className="tl-d-prog-note">{tx(p.note, lang)}</div>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              )}
+
+              {exp.clientPeriods && (
+                <div className="tl-li-clients">
+                  {exp.clientPeriods.map((cp, i) => (
+                    <span className="tl-li-client" key={i}>
+                      {cp.client} <span className="tl-li-client-yr">{cp.start}–{cp.end >= 2026 ? t.now : cp.end}</span>
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              <div className="tl-d-tech tl-li-tech">
+                {exp.tech.map((tt) => (
+                  <span className="tl-d-techchip" key={tt}>{tt}</span>
+                ))}
+              </div>
+            </div>
+          </li>
+        );
+      })}
+    </ol>
+  );
+}
+
+function ViewToggle({
+  view,
+  onChange,
+  t,
+}: {
+  view: "timeline" | "list";
+  onChange: (v: "timeline" | "list") => void;
+  t: TL;
+}) {
+  return (
+    <div className="tl-toggle" role="group" aria-label={t.viewLabel}>
+      <button
+        type="button"
+        className={`tl-toggle-btn${view === "timeline" ? " is-active" : ""}`}
+        aria-pressed={view === "timeline"}
+        onClick={() => onChange("timeline")}
+      >
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <circle cx="4" cy="8" r="2.4" stroke="currentColor" strokeWidth="1.4" />
+          <circle cx="12" cy="8" r="2.4" stroke="currentColor" strokeWidth="1.4" />
+          <line x1="6.4" y1="8" x2="9.6" y2="8" stroke="currentColor" strokeWidth="1.4" />
+        </svg>
+        {t.viewTimeline}
+      </button>
+      <button
+        type="button"
+        className={`tl-toggle-btn${view === "list" ? " is-active" : ""}`}
+        aria-pressed={view === "list"}
+        onClick={() => onChange("list")}
+      >
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <line x1="5.5" y1="4" x2="14" y2="4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+          <line x1="5.5" y1="8" x2="14" y2="8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+          <line x1="5.5" y1="12" x2="14" y2="12" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+          <circle cx="2.4" cy="4" r="1" fill="currentColor" />
+          <circle cx="2.4" cy="8" r="1" fill="currentColor" />
+          <circle cx="2.4" cy="12" r="1" fill="currentColor" />
+        </svg>
+        {t.viewList}
+      </button>
+    </div>
+  );
+}
+
 // ── Main ─────────────────────────────────────────────────────────────────────
 export default function Timeline() {
   const { lang } = useLang();
@@ -797,6 +862,7 @@ export default function Timeline() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const outerRef = useRef<HTMLDivElement>(null);
   const [wrapW, setWrapW] = useState(MAP_MIN_WIDTH);
+  const [view, setView] = useState<"timeline" | "list">("timeline");
   const [hovered, setHovered] = useState<string | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
@@ -845,40 +911,49 @@ export default function Timeline() {
         >
           {t.title}
         </h2>
-        <p style={{ fontSize: 18, color: preset.muted, maxWidth: 640, lineHeight: 1.6, margin: "0 0 32px" }}>
-          {t.subtitle}
-        </p>
-
-        {/* Relative wrapper so the hover tooltip can sit OUTSIDE the
-            horizontal-scroll container (which clips on the y-axis). */}
-        <div ref={outerRef} style={{ position: "relative" }}>
-          <div style={{ overflowX: "auto", overflowY: "hidden" }}>
-            <div ref={wrapRef} className="tl-map-wrap" style={{ minWidth: MAP_MIN_WIDTH, position: "relative" }}>
-              <TimelineMap
-                W={wrapW}
-                scale={scale}
-                lang={lang}
-                t={t}
-                hovered={hovered}
-                selected={selected}
-                onHover={(exp, e) => {
-                  setHovered(exp?.id ?? null);
-                  if (exp && e && outerRef.current) {
-                    const rect = outerRef.current.getBoundingClientRect();
-                    setTooltipPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-                  }
-                }}
-                onSelect={(id) => setSelected((cur) => (cur === id ? null : id))}
-              />
-            </div>
-          </div>
-          {hoveredExp && !selected && (
-            <Tooltip x={tooltipPos.x} y={tooltipPos.y} exp={hoveredExp} lang={lang} t={t} />
-          )}
+        <div className="tl-header">
+          <p style={{ fontSize: 18, color: preset.muted, maxWidth: 640, lineHeight: 1.6, margin: 0 }}>
+            {t.subtitle}
+          </p>
+          <ViewToggle view={view} onChange={setView} t={t} />
         </div>
 
-        {selectedExp && (
-          <DetailModal exp={selectedExp} onClose={() => setSelected(null)} lang={lang} t={t} />
+        {view === "timeline" ? (
+          <>
+            {/* Relative wrapper so the hover tooltip can sit OUTSIDE the
+                horizontal-scroll container (which clips on the y-axis). */}
+            <div ref={outerRef} style={{ position: "relative" }}>
+              <div style={{ overflowX: "auto", overflowY: "hidden" }}>
+                <div ref={wrapRef} className="tl-map-wrap" style={{ minWidth: MAP_MIN_WIDTH, position: "relative" }}>
+                  <TimelineMap
+                    W={wrapW}
+                    scale={scale}
+                    lang={lang}
+                    t={t}
+                    hovered={hovered}
+                    selected={selected}
+                    onHover={(exp, e) => {
+                      setHovered(exp?.id ?? null);
+                      if (exp && e && outerRef.current) {
+                        const rect = outerRef.current.getBoundingClientRect();
+                        setTooltipPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+                      }
+                    }}
+                    onSelect={(id) => setSelected((cur) => (cur === id ? null : id))}
+                  />
+                </div>
+              </div>
+              {hoveredExp && !selected && (
+                <Tooltip x={tooltipPos.x} y={tooltipPos.y} exp={hoveredExp} lang={lang} t={t} />
+              )}
+            </div>
+
+            {selectedExp && (
+              <DetailModal exp={selectedExp} onClose={() => setSelected(null)} lang={lang} t={t} />
+            )}
+          </>
+        ) : (
+          <ListView lang={lang} t={t} />
         )}
       </div>
     </div>
@@ -889,6 +964,44 @@ export default function Timeline() {
 const TIMELINE_CSS = `
   .tl-map-wrap .map { display: block; width: 100%; height: auto; overflow: visible; }
   .tl-map-wrap .station text { pointer-events: none; user-select: none; }
+
+  .tl-header { display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 24px; flex-wrap: wrap; margin: 0 0 32px; }
+  .tl-toggle { display: inline-flex; padding: 3px; border-radius: 10px;
+    background: rgba(20,22,26,0.05); border: 0.5px solid var(--hairline); flex-shrink: 0; }
+  .tl-toggle-btn { display: inline-flex; align-items: center; gap: 6px; appearance: none;
+    border: none; background: transparent; cursor: pointer; padding: 7px 13px; border-radius: 8px;
+    font-size: 13px; font-weight: 500; color: var(--muted); transition: all 140ms ease;
+    font-family: inherit; }
+  .tl-toggle-btn:hover { color: var(--ink); }
+  .tl-toggle-btn.is-active { background: var(--surface); color: var(--ink);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.06), 0 0 0 0.5px rgba(0,0,0,0.04); }
+  .tl-toggle-btn.is-active svg { color: var(--fte); }
+
+  .tl-list { list-style: none; margin: 8px 0 0; padding: 0;
+    display: flex; flex-direction: column; gap: 20px; max-width: 760px; }
+  .tl-li { position: relative; display: flex; gap: 18px; background: var(--surface);
+    border: 0.5px solid var(--hairline); border-radius: 14px; overflow: hidden;
+    padding: 20px 22px 20px 0; box-shadow: 0 1px 0 rgba(0,0,0,0.02), 0 8px 22px rgba(0,0,0,0.04); }
+  .tl-li-rail { flex-shrink: 0; width: 4px; align-self: stretch; margin-right: 4px; }
+  .tl-li-body { flex: 1; min-width: 0; }
+  .tl-li-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 9px; }
+  .tl-li-chip { font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+    letter-spacing: 0.06em; padding: 3px 7px; border-radius: 3px; color: #fff; }
+  .tl-li-track { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted); }
+  .tl-li-range { margin-left: auto; font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+  .tl-li-title { margin: 0 0 5px; font-size: 19px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.25; }
+  .tl-li-co { display: flex; flex-wrap: wrap; align-items: baseline; gap: 7px; font-size: 13.5px; color: var(--muted); }
+  .tl-li-co strong { color: var(--ink); font-weight: 600; }
+  .tl-li-desc { margin: 12px 0 0; font-size: 14px; line-height: 1.6; color: var(--ink); opacity: 0.9; }
+  .tl-li-prog { margin-top: 14px; }
+  .tl-li-clients { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+  .tl-li-client { font-size: 12px; color: var(--ink); opacity: 0.85; padding: 3px 9px;
+    border: 0.5px solid var(--hairline); border-radius: 999px; background: rgba(0,0,0,0.02); }
+  .tl-li-client-yr { font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); }
+  .tl-li-tech { margin-top: 14px; }
+  @media (max-width: 640px) { .tl-li-range { margin-left: 0; width: 100%; } }
 
   .tl-tooltip {
     position: absolute; width: 280px; background: var(--surface);

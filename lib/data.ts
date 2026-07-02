@@ -55,6 +55,8 @@ const R = {
   mentor: { en: "Mentor", pt: "Mentor" },
   coFounder: { en: "Co-founder", pt: "Cofundador" },
   backendEngineer: { en: "Backend Engineer", pt: "Engenheiro de Backend" },
+  foundingEngineer: { en: "Founding Engineer", pt: "Engenheiro Fundador" },
+  mobileEngineer: { en: "Mobile Engineer", pt: "Engenheiro Mobile" },
 } satisfies Record<string, L>;
 
 const BR = { en: "São Paulo, Brazil", pt: "São Paulo, Brasil" };
@@ -257,8 +259,7 @@ export const experiences: Experience[] = [
       pt: "Rede social para músicos — backend & infraestrutura",
     },
     start: 2013,
-    end: 2014,
-    pointYear: 2013,
+    end: 2016,
     country: "BR",
     location: { en: "Brazil", pt: "Brasil" },
     description: {
@@ -268,8 +269,32 @@ export const experiences: Experience[] = [
     roles: [R.coFounder, R.backendEngineer],
     tech: ["Java", "AWS (EC2, RDS, SQS, S3)", "BDD", "Lucene", "JBehave", "Maven", "Mercurial", "Wicket"],
     interchangeWith: "maps",
-    mergesBack: false, // drawn open like AtipicALI — fleeber lives on as amy.network
-    dip: true, // rendered as a subtle smooth scoop off the trunk
+    // mergesBack (default) — the branch rises and returns to the trunk
+  },
+  {
+    id: "payaqui",
+    track: "side",
+    code: "PA",
+    initial: "pa",
+    title: { en: "Founding Engineer · Mobile", pt: "Engenheiro Fundador · Mobile" },
+    company: "PayAqui",
+    shortCompany: "PayAqui",
+    short: {
+      en: "Founding engineer building native Android & iOS apps for a payments venture",
+      pt: "Engenheiro fundador construindo apps nativos Android & iOS para uma fintech de pagamentos",
+    },
+    start: 2018,
+    end: 2019,
+    country: "BR",
+    location: { en: "Brazil", pt: "Brasil" },
+    description: {
+      en: "Founding engineer at PayAqui, a side payments venture. Designed and built the company's native mobile apps for Android and iOS end to end — from architecture to shipping.",
+      pt: "Engenheiro fundador na PayAqui, uma fintech de pagamentos tocada em paralelo. Projetei e construí os apps mobile nativos da empresa para Android e iOS de ponta a ponta — da arquitetura à publicação.",
+    },
+    roles: [R.foundingEngineer, R.mobileEngineer],
+    tech: ["Java (Android)", "Swift (iOS)", "REST APIs"],
+    interchangeWith: "avenuecode-1",
+    // mergesBack (default) — the branch rises and returns to the trunk
   },
   {
     id: "atipically",
@@ -300,14 +325,14 @@ export const experiences: Experience[] = [
 ];
 
 export const YEAR_MIN = 2002;
-export const YEAR_MAX = 2026.4; // a bit past today for the open arrow
+export const YEAR_MAX = 2028; // a bit past today for the open arrow + current tail
 
 // Where I physically lived during each stretch — drives the country zones.
 export const COUNTRY_PERIODS: { code: string; label: L; start: number; end: number }[] = [
   { code: "BR", label: { en: "Brazil", pt: "Brasil" }, start: 2002, end: 2018 },
   { code: "US", label: { en: "USA", pt: "EUA" }, start: 2018, end: 2020 },
   { code: "BR", label: { en: "Brazil", pt: "Brasil" }, start: 2020, end: 2022 },
-  { code: "US", label: { en: "USA", pt: "EUA" }, start: 2022, end: 2026.4 },
+  { code: "US", label: { en: "USA", pt: "EUA" }, start: 2022, end: 2028 },
 ];
 
 export const COUNTRY_PALETTE: Record<
