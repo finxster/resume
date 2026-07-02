@@ -8,6 +8,7 @@ import HeroGraph from "@/components/hero-graph"
 import Timeline from "@/components/timeline"
 import ProjectCard from "@/components/project-card"
 import SkillBadge from "@/components/skill-badge"
+import ContactForm from "@/components/contact-form"
 import { useLang, tx, type L } from "@/lib/i18n"
 import { getDict } from "@/lib/dictionary"
 
@@ -256,46 +257,7 @@ export default function Home() {
             </div>
             <Card>
               <CardContent className="p-6">
-                <form className="space-y-4">
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <div className="space-y-2">
-                      <label htmlFor="name" className="text-sm font-medium">
-                        {t.contact.name}
-                      </label>
-                      <input id="name" className="w-full p-2 border rounded-md" placeholder={t.contact.namePlaceholder} />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="email" className="text-sm font-medium">
-                        {t.contact.email}
-                      </label>
-                      <input
-                        id="email"
-                        type="email"
-                        className="w-full p-2 border rounded-md"
-                        placeholder={t.contact.emailPlaceholder}
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="subject" className="text-sm font-medium">
-                      {t.contact.subject}
-                    </label>
-                    <input id="subject" className="w-full p-2 border rounded-md" placeholder={t.contact.subjectPlaceholder} />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium">
-                      {t.contact.message}
-                    </label>
-                    <textarea
-                      id="message"
-                      className="w-full p-2 border rounded-md min-h-[120px]"
-                      placeholder={t.contact.messagePlaceholder}
-                    ></textarea>
-                  </div>
-                  <Button type="submit" className="w-full">
-                    {t.contact.send}
-                  </Button>
-                </form>
+                <ContactForm t={t.contact} />
               </CardContent>
             </Card>
           </div>

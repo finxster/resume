@@ -75,6 +75,9 @@ export const dictionary = {
       message: "Message",
       messagePlaceholder: "Your message",
       send: "Send Message",
+      sending: "Sending...",
+      success: "Message sent! I'll get back to you soon.",
+      error: "Something went wrong. Please try again or email me directly.",
     },
     footer: {
       rights: "All rights reserved.",
@@ -151,6 +154,9 @@ export const dictionary = {
       message: "Mensagem",
       messagePlaceholder: "Sua mensagem",
       send: "Enviar Mensagem",
+      sending: "Enviando...",
+      success: "Mensagem enviada! Retorno em breve.",
+      error: "Algo deu errado. Tente novamente ou me mande um e-mail direto.",
     },
     footer: {
       rights: "Todos os direitos reservados.",

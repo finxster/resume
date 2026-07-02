@@ -5,6 +5,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/lib/i18n"
 import LanguageSwitcher from "@/components/language-switcher"
+import { Toaster } from "@/components/ui/sonner"
 
 const inter = Inter({ subsets: ["latin"] })
 const geist = Geist({ subsets: ["latin"], variable: "--font-ui" })
@@ -32,6 +33,7 @@ export default function RootLayout({
               <LanguageSwitcher />
             </div>
             {children}
+            <Toaster />
           </LanguageProvider>
         </ThemeProvider>
       </body>
