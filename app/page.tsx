@@ -269,10 +269,8 @@ export default function Home() {
         <div className="container px-4 md:px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0 flex items-center gap-3">
-              {/* Brand wordmark — the "." after finx is always indigo. */}
-              <span className="font-semibold tracking-tight text-foreground">
-                finx<span className="text-primary">.</span>
-              </span>
+              {/* Brand lockup — mark + "finx." wordmark from the brand kit. */}
+              <img src="/lockup-light.svg" alt="finx." width={51} height={24} className="h-6 w-auto" />
               <p>&copy; {new Date().getFullYear()} Luis Alves. {t.footer.rights}</p>
             </div>
             <div className="flex gap-4">

@@ -57,6 +57,17 @@ export default function RootLayout({
             <div className="fixed top-4 right-4 z-[60]">
               <LanguageSwitcher />
             </div>
+            {/* Brand anchor mirroring the switcher: the bare finx mark,
+                fixed top-left, links back to the top of the page. */}
+            {/* Same translucent pill treatment as the switcher so the mark
+                stays legible over scrolled content. */}
+            <a
+              href="#"
+              aria-label="finx — back to top"
+              className="fixed top-4 left-4 z-[60] flex items-center justify-center h-[34px] w-[34px] rounded-full border border-border bg-card/80 backdrop-blur shadow-sm"
+            >
+              <img src="/mark-light.svg" alt="" width={22} height={22} />
+            </a>
             {children}
             <Toaster />
           </LanguageProvider>
