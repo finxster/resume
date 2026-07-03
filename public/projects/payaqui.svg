@@ -1,0 +1,28 @@
+<svg viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Recreated from the PayAqui brand mark: white "pa" QR-style monogram
+       on a teal→lime gradient. Replace with the original asset when handy. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0FA390"/>
+      <stop offset="0.62" stop-color="#31B48A"/>
+      <stop offset="1" stop-color="#CFD57E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#bg)"/>
+  <g fill="none" stroke="#fff" stroke-width="82">
+    <!-- p: bowl -->
+    <path d="M 251 561 L 251 310 Q 251 251 310 251 L 461 251 Q 520 251 520 310 L 520 461 Q 520 520 461 520 L 251 520"/>
+    <!-- p: stem below the gap + lower module -->
+    <path d="M 251 621 L 251 869 Q 251 928 310 928 L 461 928 Q 520 928 520 869 L 520 700 Q 520 641 461 641 L 315 641"/>
+    <!-- a: top bowl (mirror of the p bowl, spine on the right) -->
+    <path d="M 949 561 L 949 310 Q 949 251 890 251 L 739 251 Q 680 251 680 310 L 680 461 Q 680 520 739 520 L 949 520"/>
+    <!-- a: spine below the gap + lower module -->
+    <path d="M 949 621 L 949 869 Q 949 928 890 928 L 739 928 Q 680 928 680 869 L 680 700 Q 680 641 739 641 L 885 641"/>
+  </g>
+  <g fill="#fff">
+    <rect x="340" y="340" width="92" height="92"/>
+    <rect x="340" y="748" width="92" height="92"/>
+    <rect x="769" y="340" width="92" height="92"/>
+    <rect x="769" y="748" width="92" height="92"/>
+  </g>
+</svg>

@@ -65,6 +65,15 @@ export const dictionary = {
       subtitle:
         "A selection of projects I've worked on throughout my career. Each represents different challenges and technologies.",
       viewProject: "View Project",
+      viewCode: "View Code",
+      statusActive: "Active",
+      statusPaused: "Paused",
+      statusSunset: "Sunset",
+      builtWith: "Built with",
+      backToProjects: "Back to projects",
+      technologies: "Technologies",
+      screenshots: "Screenshots",
+      screenshotsSoon: "Screenshots coming soon.",
     },
     contact: {
       title: "Get In Touch",
@@ -148,6 +157,15 @@ export const dictionary = {
       subtitle:
         "Uma seleção de projetos em que trabalhei ao longo da minha carreira. Cada um representa desafios e tecnologias diferentes.",
       viewProject: "Ver Projeto",
+      viewCode: "Ver Código",
+      statusActive: "Ativo",
+      statusPaused: "Pausado",
+      statusSunset: "Encerrado",
+      builtWith: "Feito com",
+      backToProjects: "Voltar aos projetos",
+      technologies: "Tecnologias",
+      screenshots: "Prints",
+      screenshotsSoon: "Prints em breve.",
     },
     contact: {
       title: "Vamos Conversar",

@@ -11,6 +11,7 @@ import SkillBadge from "@/components/skill-badge"
 import ContactForm from "@/components/contact-form"
 import { useLang, tx, type L } from "@/lib/i18n"
 import { getDict } from "@/lib/dictionary"
+import { projects } from "@/lib/projects"
 
 export default function Home() {
   const { lang } = useLang()
@@ -24,36 +25,6 @@ export default function Home() {
     { key: "ai" as const, category: "ai", icon: Sparkles, items: ["AI / LLMs", "Agentic AI", "GitHub Copilot", "TDD/BDD", "Scrum"] },
   ]
 
-  const projectsData: { title: string; description: L; tags: string[]; link?: string }[] = [
-    {
-      title: "Piggly",
-      description: {
-        en: "A family app for managing kids' allowances — \"mesada, now with wishes.\" Built as a full product: a React/Supabase web app, a marketing landing page, and a Cloudflare Worker that schedules recurring deposits.",
-        pt: "Um app family para gerenciar a mesada das crianças — \"mesada, agora com desejos.\" Construído como produto completo: um web app em React/Supabase, uma landing page de marketing e um Cloudflare Worker que agenda depósitos recorrentes.",
-      },
-      tags: ["React", "Vite", "Supabase", "Tailwind", "Cloudflare Workers"],
-      link: "https://piggly.pages.dev",
-    },
-    {
-      title: "AtipicALI",
-      description: {
-        en: "An ongoing parallel venture started in 2025, running alongside my full-time work. Building a product end to end on a modern TypeScript stack.",
-        pt: "Um projeto paralelo em andamento, iniciado em 2025, em paralelo ao meu trabalho full-time. Construindo um produto de ponta a ponta em uma stack moderna de TypeScript.",
-      },
-      tags: ["TypeScript", "React", "Node", "PostgreSQL"],
-    },
-    {
-      title: "USCIS Silent Update Tracker",
-      description: {
-        en: "A local Python tool that monitors multiple USCIS receipts for \"silent\" case updates across different endpoints and surfaces every change in a dashboard.",
-        pt: "Uma ferramenta local em Python que monitora múltiplos recibos do USCIS em busca de atualizações \"silenciosas\" de processos em diferentes endpoints e exibe cada mudança em um dashboard.",
-      },
-      tags: ["Python", "Automation", "Dashboard"],
-      link: "https://github.com/finxster/uscis-tracker",
-    },
-  ]
-
-  const projects = projectsData.map((p) => ({ ...p, description: tx(p.description, lang) }))
 
   return (
     <main className="min-h-screen bg-background">
@@ -208,8 +179,8 @@ export default function Home() {
             {t.projectsSection.subtitle}
           </p>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {projects.map((project, index) => (
-              <ProjectCard key={index} project={project} />
+            {projects.map((project) => (
+              <ProjectCard key={project.slug} project={project} />
             ))}
           </div>
         </div>
