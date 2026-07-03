@@ -876,22 +876,28 @@ function ViewToggle({
 export default function Timeline() {
   const { lang } = useLang();
   const t = getDict(lang).timeline;
-  const wrapRef = useRef<HTMLDivElement>(null);
   const outerRef = useRef<HTMLDivElement>(null);
+  const roRef = useRef<ResizeObserver | null>(null);
   const [wrapW, setWrapW] = useState(MAP_MIN_WIDTH);
   const [view, setView] = useState<"timeline" | "list">("timeline");
   const [hovered, setHovered] = useState<string | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
 
-  useEffect(() => {
-    if (!wrapRef.current) return;
+  // Callback ref: the map wrapper unmounts when switching to the list view,
+  // so the observer must re-attach every time a new node mounts — a mount-only
+  // effect would leave the remounted map stuck at a stale width.
+  const wrapRef = (node: HTMLDivElement | null) => {
+    roRef.current?.disconnect();
+    roRef.current = null;
+    if (!node) return;
+    setWrapW(Math.max(MAP_MIN_WIDTH, node.getBoundingClientRect().width));
     const ro = new ResizeObserver(([entry]) => {
       setWrapW(Math.max(MAP_MIN_WIDTH, entry.contentRect.width));
     });
-    ro.observe(wrapRef.current);
-    return () => ro.disconnect();
-  }, []);
+    ro.observe(node);
+    roRef.current = ro;
+  };
 
   const scale = useMemo(() => buildScale(wrapW), [wrapW]);
   const hoveredExp = hovered ? EXPERIENCES.find((e) => e.id === hovered) ?? null : null;
