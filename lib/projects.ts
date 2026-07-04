@@ -9,7 +9,7 @@ import type { L } from "@/lib/i18n";
 export type ProjectStatus = "active" | "paused" | "sunset";
 
 // LLMs / AI coding tools used to build the project (rendered as brand icons).
-export type Llm = "claude" | "codex" | "copilot" | "gemini";
+export type Llm = "claude" | "codex" | "copilot" | "gemini" | "vercel" | "replit";
 
 export interface Project {
   slug: string;
@@ -21,48 +21,16 @@ export interface Project {
   end?: number; // undefined = ongoing
   tagline: L;
   description: L;
+  /** Primary tech, shown as icon-only chips on the card. */
   tech: string[];
+  /** Full tech stack, shown on the detail page. Falls back to `tech`. */
+  stack?: string[];
   llms: Llm[];
   link?: string;
   github?: string;
 }
 
 export const projects: Project[] = [
-  {
-    slug: "portfolio",
-    name: "finx.dev",
-    status: "active",
-    start: 2024,
-    tagline: {
-      en: "This very site — an interactive portfolio & résumé.",
-      pt: "Este próprio site — um portfólio & currículo interativo.",
-    },
-    description: {
-      en: "The site you're looking at. A statically-exported Next.js portfolio with a bilingual (EN/PT) UI, a custom git-graph career timeline, and a build step that generates print-ready résumé PDFs from a single content source. Bootstrapped with v0, now maintained with Claude Code.",
-      pt: "O site que você está vendo. Um portfólio em Next.js com export estático, interface bilíngue (EN/PT), uma timeline de carreira em git-graph feita à mão e um passo de build que gera PDFs de currículo prontos para impressão a partir de uma fonte única. Iniciado com v0, hoje mantido com Claude Code.",
-    },
-    tech: ["Next.js", "React", "TypeScript", "Tailwind", "shadcn/ui", "PDFKit"],
-    llms: ["claude"],
-    link: "https://finx.dev",
-    github: "https://github.com/finxster/resume",
-  },
-  {
-    slug: "piggly",
-    name: "Piggly",
-    status: "active",
-    start: 2025,
-    tagline: {
-      en: "Family allowance app — \"mesada, now with wishes.\"",
-      pt: "App de mesada em família — \"mesada, agora com desejos.\"",
-    },
-    description: {
-      en: "A family app for managing kids' allowances — \"mesada, now with wishes.\" Built as a full product: a React/Supabase web app, a marketing landing page, and a Cloudflare Worker that schedules recurring deposits.",
-      pt: "Um app family para gerenciar a mesada das crianças — \"mesada, agora com desejos.\" Construído como produto completo: um web app em React/Supabase, uma landing page de marketing e um Cloudflare Worker que agenda depósitos recorrentes.",
-    },
-    tech: ["React", "Vite", "Supabase", "Tailwind", "Cloudflare Workers"],
-    llms: ["claude"],
-    link: "https://piggly.pages.dev",
-  },
   {
     slug: "atipically",
     name: "AtipicALI",
@@ -77,7 +45,114 @@ export const projects: Project[] = [
       pt: "Um projeto paralelo em andamento, iniciado em 2025, em paralelo ao meu trabalho full-time. Construindo um produto de ponta a ponta em uma stack moderna de TypeScript.",
     },
     tech: ["TypeScript", "React", "Node", "PostgreSQL"],
+    stack: ["TypeScript", "React", "Node.js", "PostgreSQL"],
+    llms: ["claude", "copilot"],
+  },
+  {
+    slug: "portfolio",
+    name: "finx.dev",
+    status: "active",
+    start: 2026,
+    tagline: {
+      en: "This very site — an interactive portfolio & résumé.",
+      pt: "Este próprio site — um portfólio & currículo interativo.",
+    },
+    description: {
+      en: "The site you're looking at. A statically-exported Next.js portfolio with a bilingual (EN/PT) UI, a custom git-graph career timeline, and a build step that generates print-ready résumé PDFs from a single content source. Bootstrapped with v0, now maintained with Claude Code.",
+      pt: "O site que você está vendo. Um portfólio em Next.js com export estático, interface bilíngue (EN/PT), uma timeline de carreira em git-graph feita à mão e um passo de build que gera PDFs de currículo prontos para impressão a partir de uma fonte única. Iniciado com v0, hoje mantido com Claude Code.",
+    },
+    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "shadcn/ui", "PDFKit"],
+    llms: ["claude", "vercel"],
+    link: "https://finx.dev",
+    github: "https://github.com/finxster/resume",
+  },
+  {
+    slug: "piggly",
+    name: "Piggly",
+    status: "active",
+    start: 2026,
+    tagline: {
+      en: "Family allowance app — \"mesada, now with wishes.\"",
+      pt: "App de mesada em família — \"mesada, agora com desejos.\"",
+    },
+    description: {
+      en: "A family app for managing kids' allowances — \"mesada, now with wishes.\" Built as a full product: a React/Supabase web app, a marketing landing page, and a Cloudflare Worker that schedules recurring deposits.",
+      pt: "Um app family para gerenciar a mesada das crianças — \"mesada, agora com desejos.\" Construído como produto completo: um web app em React/Supabase, uma landing page de marketing e um Cloudflare Worker que agenda depósitos recorrentes.",
+    },
+    tech: ["React", "Vite", "Supabase", "Tailwind", "Cloudflare Workers"],
     llms: ["claude"],
+    link: "https://piggly.pages.dev",
+  },
+  {
+    slug: "uscis-tracker",
+    name: "USCIS Silent Update Tracker",
+    status: "active",
+    start: 2026,
+    tagline: {
+      en: "Monitors USCIS receipts for silent case updates.",
+      pt: "Monitora recibos do USCIS em busca de atualizações silenciosas.",
+    },
+    description: {
+      en: "A local Python tool that monitors multiple USCIS receipts for \"silent\" case updates across different endpoints and surfaces every change in a dashboard.",
+      pt: "Uma ferramenta local em Python que monitora múltiplos recibos do USCIS em busca de atualizações \"silenciosas\" de processos em diferentes endpoints e exibe cada mudança em um dashboard.",
+    },
+    tech: ["Python", "Automation", "Dashboard"],
+    llms: ["claude"],
+    github: "https://github.com/finxster/uscis-tracker",
+  },
+  {
+    slug: "sisosig",
+    name: "Should I Stay Or Should I Go",
+    status: "active",
+    start: 2025,
+    tagline: {
+      en: "A decision helper for the classic stay-or-go dilemma.",
+      pt: "Um ajudante de decisão para o clássico dilema de ficar ou partir.",
+    },
+    description: {
+      en: "A small web app that helps you reason through the classic \"should I stay or should I go\" dilemma, turning a fuzzy gut call into a structured decision.",
+      pt: "Um web app que ajuda a raciocinar sobre o clássico dilema \"ficar ou partir\", transformando uma decisão intuitiva em uma escolha estruturada.",
+    },
+    tech: ["React", "TypeScript", "Tailwind CSS"],
+    llms: ["copilot"],
+    link: "https://sisosig.pages.dev/",
+  },
+  {
+    slug: "mealwheel",
+    name: "MealWheel",
+    status: "sunset",
+    start: 2025,
+    end: 2025,
+    tagline: {
+      en: "Spin the wheel to decide what's for dinner.",
+      pt: "Gire a roleta para decidir o que comer.",
+    },
+    description: {
+      en: "A quick experiment that takes the daily \"what should we eat?\" question and answers it with a spin of the wheel. Built end to end on Replit.",
+      pt: "Um experimento rápido que pega a pergunta diária \"o que a gente come?\" e responde com um giro da roleta. Construído de ponta a ponta no Replit.",
+    },
+    tech: ["React", "TypeScript"],
+    llms: ["replit"],
+  },
+  {
+    slug: "payaqui",
+    name: "PayAqui",
+    logo: "/projects/payaqui.svg",
+    status: "sunset",
+    start: 2018,
+    end: 2019,
+    tagline: {
+      en: "Native Android & iOS apps for a payments venture.",
+      pt: "Apps nativos Android & iOS para uma fintech de pagamentos.",
+    },
+    description: {
+      en: "Founding engineer at PayAqui, a side payments venture. Designed and built the company's native mobile apps for Android and iOS end to end — from architecture to shipping — while also owning non-technical work like requirements discovery and UX, and contributing to the Java backend.",
+      pt: "Engenheiro fundador na PayAqui, uma fintech de pagamentos tocada em paralelo. Projetei e construí os apps mobile nativos da empresa para Android e iOS de ponta a ponta — da arquitetura à publicação — participando ativamente também de funções não técnicas como descoberta de requisitos e UX, além de contribuir com o backend em Java.",
+    },
+    tech: ["Java", "Swift", "REST APIs"],
+    stack: ["Java (Android)", "Swift (iOS)", "Java (backend)", "REST APIs"],
+    llms: [],
   },
   {
     slug: "fleeber",
@@ -96,41 +171,6 @@ export const projects: Project[] = [
     },
     tech: ["Java", "AWS", "Lucene", "JBehave", "Wicket"],
     llms: [],
-  },
-  {
-    slug: "payaqui",
-    name: "PayAqui",
-    logo: "/projects/payaqui.svg",
-    status: "sunset",
-    start: 2018,
-    end: 2019,
-    tagline: {
-      en: "Native Android & iOS apps for a payments venture.",
-      pt: "Apps nativos Android & iOS para uma fintech de pagamentos.",
-    },
-    description: {
-      en: "Founding engineer at PayAqui, a side payments venture. Designed and built the company's native mobile apps for Android and iOS end to end — from architecture to shipping — while also owning non-technical work like requirements discovery and UX, and contributing to the Java backend.",
-      pt: "Engenheiro fundador na PayAqui, uma fintech de pagamentos tocada em paralelo. Projetei e construí os apps mobile nativos da empresa para Android e iOS de ponta a ponta — da arquitetura à publicação — participando ativamente também de funções não técnicas como descoberta de requisitos e UX, além de contribuir com o backend em Java.",
-    },
-    tech: ["Java (Android)", "Swift (iOS)", "Java (backend)", "REST APIs"],
-    llms: [],
-  },
-  {
-    slug: "uscis-tracker",
-    name: "USCIS Silent Update Tracker",
-    status: "active",
-    start: 2025,
-    tagline: {
-      en: "Monitors USCIS receipts for silent case updates.",
-      pt: "Monitora recibos do USCIS em busca de atualizações silenciosas.",
-    },
-    description: {
-      en: "A local Python tool that monitors multiple USCIS receipts for \"silent\" case updates across different endpoints and surfaces every change in a dashboard.",
-      pt: "Uma ferramenta local em Python que monitora múltiplos recibos do USCIS em busca de atualizações \"silenciosas\" de processos em diferentes endpoints e exibe cada mudança em um dashboard.",
-    },
-    tech: ["Python", "Automation", "Dashboard"],
-    llms: ["claude"],
-    github: "https://github.com/finxster/uscis-tracker",
   },
 ];
 

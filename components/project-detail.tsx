@@ -88,9 +88,9 @@ export default function ProjectDetail({ slug }: { slug: string }) {
         <section className="mb-12">
           <h2 className="text-xl font-bold mb-4">{t.technologies}</h2>
           <div className="flex flex-wrap gap-2">
-            {project.tech.map((tag) => (
+            {(project.stack ?? project.tech).map((tag) => (
               <Badge key={tag} variant="secondary" className="gap-1.5 px-3 py-1 font-normal">
-                <TechIcon tech={tag} className="h-3.5 w-3.5" />
+                <TechIcon tech={tag} colored className="h-3.5 w-3.5" />
                 {tag}
               </Badge>
             ))}
@@ -103,7 +103,7 @@ export default function ProjectDetail({ slug }: { slug: string }) {
           <div className="flex flex-wrap gap-3">
             {project.llms.map((llm) => (
               <span key={llm} className="inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm text-muted-foreground">
-                <LlmIcon llm={llm} className="h-4 w-4" /> {llmMeta[llm].label}
+                <LlmIcon llm={llm} colored className="h-4 w-4" /> {llmMeta[llm].label}
               </span>
             ))}
           </div>

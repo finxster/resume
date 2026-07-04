@@ -2,12 +2,11 @@
 
 import Link from "next/link"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { ArrowUpRight, ExternalLink, Github } from "lucide-react"
 import { useLang, tx } from "@/lib/i18n"
 import { getDict } from "@/lib/dictionary"
 import type { Project, ProjectStatus } from "@/lib/projects"
-import { LlmIcon, TechIcon } from "@/components/brand-icon"
+import { BrandBadge, llmMeta, resolveTechIcons } from "@/components/brand-icon"
 import { cn } from "@/lib/utils"
 
 const statusStyles: Record<ProjectStatus, { dot: string; text: string; pulse?: boolean }> = {
@@ -27,6 +26,7 @@ export default function ProjectCard({ project }: { project: Project }) {
     sunset: t.statusSunset,
   }[project.status]
   const status = statusStyles[project.status]
+  const techIcons = resolveTechIcons(project.tech)
 
   const period =
     project.end === undefined
@@ -38,6 +38,16 @@ export default function ProjectCard({ project }: { project: Project }) {
   return (
     <Card className="group relative overflow-hidden transition-all hover:shadow-lg hover:border-primary/30">
       <Link href={`/projects/${project.slug}/`} className="absolute inset-0 z-10" aria-label={project.name} />
+
+      {/* LLMs used to build it — top-right, brand-colored, name on hover */}
+      {project.llms.length > 0 && (
+        <div className="absolute right-4 top-4 z-20 flex items-center gap-2.5">
+          {project.llms.map((llm) => (
+            <BrandBadge key={llm} label={llmMeta[llm].label} path={llmMeta[llm].path} hex={llmMeta[llm].hex} className="h-[18px] w-[18px]" />
+          ))}
+        </div>
+      )}
+
       <CardContent className="p-6">
         <div className="flex items-start gap-4 mb-4">
           {/* Logo, or a monogram fallback */}
@@ -69,29 +79,15 @@ export default function ProjectCard({ project }: { project: Project }) {
           </div>
         </div>
 
-        <p className="text-muted-foreground mb-4 text-sm leading-relaxed">{tx(project.tagline, lang)}</p>
-
-        <div className="flex flex-wrap gap-2">
-          {project.tech.map((tag) => (
-            <Badge key={tag} variant="secondary" className="gap-1.5 font-normal">
-              <TechIcon tech={tag} className="h-3 w-3" />
-              {tag}
-            </Badge>
-          ))}
-        </div>
+        <p className="text-muted-foreground text-sm leading-relaxed">{tx(project.tagline, lang)}</p>
       </CardContent>
 
-      <CardFooter className="p-6 pt-0 flex items-center justify-between">
-        {/* LLMs used to build it */}
-        <div className="flex items-center gap-2 text-muted-foreground" title={t.builtWith}>
-          {project.llms.length > 0 && (
-            <>
-              <span className="text-xs">{t.builtWith}</span>
-              {project.llms.map((llm) => (
-                <LlmIcon key={llm} llm={llm} className="h-4 w-4 transition-colors group-hover:text-foreground" />
-              ))}
-            </>
-          )}
+      <CardFooter className="p-6 pt-0 flex items-center justify-between gap-4">
+        {/* Main tech — bottom-left, brand-colored icons, name on hover */}
+        <div className="relative z-20 flex items-center gap-2.5">
+          {techIcons.map((ti) => (
+            <BrandBadge key={ti.key} label={ti.label} path={ti.path} hex={ti.hex} className="h-[18px] w-[18px]" />
+          ))}
         </div>
         <div className="relative z-20 flex items-center gap-4">
           {project.github && (
