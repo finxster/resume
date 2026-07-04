@@ -16,6 +16,7 @@ import { projects } from "@/lib/projects"
 export default function Home() {
   const { lang } = useLang()
   const t = getDict(lang)
+  const resumeHref = lang === "pt" ? "/resume-pt.pdf" : "/resume.pdf"
 
   const skillGroups = [
     { key: "backend" as const, category: "backend", icon: Server, items: ["Java", "Spring Boot", "Kafka", "Python", "Drools"] },
@@ -46,7 +47,7 @@ export default function Home() {
                   <a href="#contact">{t.hero.getInTouch}</a>
                 </Button>
                 <Button variant="outline" asChild>
-                  <a href="/resume.pdf" download>
+                  <a href={resumeHref} download>
                     <Download className="mr-2 h-4 w-4" />
                     {t.hero.downloadResume}
                   </a>

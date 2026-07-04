@@ -11,6 +11,7 @@ import LanguageSwitcher from "@/components/language-switcher"
 export default function Navbar() {
   const { lang } = useLang()
   const t = getDict(lang).nav
+  const resumeHref = lang === "pt" ? "/resume-pt.pdf" : "/resume.pdf"
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const toggleMenu = () => {
@@ -40,7 +41,7 @@ export default function Navbar() {
               {t.contact}
             </Link>
             <Button asChild variant="outline">
-              <a href="/resume.pdf" download>
+              <a href={resumeHref} download>
                 {t.resume}
               </a>
             </Button>
@@ -91,7 +92,7 @@ export default function Navbar() {
               {t.contact}
             </Link>
             <Button asChild variant="outline" className="w-full">
-              <a href="/resume.pdf" download>
+              <a href={resumeHref} download>
                 {t.resume}
               </a>
             </Button>

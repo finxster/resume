@@ -105,6 +105,39 @@ resume/
 └── README.md            # This file
 ```
 
+## 📄 Downloadable Résumé (PDF)
+
+The "Download Resume" button serves a real, print-ready PDF that is generated
+from a structured content file — **not** hand-edited. The PDFs are bilingual:
+the button links to `/resume.pdf` (English) or `/resume-pt.pdf` (Portuguese)
+depending on the site's current language.
+
+### How it works
+
+- **Content** lives in [`scripts/resume-content.mjs`](scripts/resume-content.mjs) —
+  a bilingual (EN/PT) module with the summary, skills, detailed experience,
+  ventures, education, languages, and certifications. It mirrors the site data
+  but is intentionally denser/recruiter-focused, so it carries more detail than
+  the timeline.
+- **Generator** is [`scripts/generate-resume.mjs`](scripts/generate-resume.mjs) —
+  it uses [`pdfkit`](https://pdfkit.org/) to render `public/resume.pdf` and
+  `public/resume-pt.pdf` in the site's cool-graphite brand style.
+
+### Regenerating
+
+```bash
+npm run resume          # generate both PDFs on demand
+```
+
+You rarely need to run this by hand: a `prebuild`/`preexport` hook regenerates
+both PDFs automatically before every `npm run build` / `npm run export`, so the
+deployed site always ships fresh files.
+
+> When you add or change a role, update **both** `lib/data.ts` (the site
+> timeline) and `scripts/resume-content.mjs` (the PDF content). The build hook
+> guarantees the published PDF is never stale, but it can't invent the new copy
+> for you.
+
 ## 🎨 Customization
 
 ### Personal Information
@@ -204,9 +237,10 @@ The custom domain `finx.dev` is configured through:
 ## 📦 Available Scripts
 
 - `npm run dev` - Start development server
-- `npm run build` - Build for production
+- `npm run build` - Build for production (regenerates the résumé PDFs first)
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint for code quality
+- `npm run resume` - Regenerate the bilingual résumé PDFs (`public/resume*.pdf`)
 
 ## 🔧 Troubleshooting
 

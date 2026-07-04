@@ -259,7 +259,7 @@ export const experiences: Experience[] = [
       pt: "Rede social para músicos — backend & infraestrutura",
     },
     start: 2013,
-    end: 2016,
+    end: 2015,
     country: "BR",
     location: { en: "Brazil", pt: "Brasil" },
     description: {
@@ -288,11 +288,11 @@ export const experiences: Experience[] = [
     country: "BR",
     location: { en: "Brazil", pt: "Brasil" },
     description: {
-      en: "Founding engineer at PayAqui, a side payments venture. Designed and built the company's native mobile apps for Android and iOS end to end — from architecture to shipping.",
-      pt: "Engenheiro fundador na PayAqui, uma fintech de pagamentos tocada em paralelo. Projetei e construí os apps mobile nativos da empresa para Android e iOS de ponta a ponta — da arquitetura à publicação.",
+      en: "Founding engineer at PayAqui, a side payments venture. Designed and built the company's native mobile apps for Android and iOS end to end — from architecture to shipping — while also owning non-technical work like requirements discovery and UX, and contributing to the Java backend.",
+      pt: "Engenheiro fundador na PayAqui, uma fintech de pagamentos tocada em paralelo. Projetei e construí os apps mobile nativos da empresa para Android e iOS de ponta a ponta — da arquitetura à publicação — participando ativamente também de funções não técnicas como descoberta de requisitos e UX, além de contribuir com o backend em Java.",
     },
     roles: [R.foundingEngineer, R.mobileEngineer],
-    tech: ["Java (Android)", "Swift (iOS)", "REST APIs"],
+    tech: ["Java (Android)", "Swift (iOS)", "Java (backend)", "REST APIs"],
     interchangeWith: "avenuecode-1",
     // mergesBack (default) — the branch rises and returns to the trunk
   },
