@@ -178,8 +178,8 @@ export const experiences: Experience[] = [
     country: "BR",
     location: { en: "Brazil — Remote", pt: "Brasil — Remoto" },
     description: {
-      en: "Left Avenue Code to lead engineering at this transit-fintech startup. Hired and onboarded developers, defined team processes, and built the Evompass (white-label digital wallet) and Mobipix (transaction management) platforms.",
-      pt: "Saí da Avenue Code para liderar a engenharia nesta startup de fintech de mobilidade. Contratei e integrei desenvolvedores, defini processos de time e construí as plataformas Evompass (carteira digital white-label) e Mobipix (gestão de transações).",
+      en: "The project that pushed me furthest outside my comfort zone. Joined early and turned product ideas into production software for real customers — switching between backend, mobile, hiring, mentoring, and product depending on the day. Mobile wasn't my background, so I learned Flutter and built the mobile side of the platform. We shipped a white-label digital wallet and a transaction platform aggregating multiple transport and payment systems, validated with paying pilot customers, and I built onboarding that got new engineers shipping production code in ~two weeks.",
+      pt: "O projeto que mais me tirou da zona de conforto. Entrei cedo e transformei ideias de produto em software em produção para clientes reais — alternando entre backend, mobile, contratação, mentoria e produto conforme o dia. Mobile não fazia parte da minha bagagem, então aprendi Flutter e construí o lado mobile da plataforma. Entregamos uma carteira digital white-label e uma plataforma de transações que agregava múltiplos sistemas de transporte e pagamento, validada com clientes-piloto pagantes, e criei um onboarding que fazia novos engenheiros subirem código em produção em ~duas semanas.",
     },
     roles: [R.scrumMaster, R.techLead, R.mentor],
     tech: ["Java", "Flutter", "React", "Spring Boot", "AWS", "CI/CD (GitHub Actions)", "JHipster", "Liquibase"],
@@ -201,8 +201,8 @@ export const experiences: Experience[] = [
     country: "US",
     location: { en: "SF Bay Area, USA", pt: "SF Bay Area, EUA" },
     description: {
-      en: "Returned to Avenue Code from X4Fare as a hands-on tech lead, fully remote from the US. Started on GAP's Hands Free Planning simulation platform (Databricks/Python), then moved into Williams Sonoma's supply-chain domain — microservices, a reusable file-upload framework, and back-order automation. Led a 3-person team migrating ~20 microservices from Java 11 to 21, drove early AI initiatives, and after a successful Drools proof-of-concept now lead an AI-built internal rules-engine product that replaced a third-party vendor — pioneering AI-first, agentic development across the supply-chain vertical.",
-      pt: "Voltei à Avenue Code depois da X4Fare como tech lead hands-on, totalmente remoto a partir dos EUA. Comecei na plataforma de simulação Hands Free Planning da GAP (Databricks/Python) e depois entrei no domínio de supply chain da Williams Sonoma — microsserviços, um framework reutilizável de file upload e automação de back-order. Liderei um time de 3 pessoas migrando ~20 microsserviços de Java 11 para 21, conduzi as primeiras iniciativas de IA e, após um POC bem-sucedido com Drools, hoje lidero um produto interno de motor de regras construído com IA que substituiu um fornecedor externo — sendo pioneiro em desenvolvimento AI-first e agentic em toda a vertical de supply chain.",
+      en: "Sitting between hands-on engineering and technical leadership for Fortune 500 retail across supply chain, logistics, data engineering, and AI. Built the proof-of-concept for a strategic internal rules platform that led leadership to replace a commercial vendor — now a foundation for future AI work — and helped pioneer AI-first engineering practices (workflows, prompts, guidelines) adopted by multiple teams. Also built an operational dashboard used across supply-chain teams (service health, deployments, environment availability, auto-created Jira tickets) and coordinated migrating ~20 microservices from Java 11 to 21.",
+      pt: "Atuando entre engenharia hands-on e liderança técnica para varejo Fortune 500 em supply chain, logística, engenharia de dados e IA. Construí a prova de conceito de uma plataforma de regras interna estratégica que levou a liderança a substituir um fornecedor comercial — hoje base para futuras iniciativas de IA — e ajudei a ser pioneiro em práticas de engenharia AI-first (workflows, prompts, diretrizes) adotadas por múltiplos times. Também construí um dashboard operacional usado por vários times de supply chain (saúde dos serviços, deploys, disponibilidade de ambientes, criação automática de tickets no Jira) e coordenei a migração de ~20 microsserviços de Java 11 para 21.",
     },
     roles: [R.techLead, R.seniorDeveloper, R.scrumMaster, R.mentor],
     progression: [
@@ -301,7 +301,7 @@ export const experiences: Experience[] = [
     track: "side",
     code: "AT",
     initial: "At",
-    title: { en: "Co-founder", pt: "Cofundador" },
+    title: { en: "Founder & Engineer", pt: "Fundador & Engenheiro" },
     company: "AtipicALI",
     shortCompany: "AtipicALI",
     short: {
@@ -314,8 +314,8 @@ export const experiences: Experience[] = [
     country: "US",
     location: { en: "SF Bay Area, USA", pt: "SF Bay Area, EUA" },
     description: {
-      en: "An active parallel venture started in 2025 alongside Avenue Code work. Still running today.",
-      pt: "Um projeto paralelo ativo, iniciado em 2025 em paralelo ao trabalho na Avenue Code. Segue em andamento.",
+      en: "My current side project and the closest representation of how I enjoy building software. Started as a platform to help neurodivergent individuals and families find services, businesses, and places that fit their needs, and grew into a broader ecosystem — place discovery, content management, scheduling, booking, and AI-assisted experiences. I own the whole thing: architecture, backend, frontend, infrastructure, deployment, auth, admin tools, and AI integrations — and it's where I experiment with agentic workflows and ideas I later bring back into my professional work.",
+      pt: "Meu projeto paralelo atual e a representação mais fiel de como eu gosto de construir software. Começou como uma plataforma para ajudar pessoas e famílias neurodivergentes a encontrar serviços, negócios e lugares que atendam melhor às suas necessidades, e evoluiu para um ecossistema mais amplo — descoberta de lugares, gestão de conteúdo, agendamento, reservas e experiências assistidas por IA. Sou responsável por tudo: arquitetura, backend, frontend, infraestrutura, deploy, autenticação, ferramentas de administração e integrações de IA — e é onde experimento workflows agentic e ideias que depois trago para o meu trabalho profissional.",
     },
     roles: [R.coFounder],
     tech: ["TypeScript", "React", "Node", "PostgreSQL"],
