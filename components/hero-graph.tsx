@@ -10,13 +10,18 @@
 // mouse tracking is attached to the parent element and mapped to canvas coords.
 
 import { useEffect, useRef } from "react";
+import { useTheme } from "next-themes";
 
 const BASE_NODE_COUNT = 46; // tuned for an ~880×560 canvas; scaled by area below
 const MAX_NODE_COUNT = 120; // guard rail on very large screens
 const LINK_DIST = 130; // px: max distance to draw an edge
 const HOT_DIST = 120; // px: cursor interaction radius
 const SPEED = 0.25; // px/frame drift velocity range (±)
-const INK = "20,22,26"; // brand graphite #14161A as "r,g,b" for rgba()
+// Node/edge ink as "r,g,b" for rgba(). Light: brand graphite #14161A on the
+// pale canvas; dark: the pale canvas #F7F8FA on graphite — the same ink/canvas
+// contrast, inverted.
+const INK_LIGHT = "20,22,26";
+const INK_DARK = "247,248,250";
 
 interface Node {
   x: number;
@@ -27,6 +32,14 @@ interface Node {
 
 export default function HeroGraph({ className }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { resolvedTheme } = useTheme();
+  // Live ink colour the draw loop reads each frame. Kept in a ref (not a dep of
+  // the animation effect) so toggling the theme recolours the field without
+  // tearing down and re-seeding the node graph.
+  const inkRef = useRef(INK_LIGHT);
+  useEffect(() => {
+    inkRef.current = resolvedTheme === "dark" ? INK_DARK : INK_LIGHT;
+  }, [resolvedTheme]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -71,6 +84,7 @@ export default function HeroGraph({ className }: { className?: string }) {
     }
 
     function frame() {
+      const ink = inkRef.current;
       ctx!.clearRect(0, 0, w, h);
 
       // advance + bounce
@@ -93,7 +107,7 @@ export default function HeroGraph({ className }: { className?: string }) {
             Math.hypot(b.x - mouse.x, b.y - mouse.y)
           );
           const hot = near < HOT_DIST ? 1 - near / HOT_DIST : 0;
-          ctx!.strokeStyle = `rgba(${INK},${(1 - d / LINK_DIST) * (0.12 + hot * 0.55)})`;
+          ctx!.strokeStyle = `rgba(${ink},${(1 - d / LINK_DIST) * (0.12 + hot * 0.55)})`;
           ctx!.lineWidth = 0.8 + hot * 0.8;
           ctx!.beginPath();
           ctx!.moveTo(a.x, a.y);
@@ -107,7 +121,7 @@ export default function HeroGraph({ className }: { className?: string }) {
         const near = Math.hypot(n.x - mouse.x, n.y - mouse.y);
         const hot = near < HOT_DIST ? 1 - near / HOT_DIST : 0;
         ctx!.beginPath();
-        ctx!.fillStyle = `rgba(${INK},${0.35 + hot * 0.55})`;
+        ctx!.fillStyle = `rgba(${ink},${0.35 + hot * 0.55})`;
         ctx!.arc(n.x, n.y, 1.6 + hot * 2.4, 0, Math.PI * 2);
         ctx!.fill();
       }

@@ -241,8 +241,10 @@ export default function Home() {
         <div className="container px-4 md:px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0 flex items-center gap-3">
-              {/* Brand lockup — mark + "finx." wordmark from the brand kit. */}
-              <img src="/lockup-light.svg" alt="finx." width={51} height={24} className="h-6 w-auto" />
+              {/* Brand lockup — mark + "finx." wordmark from the brand kit.
+                  Dark variant swaps the ink to the pale canvas colour. */}
+              <img src="/lockup-light.svg" alt="finx." width={51} height={24} className="h-6 w-auto dark:hidden" />
+              <img src="/lockup-dark.svg" alt="finx." width={51} height={24} className="hidden h-6 w-auto dark:block" />
               <p>&copy; {new Date().getFullYear()} Luis Alves. {t.footer.rights}</p>
             </div>
             <div className="flex gap-4">

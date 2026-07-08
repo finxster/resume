@@ -17,6 +17,7 @@ import {
   COUNTRY_PALETTE,
   type Experience,
 } from "@/lib/data";
+import { useTheme } from "next-themes";
 import { useLang, tx, type Lang } from "@/lib/i18n";
 import { getDict, type Dictionary } from "@/lib/dictionary";
 
@@ -27,7 +28,7 @@ type TL = Dictionary["timeline"];
 // Colors follow the "Cool Graphite" brand: graphite ink neutrals, brand
 // indigo (#4457E8) for the full-time trunk stations, and a soft graphite for
 // side ventures so indigo stays the only saturated accent on the page.
-const preset = {
+const lightPreset = {
   bg: "#F7F8FA", // brand canvas
 
   surface: "#FFFFFF",
@@ -36,9 +37,32 @@ const preset = {
   hairline: "rgba(20,22,26,0.10)",
   fte: "#4457E8",
   side: "#4B5563",
+  chip: "rgba(20,22,26,0.04)", // subtle fill for chips / toggle track / hovers
   lineWeight: 7,
   stationStroke: 3,
 };
+
+// Dark twin of the preset — mirrors the "Cool Graphite" dark tokens: canvas
+// #14161A, surface #1B1E24, ink lifts to the light canvas, and the accent uses
+// the lighter indigo (#6E7BFF) the brand book reserves for ink backgrounds.
+const darkPreset: typeof lightPreset = {
+  bg: "#14161A",
+  surface: "#1B1E24",
+  ink: "#F7F8FA",
+  muted: "rgba(247,248,250,0.55)",
+  hairline: "rgba(247,248,250,0.12)",
+  fte: "#6E7BFF",
+  side: "#9AA3B2",
+  chip: "rgba(247,248,250,0.06)",
+  lineWeight: 7,
+  stationStroke: 3,
+};
+
+// Active preset for the current render. The sub-components (SVG stations,
+// trunks, tooltips) all read this module binding directly, so the Timeline
+// component reassigns it from the resolved theme at the top of its render —
+// synchronous top-down rendering guarantees they observe the current value.
+let preset = lightPreset;
 
 // ── Layout constants ────────────────────────────────────────────────────────
 // Side ventures sit ABOVE the trunk — parallel/entrepreneurial work reads as
@@ -875,6 +899,18 @@ function ViewToggle({
 // ── Main ─────────────────────────────────────────────────────────────────────
 export default function Timeline() {
   const { lang } = useLang();
+  const { resolvedTheme } = useTheme();
+  // `resolvedTheme` is undefined during SSR and the first client render, so we
+  // stay on the light preset until mounted — otherwise the server-rendered
+  // inline `--ink`/`--bg` style attributes hydrate light and never get patched
+  // (React skips attribute mismatches), leaving the map dark-on-dark for
+  // return visitors whose stored theme is dark. The post-mount re-render then
+  // applies the real theme.
+  const [themeReady, setThemeReady] = useState(false);
+  useEffect(() => setThemeReady(true), []);
+  // Swap the module-level preset the SVG sub-components read from, before any
+  // of them render this pass.
+  preset = themeReady && resolvedTheme === "dark" ? darkPreset : lightPreset;
   const t = getDict(lang).timeline;
   const outerRef = useRef<HTMLDivElement>(null);
   const roRef = useRef<ResizeObserver | null>(null);
@@ -917,6 +953,7 @@ export default function Timeline() {
           "--hairline": preset.hairline,
           "--fte": preset.fte,
           "--side": preset.side,
+          "--chip": preset.chip,
         } as React.CSSProperties
       }
     >
@@ -991,7 +1028,7 @@ const TIMELINE_CSS = `
   .tl-header { display: flex; align-items: flex-end; justify-content: space-between;
     gap: 24px; flex-wrap: wrap; margin: 0 0 32px; }
   .tl-toggle { display: inline-flex; padding: 3px; border-radius: 10px;
-    background: rgba(20,22,26,0.05); border: 0.5px solid var(--hairline); flex-shrink: 0; }
+    background: var(--chip); border: 0.5px solid var(--hairline); flex-shrink: 0; }
   .tl-toggle-btn { display: inline-flex; align-items: center; gap: 6px; appearance: none;
     border: none; background: transparent; cursor: pointer; padding: 7px 13px; border-radius: 8px;
     font-size: 13px; font-weight: 500; color: var(--muted); transition: all 140ms ease;
@@ -1021,7 +1058,7 @@ const TIMELINE_CSS = `
   .tl-li-prog { margin-top: 14px; }
   .tl-li-clients { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
   .tl-li-client { font-size: 12px; color: var(--ink); opacity: 0.85; padding: 3px 9px;
-    border: 0.5px solid var(--hairline); border-radius: 999px; background: rgba(0,0,0,0.02); }
+    border: 0.5px solid var(--hairline); border-radius: 999px; background: var(--chip); }
   .tl-li-client-yr { font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); }
   .tl-li-tech { margin-top: 14px; }
   @media (max-width: 640px) { .tl-li-range { margin-left: 0; width: 100%; } }
@@ -1074,11 +1111,11 @@ const TIMELINE_CSS = `
   .tl-d-close { appearance: none; border: 0.5px solid var(--hairline); background: transparent;
     width: 30px; height: 30px; border-radius: 8px; color: var(--muted); font-size: 18px; line-height: 1;
     cursor: pointer; transition: all 140ms ease; flex-shrink: 0; }
-  .tl-d-close:hover { background: rgba(0,0,0,0.04); color: var(--ink); }
+  .tl-d-close:hover { background: var(--chip); color: var(--ink); }
   .tl-d-desc { margin: 18px 0 16px; font-size: 14.5px; line-height: 1.6; color: var(--ink); opacity: 0.9; max-width: 720px; }
   .tl-d-roles { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
   .tl-d-role { font-size: 11.5px; font-weight: 500; padding: 4px 10px; border-radius: 999px;
-    background: rgba(0,0,0,0.05); color: var(--ink); white-space: nowrap; }
+    background: var(--chip); color: var(--ink); white-space: nowrap; }
   .tl-d-progression { list-style: none; margin: 4px 0 0; padding: 4px 0 4px 14px; border-left: 2px solid;
     display: flex; flex-direction: column; gap: 12px; }
   .tl-d-progression li { position: relative; padding-left: 6px; }
@@ -1095,6 +1132,6 @@ const TIMELINE_CSS = `
     color: var(--muted); margin-bottom: 8px; }
   .tl-d-tech { display: flex; flex-wrap: wrap; gap: 6px; }
   .tl-d-techchip { font-family: var(--font-mono); font-size: 11.5px; padding: 4px 9px;
-    border: 0.5px solid var(--hairline); border-radius: 5px; color: var(--ink); background: rgba(255,255,255,0.5);
+    border: 0.5px solid var(--hairline); border-radius: 5px; color: var(--ink); background: var(--chip);
     white-space: nowrap; }
 `;

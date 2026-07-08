@@ -5,6 +5,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/lib/i18n"
 import LanguageSwitcher from "@/components/language-switcher"
+import ThemeToggle from "@/components/theme-toggle"
 import { Toaster } from "@/components/ui/sonner"
 
 // Brand typography (finx brand book): Space Grotesk for display/body,
@@ -50,11 +51,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${spaceGrotesk.className} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <LanguageProvider>
             {/* Floating switcher — the site has no mounted navbar, so the
                 language toggle lives fixed in the top-right corner. */}
-            <div className="fixed top-4 right-4 z-[60]">
+            <div className="fixed top-4 right-4 z-[60] flex items-center gap-2">
+              <ThemeToggle />
               <LanguageSwitcher />
             </div>
             {/* Brand anchor mirroring the switcher: the bare finx mark,
@@ -66,7 +68,8 @@ export default function RootLayout({
               aria-label="finx — back to top"
               className="fixed top-4 left-4 z-[60] hidden sm:flex items-center justify-center h-[34px] w-[34px] rounded-full border border-border bg-card/80 backdrop-blur shadow-sm"
             >
-              <img src="/mark-light.svg" alt="" width={22} height={22} />
+              <img src="/mark-light.svg" alt="" width={22} height={22} className="dark:hidden" />
+              <img src="/mark-dark.svg" alt="" width={22} height={22} className="hidden dark:block" />
             </a>
             {children}
             <Toaster />
