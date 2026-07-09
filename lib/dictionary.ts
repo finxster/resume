@@ -74,6 +74,8 @@ export const dictionary = {
       technologies: "Technologies",
       screenshots: "Screenshots",
       screenshotsSoon: "Screenshots coming soon.",
+      hostedOn: "Hosted on",
+      runsLocally: "Runs locally",
     },
     contact: {
       title: "Get In Touch",
@@ -166,6 +168,8 @@ export const dictionary = {
       technologies: "Tecnologias",
       screenshots: "Prints",
       screenshotsSoon: "Prints em breve.",
+      hostedOn: "Hospedado no",
+      runsLocally: "Roda localmente",
     },
     contact: {
       title: "Vamos Conversar",

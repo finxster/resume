@@ -1,12 +1,12 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowLeft, ExternalLink, Github, ImageIcon } from "lucide-react"
+import { ArrowLeft, Cloud, ExternalLink, Github, ImageIcon, Laptop, type LucideIcon } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { useLang, tx } from "@/lib/i18n"
 import { getDict } from "@/lib/dictionary"
-import { getProject, type ProjectStatus } from "@/lib/projects"
+import { getProject, type Deployment, type ProjectStatus } from "@/lib/projects"
 import { LlmIcon, TechIcon, llmMeta } from "@/components/brand-icon"
 import { cn } from "@/lib/utils"
 
@@ -14,6 +14,15 @@ const statusStyles: Record<ProjectStatus, string> = {
   active: "text-emerald-600 dark:text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
   paused: "text-amber-600 dark:text-amber-400 border-amber-500/30 bg-amber-500/10",
   sunset: "text-muted-foreground border-border bg-muted",
+}
+
+// name === undefined => a local project (label comes from the dictionary).
+const deploymentMeta: Record<Deployment, { name?: string; icon: LucideIcon }> = {
+  "cloudflare-pages": { name: "Cloudflare Pages", icon: Cloud },
+  "github-pages": { name: "GitHub Pages", icon: Github },
+  replit: { name: "Replit", icon: Cloud },
+  aws: { name: "AWS", icon: Cloud },
+  local: { icon: Laptop },
 }
 
 export default function ProjectDetail({ slug }: { slug: string }) {
@@ -62,6 +71,16 @@ export default function ProjectDetail({ slug }: { slug: string }) {
                 {statusLabel}
               </span>
               <span className="text-muted-foreground tabular-nums">{period}</span>
+              {project.deployment && (() => {
+                const dep = deploymentMeta[project.deployment]
+                const Icon = dep.icon
+                return (
+                  <span className="inline-flex items-center gap-1.5 text-muted-foreground">
+                    <Icon className="h-3.5 w-3.5" />
+                    {dep.name ? `${t.hostedOn} ${dep.name}` : t.runsLocally}
+                  </span>
+                )
+              })()}
             </div>
           </div>
         </div>

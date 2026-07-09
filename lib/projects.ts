@@ -11,6 +11,9 @@ export type ProjectStatus = "active" | "paused" | "sunset";
 // LLMs / AI coding tools used to build the project (rendered as brand icons).
 export type Llm = "claude" | "codex" | "copilot" | "gemini" | "vercel" | "replit";
 
+// Where the project is hosted (rendered as a badge on the detail page).
+export type Deployment = "cloudflare-pages" | "github-pages" | "replit" | "aws" | "local";
+
 export interface Project {
   slug: string;
   name: string;
@@ -26,6 +29,8 @@ export interface Project {
   /** Full tech stack, shown on the detail page. Falls back to `tech`. */
   stack?: string[];
   llms: Llm[];
+  /** Where it's hosted, shown as a badge on the detail page. */
+  deployment?: Deployment;
   link?: string;
   github?: string;
   /** Screenshots for the detail-page gallery. `src` is a path under /public. */
@@ -49,6 +54,7 @@ export const projects: Project[] = [
     tech: ["TypeScript", "React", "Node", "PostgreSQL"],
     stack: ["TypeScript", "React", "Node.js", "PostgreSQL"],
     llms: ["claude", "copilot"],
+    deployment: "cloudflare-pages",
   },
   {
     slug: "portfolio",
@@ -66,6 +72,7 @@ export const projects: Project[] = [
     tech: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "shadcn/ui", "PDFKit"],
     llms: ["claude", "vercel"],
+    deployment: "github-pages",
     link: "https://finx.dev",
     github: "https://github.com/finxster/resume",
   },
@@ -84,6 +91,7 @@ export const projects: Project[] = [
     },
     tech: ["React", "Vite", "Supabase", "Tailwind", "Cloudflare Workers"],
     llms: ["claude"],
+    deployment: "cloudflare-pages",
     link: "https://piggly.pages.dev",
   },
   {
@@ -101,6 +109,7 @@ export const projects: Project[] = [
     },
     tech: ["Python", "Automation", "Dashboard"],
     llms: ["claude"],
+    deployment: "local",
     github: "https://github.com/finxster/uscis-tracker",
   },
   {
@@ -109,15 +118,26 @@ export const projects: Project[] = [
     status: "active",
     start: 2025,
     tagline: {
-      en: "A decision helper for the classic stay-or-go dilemma.",
-      pt: "Um ajudante de decisão para o clássico dilema de ficar ou partir.",
+      en: "Weigh the pros & cons of the classic stay-or-go dilemma.",
+      pt: "Pese os prós & contras do clássico dilema de ficar ou partir.",
     },
     description: {
-      en: "A small web app that helps you reason through the classic \"should I stay or should I go\" dilemma, turning a fuzzy gut call into a structured decision.",
-      pt: "Um web app que ajuda a raciocinar sobre o clássico dilema \"ficar ou partir\", transformando uma decisão intuitiva em uma escolha estruturada.",
+      en: "Born from a real fork in the road: facing a big life decision, I was about to scribble the classic pros-and-cons list on a scrap of paper — then thought, why not a simple app instead? No login, no fuss. You open it, build side-by-side lists (Stay vs. Go), add pros and cons, and even assign a weight to each criterion so the app tallies a weighted score and crowns a winner. Your decision lives at its own link — save it and it's yours, Trello-style, no account required. It's also a deliberate exercise in neo-brutalist design: chunky borders, hard shadows, loud type. Bilingual (EN/PT) and effectively zero-cost — Cloudflare KV is the whole database, with an offline fallback to localStorage. A small, genuinely useful app.",
+      pt: "Nasceu de uma encruzilhada real: diante de uma decisão grande na vida, eu já ia rabiscar a clássica lista de prós e contras num papelzinho — então pensei, por que não um app simples? Sem login, sem frescura. Você entra, monta listas lado a lado (Ficar vs. Ir), adiciona prós e contras e ainda pode dar um peso a cada critério, para o app somar uma pontuação ponderada e coroar um vencedor. Sua decisão mora em um link próprio — salvou, é seu, no estilo Trello, sem precisar de conta. É também um exercício proposital de design neo-brutalista: bordas grossas, sombras duras, tipografia marcante. Bilíngue (EN/PT) e de custo praticamente zero — o Cloudflare KV é o banco inteiro, com fallback offline para o localStorage. Um app pequeno e genuinamente útil.",
     },
-    tech: ["React", "TypeScript", "Tailwind CSS"],
+    tech: ["React", "Vite", "Tailwind", "Cloudflare Workers"],
+    stack: [
+      "React",
+      "Vite",
+      "JavaScript",
+      "Tailwind CSS",
+      "lucide-react",
+      "Cloudflare Pages",
+      "Cloudflare Workers",
+      "Cloudflare KV",
+    ],
     llms: ["copilot"],
+    deployment: "cloudflare-pages",
     link: "https://sisosig.pages.dev/",
   },
   {
@@ -152,6 +172,7 @@ export const projects: Project[] = [
       "Neon",
     ],
     llms: ["replit"],
+    deployment: "replit",
     screenshots: [
       {
         src: "/projects/mealwheel-wheel.jpg",
@@ -201,6 +222,7 @@ export const projects: Project[] = [
     tech: ["Java", "Swift", "REST APIs"],
     stack: ["Java (Android)", "Swift (iOS)", "Java (backend)", "REST APIs"],
     llms: [],
+    deployment: "aws",
   },
   {
     slug: "fleeber",
@@ -219,6 +241,7 @@ export const projects: Project[] = [
     },
     tech: ["Java", "AWS", "Lucene", "JBehave", "Wicket"],
     llms: [],
+    deployment: "aws",
   },
 ];
 
