@@ -112,10 +112,27 @@ export default function ProjectDetail({ slug }: { slug: string }) {
 
         <section>
           <h2 className="text-xl font-bold mb-4">{t.screenshots}</h2>
-          <div className="flex items-center justify-center gap-3 rounded-xl border border-dashed py-16 text-muted-foreground">
-            <ImageIcon className="h-5 w-5" />
-            <span className="text-sm">{t.screenshotsSoon}</span>
-          </div>
+          {project.screenshots && project.screenshots.length > 0 ? (
+            <div className="grid gap-6 sm:grid-cols-2">
+              {project.screenshots.map((shot) => (
+                <figure key={shot.src} className="space-y-2">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={shot.src}
+                    alt={tx(shot.caption, lang)}
+                    loading="lazy"
+                    className="w-full rounded-xl border bg-card object-cover"
+                  />
+                  <figcaption className="text-sm text-muted-foreground">{tx(shot.caption, lang)}</figcaption>
+                </figure>
+              ))}
+            </div>
+          ) : (
+            <div className="flex items-center justify-center gap-3 rounded-xl border border-dashed py-16 text-muted-foreground">
+              <ImageIcon className="h-5 w-5" />
+              <span className="text-sm">{t.screenshotsSoon}</span>
+            </div>
+          )}
         </section>
       </div>
     </main>

@@ -28,6 +28,8 @@ export interface Project {
   llms: Llm[];
   link?: string;
   github?: string;
+  /** Screenshots for the detail-page gallery. `src` is a path under /public. */
+  screenshots?: { src: string; caption: L }[];
 }
 
 export const projects: Project[] = [
@@ -121,19 +123,65 @@ export const projects: Project[] = [
   {
     slug: "mealwheel",
     name: "MealWheel",
+    logo: "/projects/mealwheel.jpeg",
     status: "sunset",
     start: 2025,
     end: 2025,
     tagline: {
-      en: "Spin the wheel to decide what's for dinner.",
-      pt: "Gire a roleta para decidir o que comer.",
+      en: "Spin the wheel to settle the daily \"where should we eat?\" fight.",
+      pt: "Gire a roleta e encerre a briga diária do \"onde a gente come?\".",
     },
     description: {
-      en: "A quick experiment that takes the daily \"what should we eat?\" question and answers it with a spin of the wheel. Built end to end on Replit.",
-      pt: "Um experimento rápido que pega a pergunta diária \"o que a gente come?\" e responde com um giro da roleta. Construído de ponta a ponta no Replit.",
+      en: "Born from a pre-pandemic ritual: back when everyone worked on-site, a big group of us went out for lunch together every day — and every day devolved into the same argument over where to go. The idea sat on the shelf for years until AI and vibe coding finally made it cheap to build. MealWheel lets each person add the places they like to eat, then spins a wheel to pick one at random from everyone's shared list — turning the daily standoff into a fair, one-tap decision. Under the hood it's a full-stack app, not just an animation: real accounts (Passport.js + bcrypt), session-based login, and a PostgreSQL database so your places and history persist. Built end to end on Replit as my first real dip into vibe coding.",
+      pt: "Nasceu de um ritual pré-pandemia: na época em que todo mundo trabalhava presencial, um grupo grande de nós ia almoçar junto todo dia — e todo dia acabava na mesma discussão sobre onde ir. A ideia ficou guardada por anos, até a IA e o vibe coding finalmente tornarem barato tirá-la do papel. No MealWheel cada pessoa adiciona os lugares que gosta de comer, e o app gira uma roleta que sorteia um deles a partir da lista compartilhada de todos — transformando o impasse diário em uma decisão justa, a um toque. Por baixo é um app full-stack, não só uma animação: contas de verdade (Passport.js + bcrypt), login por sessão e um banco PostgreSQL para persistir seus lugares e histórico. Construído de ponta a ponta no Replit, meu primeiro mergulho de verdade no vibe coding.",
     },
-    tech: ["React", "TypeScript"],
+    tech: ["React", "TypeScript", "Node", "PostgreSQL", "Tailwind"],
+    stack: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Wouter",
+      "TanStack Query",
+      "Node.js",
+      "Express",
+      "Passport.js",
+      "PostgreSQL",
+      "Drizzle ORM",
+      "Neon",
+    ],
     llms: ["replit"],
+    screenshots: [
+      {
+        src: "/projects/mealwheel-wheel.jpg",
+        caption: {
+          en: "The wheel picks a winner from everyone's shared list of places.",
+          pt: "A roleta sorteia um vencedor a partir da lista compartilhada de lugares.",
+        },
+      },
+      {
+        src: "/projects/mealwheel-spin.jpg",
+        caption: {
+          en: "Pick your crew, the meal type, and the places in the running.",
+          pt: "Escolha a galera, o tipo de refeição e os lugares que entram no sorteio.",
+        },
+      },
+      {
+        src: "/projects/mealwheel-history.jpg",
+        caption: {
+          en: "Every spin is saved — a full audit trail of past decisions.",
+          pt: "Todo giro é salvo — um histórico completo das decisões anteriores.",
+        },
+      },
+      {
+        src: "/projects/mealwheel-places.jpg",
+        caption: {
+          en: "Manage places: add restaurants and toggle which ones are in play.",
+          pt: "Gerencie lugares: adicione restaurantes e ative quais entram no sorteio.",
+        },
+      },
+    ],
   },
   {
     slug: "payaqui",
