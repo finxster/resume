@@ -1,12 +1,13 @@
 "use client"
 
+import { useCallback, useEffect, useState } from "react"
 import Link from "next/link"
-import { ArrowLeft, Cloud, ExternalLink, Github, ImageIcon, Laptop, type LucideIcon } from "lucide-react"
+import { ArrowLeft, ChevronLeft, ChevronRight, Cloud, ExternalLink, Github, ImageIcon, Laptop, X, type LucideIcon } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { useLang, tx } from "@/lib/i18n"
+import { useLang, tx, type Lang } from "@/lib/i18n"
 import { getDict } from "@/lib/dictionary"
-import { getProject, type Deployment, type ProjectStatus } from "@/lib/projects"
+import { getProject, type Deployment, type ProjectStatus, type Project } from "@/lib/projects"
 import { LlmIcon, TechIcon, llmMeta } from "@/components/brand-icon"
 import { cn } from "@/lib/utils"
 
@@ -132,20 +133,7 @@ export default function ProjectDetail({ slug }: { slug: string }) {
         <section>
           <h2 className="text-xl font-bold mb-4">{t.screenshots}</h2>
           {project.screenshots && project.screenshots.length > 0 ? (
-            <div className="grid gap-6 sm:grid-cols-2">
-              {project.screenshots.map((shot) => (
-                <figure key={shot.src} className="space-y-2">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={shot.src}
-                    alt={tx(shot.caption, lang)}
-                    loading="lazy"
-                    className="w-full rounded-xl border bg-card object-cover"
-                  />
-                  <figcaption className="text-sm text-muted-foreground">{tx(shot.caption, lang)}</figcaption>
-                </figure>
-              ))}
-            </div>
+            <Gallery screenshots={project.screenshots} lang={lang} />
           ) : (
             <div className="flex items-center justify-center gap-3 rounded-xl border border-dashed py-16 text-muted-foreground">
               <ImageIcon className="h-5 w-5" />
@@ -155,5 +143,117 @@ export default function ProjectDetail({ slug }: { slug: string }) {
         </section>
       </div>
     </main>
+  )
+}
+
+type Screenshot = NonNullable<Project["screenshots"]>[number]
+
+function Gallery({ screenshots, lang }: { screenshots: Screenshot[]; lang: Lang }) {
+  // null = closed; otherwise the index of the open screenshot.
+  const [open, setOpen] = useState<number | null>(null)
+  const count = screenshots.length
+
+  const close = useCallback(() => setOpen(null), [])
+  const go = useCallback(
+    (delta: number) => setOpen((i) => (i === null ? i : (i + delta + count) % count)),
+    [count],
+  )
+
+  // Keyboard nav + lock body scroll while the lightbox is open.
+  useEffect(() => {
+    if (open === null) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close()
+      else if (e.key === "ArrowRight") go(1)
+      else if (e.key === "ArrowLeft") go(-1)
+    }
+    window.addEventListener("keydown", onKey)
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    return () => {
+      window.removeEventListener("keydown", onKey)
+      document.body.style.overflow = prevOverflow
+    }
+  }, [open, close, go])
+
+  const current = open === null ? null : screenshots[open]
+
+  return (
+    <>
+      <div className="grid gap-6 sm:grid-cols-2">
+        {screenshots.map((shot, i) => (
+          <figure key={shot.src} className="space-y-2">
+            <button
+              type="button"
+              onClick={() => setOpen(i)}
+              className="group block w-full overflow-hidden rounded-xl border bg-card focus:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-zoom-in"
+              aria-label={tx(shot.caption, lang)}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={shot.src}
+                alt={tx(shot.caption, lang)}
+                loading="lazy"
+                className="w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+              />
+            </button>
+            <figcaption className="text-sm text-muted-foreground">{tx(shot.caption, lang)}</figcaption>
+          </figure>
+        ))}
+      </div>
+
+      {current && (
+        <div
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/90 backdrop-blur-sm p-4 sm:p-8"
+          onClick={close}
+          role="dialog"
+          aria-modal="true"
+          aria-label={tx(current.caption, lang)}
+        >
+          <button
+            type="button"
+            onClick={close}
+            className="absolute right-4 top-4 rounded-full p-2 text-white/80 hover:bg-white/10 hover:text-white transition-colors"
+            aria-label="Close"
+          >
+            <X className="h-6 w-6" />
+          </button>
+
+          {count > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); go(-1) }}
+                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 rounded-full p-2 text-white/80 hover:bg-white/10 hover:text-white transition-colors"
+                aria-label="Previous"
+              >
+                <ChevronLeft className="h-8 w-8" />
+              </button>
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); go(1) }}
+                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 rounded-full p-2 text-white/80 hover:bg-white/10 hover:text-white transition-colors"
+                aria-label="Next"
+              >
+                <ChevronRight className="h-8 w-8" />
+              </button>
+            </>
+          )}
+
+          <figure className="flex max-h-full max-w-5xl flex-col items-center gap-4" onClick={(e) => e.stopPropagation()}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={current.src}
+              alt={tx(current.caption, lang)}
+              className="max-h-[80vh] w-auto max-w-full rounded-lg object-contain shadow-2xl"
+            />
+            <figcaption className="text-center text-sm text-white/70">
+              {tx(current.caption, lang)}
+              {count > 1 && <span className="ml-2 tabular-nums text-white/40">{open! + 1} / {count}</span>}
+            </figcaption>
+          </figure>
+        </div>
+      )}
+    </>
   )
 }
