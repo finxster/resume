@@ -139,6 +139,22 @@ export const projects: Project[] = [
     llms: ["copilot"],
     deployment: "cloudflare-pages",
     link: "https://sisosig.pages.dev/",
+    screenshots: [
+      {
+        src: "/projects/sisosig_top.png",
+        caption: {
+          en: "Neo-brutalist UI — Stay vs. Go head to head, with a live winner and score.",
+          pt: "Interface neo-brutalista — Ficar vs. Ir lado a lado, com vencedor e pontuação ao vivo.",
+        },
+      },
+      {
+        src: "/projects/sisosig_bottom.png",
+        caption: {
+          en: "Weighted pros & cons — each item gets a 1–5 weight that feeds the score.",
+          pt: "Prós & contras com pesos — cada item recebe um peso de 1 a 5 que alimenta a pontuação.",
+        },
+      },
+    ],
   },
   {
     slug: "mealwheel",
