@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/lib/i18n"
 import LanguageSwitcher from "@/components/language-switcher"
 import ThemeToggle from "@/components/theme-toggle"
+import ScrollChip from "@/components/scroll-chip"
 import { Toaster } from "@/components/ui/sonner"
 
 // Brand typography (finx brand book): Space Grotesk for display/body,
@@ -59,18 +60,10 @@ export default function RootLayout({
               <ThemeToggle />
               <LanguageSwitcher />
             </div>
-            {/* Brand anchor mirroring the switcher: the bare finx mark,
-                fixed top-left, links back to the top of the page. */}
-            {/* Same translucent pill treatment as the switcher so the mark
-                stays legible over scrolled content. */}
-            <a
-              href="#"
-              aria-label="finx — back to top"
-              className="fixed top-4 left-4 z-[60] hidden sm:flex items-center justify-center h-[34px] w-[34px] rounded-full border border-border bg-card/80 backdrop-blur shadow-sm"
-            >
-              <img src="/mark-light.svg" alt="" width={22} height={22} className="dark:hidden" />
-              <img src="/mark-dark.svg" alt="" width={22} height={22} className="hidden dark:block" />
-            </a>
+            {/* Brand anchor mirroring the switcher: the finx mark fixed
+                top-left, linking home, with a chip naming the current
+                section (home) or project (project pages). */}
+            <ScrollChip />
             {children}
             <Toaster />
           </LanguageProvider>

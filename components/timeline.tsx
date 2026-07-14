@@ -1038,7 +1038,7 @@ const TIMELINE_CSS = `
     box-shadow: 0 1px 2px rgba(0,0,0,0.06), 0 0 0 0.5px rgba(0,0,0,0.04); }
   .tl-toggle-btn.is-active svg { color: var(--fte); }
 
-  .tl-list { list-style: none; margin: 8px 0 0; padding: 0;
+  .tl-list { list-style: none; margin: 8px auto 0; padding: 0;
     display: flex; flex-direction: column; gap: 20px; max-width: 760px; }
   .tl-li { position: relative; display: flex; gap: 18px; background: var(--surface);
     border: 0.5px solid var(--hairline); border-radius: 14px; overflow: hidden;
