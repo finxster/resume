@@ -20,6 +20,7 @@ const statusStyles: Record<ProjectStatus, string> = {
 // name === undefined => a local project (label comes from the dictionary).
 const deploymentMeta: Record<Deployment, { name?: string; icon: LucideIcon }> = {
   "cloudflare-pages": { name: "Cloudflare Pages", icon: Cloud },
+  "cloudflare-workers": { name: "Cloudflare Workers", icon: Cloud },
   "github-pages": { name: "GitHub Pages", icon: Github },
   replit: { name: "Replit", icon: Cloud },
   aws: { name: "AWS", icon: Cloud },
@@ -99,7 +100,7 @@ export default function ProjectDetail({ slug }: { slug: string }) {
           {project.github && (
             <Button variant="outline" asChild>
               <a href={project.github} target="_blank" rel="noopener noreferrer">
-                <Github className="mr-2 h-4 w-4" /> {t.viewCode}
+                <Github className="mr-2 h-4 w-4" /> {t.viewCode} <ExternalLink className="ml-2 h-4 w-4" />
               </a>
             </Button>
           )}

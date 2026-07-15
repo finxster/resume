@@ -64,8 +64,9 @@ export const dictionary = {
       title: "Projects",
       subtitle:
         "A selection of projects I've worked on throughout my career. Each represents different challenges and technologies.",
-      viewProject: "View Project",
+      viewProject: "Visit site",
       viewCode: "View Code",
+      viewDetails: "View details",
       statusActive: "Active",
       statusPaused: "Paused",
       statusSunset: "Sunset",
@@ -158,8 +159,9 @@ export const dictionary = {
       title: "Projetos",
       subtitle:
         "Uma seleção de projetos em que trabalhei ao longo da minha carreira. Cada um representa desafios e tecnologias diferentes.",
-      viewProject: "Ver Projeto",
+      viewProject: "Acessar site",
       viewCode: "Ver Código",
+      viewDetails: "Ver detalhes",
       statusActive: "Ativo",
       statusPaused: "Pausado",
       statusSunset: "Encerrado",

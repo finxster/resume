@@ -12,7 +12,7 @@ export type ProjectStatus = "active" | "paused" | "sunset";
 export type Llm = "claude" | "codex" | "copilot" | "gemini" | "vercel" | "replit";
 
 // Where the project is hosted (rendered as a badge on the detail page).
-export type Deployment = "cloudflare-pages" | "github-pages" | "replit" | "aws" | "local";
+export type Deployment = "cloudflare-pages" | "cloudflare-workers" | "github-pages" | "replit" | "aws" | "local";
 
 export interface Project {
   slug: string;
@@ -97,6 +97,7 @@ export const projects: Project[] = [
   {
     slug: "uscis-tracker",
     name: "USCIS Silent Update Tracker",
+    logo: "/projects/uscis_python.svg",
     status: "active",
     start: 2026,
     tagline: {
@@ -111,10 +112,27 @@ export const projects: Project[] = [
     llms: ["claude"],
     deployment: "local",
     github: "https://github.com/finxster/uscis-tracker",
+    screenshots: [
+      {
+        src: "/projects/uscis_dashboard.png",
+        caption: {
+          en: "Dashboard — one card per receipt, flagging silent updates and every check with its content hash.",
+          pt: "Dashboard — um cartão por recibo, sinalizando atualizações silenciosas e cada verificação com seu hash de conteúdo.",
+        },
+      },
+      {
+        src: "/projects/uscis_detail.png",
+        caption: {
+          en: "Field-level diff — expanding a change shows exactly which fields moved, old value → new value.",
+          pt: "Diff a nível de campo — ao expandir uma mudança, mostra exatamente quais campos mudaram, valor antigo → valor novo.",
+        },
+      },
+    ],
   },
   {
     slug: "sisosig",
     name: "Should I Stay Or Should I Go",
+    logo: "/projects/sisosig_react.svg",
     status: "active",
     start: 2025,
     tagline: {
@@ -152,6 +170,41 @@ export const projects: Project[] = [
         caption: {
           en: "Weighted pros & cons — each item gets a 1–5 weight that feeds the score.",
           pt: "Prós & contras com pesos — cada item recebe um peso de 1 a 5 que alimenta a pontuação.",
+        },
+      },
+    ],
+  },
+  {
+    slug: "anxious-perm-bot",
+    name: "AnxiousPermBot",
+    logo: "/projects/anxiousperm_telegram.svg",
+    status: "active",
+    start: 2025,
+    tagline: {
+      en: "Telegram bot that tracks PERM green-card queue movement daily.",
+      pt: "Bot no Telegram que acompanha a fila do PERM (green card) diariamente.",
+    },
+    description: {
+      en: "Born from the anxiety of waiting in the PERM labor-certification queue and refreshing a prediction site over and over. So I automated the refresh: a Cloudflare Worker runs on a cron every morning, pulls the latest prediction from permupdate.com, stores a snapshot in Cloudflare KV, and sends a formatted Telegram report comparing today against yesterday — estimated date, queue position, processing rate, and days remaining, each with a 🔴▲/🟢▼ delta so you see at a glance whether the line moved your way. Daily reports Monday–Saturday, a fuller summary on Sundays, multi-recipient support, and a small web dashboard to trigger a report on demand. Zero-cost serverless, and genuinely calming: like reading the morning paper fresh off the press — I'd wake up already knowing my spot in the line. The bot watches the queue so you don't have to.",
+      pt: "Nasceu da ansiedade de esperar na fila do PERM (etapa da certificação de trabalho para o green card) e ficar atualizando um site de previsão sem parar. Então automatizei a atualização: um Cloudflare Worker roda num cron toda manhã, busca a previsão mais recente do permupdate.com, guarda um snapshot no Cloudflare KV e envia um relatório formatado no Telegram comparando hoje com ontem — data estimada, posição na fila, ritmo de processamento e dias restantes, cada um com um delta 🔴▲/🟢▼ para você ver num relance se a fila andou a seu favor. Relatórios diários de segunda a sábado, um resumo mais completo aos domingos, suporte a múltiplos destinatários e um pequeno dashboard web para disparar um relatório sob demanda. Serverless de custo zero e genuinamente tranquilizador: aquela sensação de ler as notícias fresquinhas toda manhã — eu acordava e já sabia meu lugar na fila. O bot vigia a fila para você não precisar.",
+    },
+    tech: ["JavaScript", "Cloudflare Workers", "Cloudflare KV", "Telegram Bot API"],
+    stack: [
+      "JavaScript",
+      "Cloudflare Workers",
+      "Cloudflare KV",
+      "Cron Triggers",
+      "Telegram Bot API",
+    ],
+    llms: ["copilot"],
+    deployment: "cloudflare-workers",
+    github: "https://github.com/finxster/AnxiousPermBot",
+    screenshots: [
+      {
+        src: "/projects/anxiousperm_report.png",
+        caption: {
+          en: "Daily Telegram report — estimated date, queue position, and processing rate, each with a day-over-day delta.",
+          pt: "Relatório diário no Telegram — data estimada, posição na fila e ritmo de processamento, cada um com o delta em relação ao dia anterior.",
         },
       },
     ],

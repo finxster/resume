@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { ArrowUpRight, ExternalLink, Github } from "lucide-react"
+import { ArrowRight, ExternalLink, Github } from "lucide-react"
 import { useLang, tx } from "@/lib/i18n"
 import { getDict } from "@/lib/dictionary"
 import type { Project, ProjectStatus } from "@/lib/projects"
@@ -36,7 +36,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         : `${project.start} — ${project.end}`
 
   return (
-    <Card className="group relative overflow-hidden transition-all hover:shadow-lg hover:border-primary/30">
+    <Card className="group relative cursor-pointer overflow-hidden transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:border-primary/40 hover:ring-1 hover:ring-primary/20">
       <Link href={`/projects/${project.slug}/`} className="absolute inset-0 z-10" aria-label={project.name} />
 
       {/* LLMs used to build it — top-right, brand-colored, name on hover */}
@@ -60,10 +60,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             </div>
           )}
           <div className="min-w-0 flex-1">
-            <div className="flex items-center gap-2">
-              <h3 className="text-xl font-bold truncate">{project.name}</h3>
-              <ArrowUpRight className="h-4 w-4 shrink-0 text-muted-foreground opacity-0 -translate-x-1 translate-y-1 transition-all group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0" />
-            </div>
+            <h3 className="text-xl font-bold truncate transition-colors group-hover:text-primary">{project.name}</h3>
             <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
               <span className={cn("inline-flex items-center gap-1.5 font-medium", status.text)}>
                 <span className="relative flex h-2 w-2">
@@ -80,6 +77,11 @@ export default function ProjectCard({ project }: { project: Project }) {
         </div>
 
         <p className="text-muted-foreground text-sm leading-relaxed">{tx(project.tagline, lang)}</p>
+
+        <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
+          {t.viewDetails}
+          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+        </span>
       </CardContent>
 
       <CardFooter className="p-6 pt-0 flex items-center justify-between gap-4">
@@ -97,7 +99,7 @@ export default function ProjectCard({ project }: { project: Project }) {
               rel="noopener noreferrer"
               className="text-primary hover:text-primary/80 flex items-center text-sm font-medium transition-colors"
             >
-              <Github className="mr-1 h-3.5 w-3.5" /> {t.viewCode}
+              <Github className="mr-1 h-3.5 w-3.5" /> {t.viewCode} <ExternalLink className="ml-1 h-3 w-3" />
             </a>
           )}
           {project.link && (
