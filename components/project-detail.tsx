@@ -60,7 +60,7 @@ export default function ProjectDetail({ slug }: { slug: string }) {
         <div className="flex items-start gap-5 mb-6">
           {project.logo ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={project.logo} alt="" className="h-16 w-16 rounded-2xl object-contain border bg-card" />
+            <img src={project.logo} alt="" className="h-16 w-16 rounded-2xl object-contain border bg-card p-2" />
           ) : (
             <div className="h-16 w-16 shrink-0 rounded-2xl border bg-muted flex items-center justify-center text-2xl font-bold text-muted-foreground">
               {project.name.slice(0, 2)}

@@ -7,6 +7,7 @@ import {
   siV0,
   siReplit,
   siReact,
+  siVuedotjs,
   siVite,
   siSupabase,
   siTailwindcss,
@@ -94,6 +95,8 @@ export function LlmIcon({
 // "(...)" qualifier, so "Java (Android)" resolves to the Java icon.
 const techIcons: Record<string, SimpleIcon> = {
   react: siReact,
+  vue: siVuedotjs,
+  "vue.js": siVuedotjs,
   vite: siVite,
   supabase: siSupabase,
   tailwind: siTailwindcss,

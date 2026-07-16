@@ -53,7 +53,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           {/* Logo, or a monogram fallback */}
           {project.logo ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={project.logo} alt="" className="h-12 w-12 rounded-xl object-contain border bg-card" />
+            <img src={project.logo} alt="" className="h-12 w-12 rounded-xl object-contain border bg-card p-1.5" />
           ) : (
             <div className="h-12 w-12 shrink-0 rounded-xl border bg-muted flex items-center justify-center text-lg font-bold text-muted-foreground">
               {project.name.slice(0, 2)}

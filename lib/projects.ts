@@ -41,24 +41,38 @@ export const projects: Project[] = [
   {
     slug: "atipically",
     name: "AtipicALI",
+    logo: "/projects/atipicali.png",
     status: "active",
     start: 2025,
     tagline: {
-      en: "Ongoing parallel venture on a modern TypeScript stack.",
-      pt: "Projeto paralelo em andamento numa stack moderna de TypeScript.",
+      en: "Ongoing parallel venture on a Vue + Spring Boot stack.",
+      pt: "Projeto paralelo em andamento numa stack Vue + Spring Boot.",
     },
     description: {
-      en: "An ongoing parallel venture started in 2025, running alongside my full-time work. Building a product end to end on a modern TypeScript stack.",
-      pt: "Um projeto paralelo em andamento, iniciado em 2025, em paralelo ao meu trabalho full-time. Construindo um produto de ponta a ponta em uma stack moderna de TypeScript.",
+      en: "An ongoing parallel venture started in 2025, running alongside my full-time work. Built end to end: a Vue 3 SPA (plus a separate admin app), a Java/Spring Boot REST API backed by PostgreSQL, with file storage on Cloudflare R2. The frontends deploy to Cloudflare Pages and the backend runs on Koyeb.",
+      pt: "Um projeto paralelo em andamento, iniciado em 2025, em paralelo ao meu trabalho full-time. Construído de ponta a ponta: uma SPA em Vue 3 (mais um app admin separado), uma API REST em Java/Spring Boot sobre PostgreSQL, com armazenamento de arquivos no Cloudflare R2. Os frontends rodam no Cloudflare Pages e o backend no Koyeb.",
     },
-    tech: ["TypeScript", "React", "Node", "PostgreSQL"],
-    stack: ["TypeScript", "React", "Node.js", "PostgreSQL"],
+    tech: ["Vue", "Java", "Spring Boot", "PostgreSQL"],
+    stack: [
+      "Vue",
+      "Vite",
+      "Pinia",
+      "Tailwind CSS",
+      "Leaflet",
+      "Java",
+      "Spring Boot",
+      "Spring Security",
+      "PostgreSQL",
+      "Liquibase",
+      "Cloudflare R2",
+    ],
     llms: ["claude", "copilot"],
     deployment: "cloudflare-pages",
   },
   {
     slug: "portfolio",
     name: "finx.dev",
+    logo: "/favicon.svg",
     status: "active",
     start: 2026,
     tagline: {
@@ -79,6 +93,7 @@ export const projects: Project[] = [
   {
     slug: "piggly",
     name: "Piggly",
+    logo: "/projects/piggly.svg",
     status: "active",
     start: 2026,
     tagline: {
