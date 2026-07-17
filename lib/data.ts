@@ -314,11 +314,11 @@ export const experiences: Experience[] = [
     country: "US",
     location: { en: "SF Bay Area, USA", pt: "SF Bay Area, EUA" },
     description: {
-      en: "My current side project and the closest representation of how I enjoy building software. Started as a platform to help neurodivergent individuals and families find services, businesses, and places that fit their needs, and grew into a broader ecosystem — place discovery, content management, scheduling, booking, and AI-assisted experiences. I own the whole thing: architecture, backend, frontend, infrastructure, deployment, auth, admin tools, and AI integrations — and it's where I experiment with agentic workflows and ideas I later bring back into my professional work.",
-      pt: "Meu projeto paralelo atual e a representação mais fiel de como eu gosto de construir software. Começou como uma plataforma para ajudar pessoas e famílias neurodivergentes a encontrar serviços, negócios e lugares que atendam melhor às suas necessidades, e evoluiu para um ecossistema mais amplo — descoberta de lugares, gestão de conteúdo, agendamento, reservas e experiências assistidas por IA. Sou responsável por tudo: arquitetura, backend, frontend, infraestrutura, deploy, autenticação, ferramentas de administração e integrações de IA — e é onde experimento workflows agentic e ideias que depois trago para o meu trabalho profissional.",
+      en: "My current side project and the closest representation of how I enjoy building software. Started as a platform to help neurodivergent individuals and families find services, businesses, and places that fit their needs, and grew into a broader ecosystem — place discovery, content management, scheduling, booking, and AI-assisted experiences. I'm responsible for the entire technical side: architecture, backend, frontend, infrastructure, deployment, auth, admin tools, and AI integrations — and it's where I experiment with agentic workflows and ideas I later bring back into my professional work.",
+      pt: "Meu projeto paralelo atual e a representação mais fiel de como eu gosto de construir software. Começou como uma plataforma para ajudar pessoas e famílias neurodivergentes a encontrar serviços, negócios e lugares que atendam melhor às suas necessidades, e evoluiu para um ecossistema mais amplo — descoberta de lugares, gestão de conteúdo, agendamento, reservas e experiências assistidas por IA. Sou responsável por toda a parte técnica: arquitetura, backend, frontend, infraestrutura, deploy, autenticação, ferramentas de administração e integrações de IA — e é onde experimento workflows agentic e ideias que depois trago para o meu trabalho profissional.",
     },
     roles: [R.coFounder],
-    tech: ["TypeScript", "React", "Node", "PostgreSQL"],
+    tech: ["Java", "Spring Boot", "Vue", "PostgreSQL"],
     interchangeWith: "avenuecode-2",
     mergesBack: false, // ongoing — the branch stays open
   },

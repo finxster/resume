@@ -32,6 +32,8 @@ export interface Project {
   /** Where it's hosted, shown as a badge on the detail page. */
   deployment?: Deployment;
   link?: string;
+  /** Additional live URLs (e.g. sub-apps), shown as secondary link buttons. */
+  links?: { label: string; url: string }[];
   github?: string;
   /** Optional link to a brand/design doc (PDF under /public), shown as a button. */
   brandDoc?: string;
@@ -47,12 +49,12 @@ export const projects: Project[] = [
     status: "active",
     start: 2025,
     tagline: {
-      en: "Ongoing parallel venture on a Vue + Spring Boot stack.",
-      pt: "Projeto paralelo em andamento numa stack Vue + Spring Boot.",
+      en: "Ongoing parallel venture — a multi-app ecosystem on a Vue + Spring Boot stack.",
+      pt: "Projeto paralelo em andamento — um ecossistema multi-app numa stack Vue + Spring Boot.",
     },
     description: {
-      en: "An ongoing parallel venture started in 2025, running alongside my full-time work. Built end to end: a Vue 3 SPA (plus a separate admin app), a Java/Spring Boot REST API backed by PostgreSQL, with file storage on Cloudflare R2. The frontends deploy to Cloudflare Pages and the backend runs on Koyeb.",
-      pt: "Um projeto paralelo em andamento, iniciado em 2025, em paralelo ao meu trabalho full-time. Construído de ponta a ponta: uma SPA em Vue 3 (mais um app admin separado), uma API REST em Java/Spring Boot sobre PostgreSQL, com armazenamento de arquivos no Cloudflare R2. Os frontends rodam no Cloudflare Pages e o backend no Koyeb.",
+      en: "An ongoing parallel venture started in 2025, running alongside my full-time work. Built end to end as a multi-app ecosystem: a single Java/Spring Boot backend serves every frontend — a deliberate monolith (microservices would be cleaner, but the monolith keeps server costs down) backed by PostgreSQL, with file storage on Cloudflare R2. The frontends are Vue 3 apps: web (the main public site), admin (approve places, moderate community-wall posts, publish news, handle reports), scheduling (for the platform's service providers to manage the appointments booked through booking), booking (a Calendly-style flow where users book online), and chatbot (a new AI service for professionals, currently on mocked data). These are progressively being integrated into the web app (WIP). Frontends deploy to Cloudflare Pages; the backend runs on Koyeb.",
+      pt: "Um projeto paralelo em andamento, iniciado em 2025, em paralelo ao meu trabalho full-time. Construído de ponta a ponta como um ecossistema multi-app: um único backend em Java/Spring Boot serve todos os frontends — um monolito por decisão (microserviços seriam mais limpos, mas o monolito mantém o custo de servidor baixo) sobre PostgreSQL, com armazenamento de arquivos no Cloudflare R2. Os frontends são apps em Vue 3: web (o site público principal), admin (aprovar lugares, moderar postagens do mural, publicar novidades, tratar reports), scheduling (para os prestadores de serviço da plataforma gerenciarem os agendamentos feitos pelo booking), booking (um fluxo estilo Calendly onde os usuários agendam online) e chatbot (um novo serviço de IA para profissionais, hoje com dados mockados). Tudo vem sendo progressivamente integrado ao app web (WIP). Os frontends rodam no Cloudflare Pages; o backend no Koyeb.",
     },
     tech: ["Java", "Spring Boot", "Vue", "PostgreSQL"],
     stack: [
@@ -72,6 +74,13 @@ export const projects: Project[] = [
     ],
     llms: ["claude", "copilot"],
     deployment: "cloudflare-pages",
+    link: "https://atipicali.com",
+    links: [
+      { label: "Admin", url: "https://admin.atipicali.com" },
+      { label: "Scheduling", url: "https://scheduling.atipicali.com" },
+      { label: "Booking", url: "https://booking.atipicali.com" },
+      { label: "Chatbot", url: "https://chatbot.atipicali.com" },
+    ],
   },
   {
     slug: "portfolio",

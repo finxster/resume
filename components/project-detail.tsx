@@ -97,6 +97,13 @@ export default function ProjectDetail({ slug }: { slug: string }) {
               </a>
             </Button>
           )}
+          {project.links?.map((l) => (
+            <Button key={l.url} variant="outline" asChild>
+              <a href={l.url} target="_blank" rel="noopener noreferrer">
+                {l.label} <ExternalLink className="ml-2 h-4 w-4" />
+              </a>
+            </Button>
+          ))}
           {project.github && (
             <Button variant="outline" asChild>
               <a href={project.github} target="_blank" rel="noopener noreferrer">
