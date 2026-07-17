@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react"
 import Link from "next/link"
-import { ArrowLeft, ChevronLeft, ChevronRight, Cloud, ExternalLink, Github, ImageIcon, Laptop, X, type LucideIcon } from "lucide-react"
+import { ArrowLeft, ChevronLeft, ChevronRight, Cloud, ExternalLink, FileText, Github, ImageIcon, Laptop, X, type LucideIcon } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { useLang, tx, type Lang } from "@/lib/i18n"
@@ -101,6 +101,13 @@ export default function ProjectDetail({ slug }: { slug: string }) {
             <Button variant="outline" asChild>
               <a href={project.github} target="_blank" rel="noopener noreferrer">
                 <Github className="mr-2 h-4 w-4" /> {t.viewCode} <ExternalLink className="ml-2 h-4 w-4" />
+              </a>
+            </Button>
+          )}
+          {project.brandDoc && (
+            <Button variant="outline" asChild>
+              <a href={project.brandDoc} target="_blank" rel="noopener noreferrer">
+                <FileText className="mr-2 h-4 w-4" /> {t.viewBrand} <ExternalLink className="ml-2 h-4 w-4" />
               </a>
             </Button>
           )}

@@ -33,6 +33,8 @@ export interface Project {
   deployment?: Deployment;
   link?: string;
   github?: string;
+  /** Optional link to a brand/design doc (PDF under /public), shown as a button. */
+  brandDoc?: string;
   /** Screenshots for the detail-page gallery. `src` is a path under /public. */
   screenshots?: { src: string; caption: L }[];
 }
@@ -52,19 +54,21 @@ export const projects: Project[] = [
       en: "An ongoing parallel venture started in 2025, running alongside my full-time work. Built end to end: a Vue 3 SPA (plus a separate admin app), a Java/Spring Boot REST API backed by PostgreSQL, with file storage on Cloudflare R2. The frontends deploy to Cloudflare Pages and the backend runs on Koyeb.",
       pt: "Um projeto paralelo em andamento, iniciado em 2025, em paralelo ao meu trabalho full-time. Construído de ponta a ponta: uma SPA em Vue 3 (mais um app admin separado), uma API REST em Java/Spring Boot sobre PostgreSQL, com armazenamento de arquivos no Cloudflare R2. Os frontends rodam no Cloudflare Pages e o backend no Koyeb.",
     },
-    tech: ["Vue", "Java", "Spring Boot", "PostgreSQL"],
+    tech: ["Java", "Spring Boot", "Vue", "PostgreSQL"],
     stack: [
+      "Java",
+      "Spring Boot",
+      "Spring Security",
       "Vue",
       "Vite",
       "Pinia",
       "Tailwind CSS",
       "Leaflet",
-      "Java",
-      "Spring Boot",
-      "Spring Security",
       "PostgreSQL",
       "Liquibase",
       "Cloudflare R2",
+      "Koyeb (backend)",
+      "Cloudflare Pages CI/CD (frontends)",
     ],
     llms: ["claude", "copilot"],
     deployment: "cloudflare-pages",
@@ -80,15 +84,39 @@ export const projects: Project[] = [
       pt: "Este próprio site — um portfólio & currículo interativo.",
     },
     description: {
-      en: "The site you're looking at. A statically-exported Next.js portfolio with a bilingual (EN/PT) UI, a custom git-graph career timeline, and a build step that generates print-ready résumé PDFs from a single content source. Bootstrapped with v0, now maintained with Claude Code.",
-      pt: "O site que você está vendo. Um portfólio em Next.js com export estático, interface bilíngue (EN/PT), uma timeline de carreira em git-graph feita à mão e um passo de build que gera PDFs de currículo prontos para impressão a partir de uma fonte única. Iniciado com v0, hoje mantido com Claude Code.",
+      en: "The site you're looking at. A statically-exported Next.js portfolio with a bilingual (EN/PT) UI and a build step that generates print-ready résumé PDFs from a single content source. Its centerpiece is a career timeline rendered as a hand-built git-graph: the full-time career runs as a trunk, side ventures fork off as parallel branches that either merge back in or trail off into a dashed tail while ongoing, with client containers, per-country zones, year markers, hover-to-focus dimming, interactive tooltips and detail cards, plus a toggle to a plain list view — all in bespoke SVG, and honestly a ton of work to get right. It even has its own brand system — the mark, the graphite-neutral palette with a single indigo accent, the type and the favicon — designed with Claude Design. Bootstrapped with v0, now maintained with Claude Code.",
+      pt: "O site que você está vendo. Um portfólio em Next.js com export estático, interface bilíngue (EN/PT) e um passo de build que gera PDFs de currículo prontos para impressão a partir de uma fonte única. A peça central é uma timeline de carreira renderizada como um git-graph feito à mão: a carreira full-time corre como um tronco, os side ventures forkam como branches paralelos que dão merge de volta ou seguem num rabinho tracejado enquanto estão ativos, com contêineres de cliente, zonas por país, marcadores de ano, escurecimento por hover para focar, tooltips interativos e cards de detalhe, além de um toggle para uma visão em lista — tudo em SVG artesanal, e sinceramente deu bastante trabalho para acertar. Tem até um brand system próprio — o mark, a paleta grafite com um único acento índigo, a tipografia e o favicon — desenhado com Claude Design. Iniciado com v0, hoje mantido com Claude Code.",
     },
     tech: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "shadcn/ui", "PDFKit"],
+    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "shadcn/ui", "PDFKit", "GitHub Actions (CI/CD)"],
     llms: ["claude", "vercel"],
     deployment: "github-pages",
     link: "https://finx.dev",
     github: "https://github.com/finxster/resume",
+    brandDoc: "/finx-brand-system.pdf",
+    screenshots: [
+      {
+        src: "/projects/finxdev-timeline.png",
+        caption: {
+          en: "The centerpiece — a hand-built git-graph career timeline with country zones and forking side ventures.",
+          pt: "A peça central — uma timeline de carreira em git-graph feita à mão, com zonas por país e side ventures forkando.",
+        },
+      },
+      {
+        src: "/projects/finxdev-list.png",
+        caption: {
+          en: "A toggle switches the same data to a plain, print-friendly list view.",
+          pt: "Um toggle troca os mesmos dados por uma visão em lista simples e amigável para impressão.",
+        },
+      },
+      {
+        src: "/projects/finxdev-hero.png",
+        caption: {
+          en: "The landing hero, over an animated constellation background.",
+          pt: "O hero da landing, sobre um fundo animado de constelação.",
+        },
+      },
+    ],
   },
   {
     slug: "piggly",
@@ -97,17 +125,56 @@ export const projects: Project[] = [
     status: "active",
     start: 2026,
     tagline: {
-      en: "Family allowance app — \"mesada, now with wishes.\"",
-      pt: "App de mesada em família — \"mesada, agora com desejos.\"",
+      en: "App to manage kids' allowances.",
+      pt: "App para controlar a mesada das crianças.",
     },
     description: {
-      en: "A family app for managing kids' allowances — \"mesada, now with wishes.\" Built as a full product: a React/Supabase web app, a marketing landing page, and a Cloudflare Worker that schedules recurring deposits.",
-      pt: "Um app family para gerenciar a mesada das crianças — \"mesada, agora com desejos.\" Construído como produto completo: um web app em React/Supabase, uma landing page de marketing e um Cloudflare Worker que agenda depósitos recorrentes.",
+      en: "An app to manage kids' allowances. It was born at home: we started giving our kids an allowance so they'd learn about money, but actually handling it — pulling out cash and handing it over every time — turned out to be the hard part (the difficulty was really ours). We tried tracking it on a scrap of paper and lost the thread more than once. So the app took over: you set the periodicity and it computes everything for you. Then one of the kids reached reading age, so I built a kid view — protected so only adults perform operations, gated behind a PIN — where the child can see how much they have, add wishes, and watch the app estimate how long until they can afford each one. Built as a full product: a React/Supabase web app, a marketing landing page, and a Cloudflare Worker that schedules the recurring deposits.",
+      pt: "Um app para controlar a mesada das crianças. Nasceu aqui em casa: começamos a dar mesada para as crianças, para elas aprenderem sobre finanças, mas ficar tirando dinheiro e entregando toda vez era muito difícil (a dificuldade era mais nossa). Tentamos controlar no papelzinho e nos perdemos várias vezes. Então o app assumiu: você escolhe a periodicidade e ele computa tudo para você. Aí um dos filhos chegou na idade de saber ler, então criei a visão para a criança — protegida, só adultos fazem operações, com acesso por PIN — onde a criança vê quanto tem, pode colocar desejos e o app calcula quanto tempo falta para conquistar cada um. Construído como produto completo: um web app em React/Supabase, uma landing page de marketing e um Cloudflare Worker que agenda os depósitos recorrentes.",
     },
-    tech: ["React", "Vite", "Supabase", "Tailwind", "Cloudflare Workers"],
+    tech: ["React", "Vite", "Tailwind", "Supabase", "Cloudflare Workers"],
+    stack: [
+      "React",
+      "Vite",
+      "Tailwind CSS",
+      "Supabase",
+      "Cloudflare Workers",
+      "Cloudflare Pages",
+      "Cloudflare Git integration (CI/CD)",
+    ],
     llms: ["claude"],
     deployment: "cloudflare-pages",
     link: "https://piggly.pages.dev",
+    screenshots: [
+      {
+        src: "/projects/piggly-dashboard.png",
+        caption: {
+          en: "Parent view — each child's balance and their next scheduled deposit.",
+          pt: "Visão dos pais — o saldo de cada criança e o próximo depósito agendado.",
+        },
+      },
+      {
+        src: "/projects/piggly-kidview-balance.png",
+        caption: {
+          en: "Kid view — balance and transaction history, deposits and spending.",
+          pt: "Visão da criança — saldo e histórico de transações, depósitos e gastos.",
+        },
+      },
+      {
+        src: "/projects/piggly-kidview-wish.png",
+        caption: {
+          en: "Wishes — the app estimates how long until the child can afford each goal.",
+          pt: "Desejos — o app estima quanto tempo falta para a criança conquistar cada meta.",
+        },
+      },
+      {
+        src: "/projects/piggly-pin-gate.png",
+        caption: {
+          en: "PIN-gated operations — only adults can move money.",
+          pt: "Operações protegidas por PIN — só adultos movimentam o dinheiro.",
+        },
+      },
+    ],
   },
   {
     slug: "uscis-tracker",
@@ -165,9 +232,10 @@ export const projects: Project[] = [
       "JavaScript",
       "Tailwind CSS",
       "lucide-react",
-      "Cloudflare Pages",
-      "Cloudflare Workers",
       "Cloudflare KV",
+      "Cloudflare Workers",
+      "Cloudflare Pages",
+      "Cloudflare Git integration (CI/CD)",
     ],
     llms: ["copilot"],
     deployment: "cloudflare-pages",
@@ -203,13 +271,14 @@ export const projects: Project[] = [
       en: "Born from the anxiety of waiting in the PERM labor-certification queue and refreshing a prediction site over and over. So I automated the refresh: a Cloudflare Worker runs on a cron every morning, pulls the latest prediction from permupdate.com, stores a snapshot in Cloudflare KV, and sends a formatted Telegram report comparing today against yesterday — estimated date, queue position, processing rate, and days remaining, each with a 🔴▲/🟢▼ delta so you see at a glance whether the line moved your way. Daily reports Monday–Saturday, a fuller summary on Sundays, multi-recipient support, and a small web dashboard to trigger a report on demand. Zero-cost serverless, and genuinely calming: like reading the morning paper fresh off the press — I'd wake up already knowing my spot in the line. The bot watches the queue so you don't have to.",
       pt: "Nasceu da ansiedade de esperar na fila do PERM (etapa da certificação de trabalho para o green card) e ficar atualizando um site de previsão sem parar. Então automatizei a atualização: um Cloudflare Worker roda num cron toda manhã, busca a previsão mais recente do permupdate.com, guarda um snapshot no Cloudflare KV e envia um relatório formatado no Telegram comparando hoje com ontem — data estimada, posição na fila, ritmo de processamento e dias restantes, cada um com um delta 🔴▲/🟢▼ para você ver num relance se a fila andou a seu favor. Relatórios diários de segunda a sábado, um resumo mais completo aos domingos, suporte a múltiplos destinatários e um pequeno dashboard web para disparar um relatório sob demanda. Serverless de custo zero e genuinamente tranquilizador: aquela sensação de ler as notícias fresquinhas toda manhã — eu acordava e já sabia meu lugar na fila. O bot vigia a fila para você não precisar.",
     },
-    tech: ["JavaScript", "Cloudflare Workers", "Cloudflare KV", "Telegram Bot API"],
+    tech: ["JavaScript", "Cloudflare KV", "Cloudflare Workers", "Telegram Bot API"],
     stack: [
       "JavaScript",
-      "Cloudflare Workers",
       "Cloudflare KV",
+      "Cloudflare Workers",
       "Cron Triggers",
       "Telegram Bot API",
+      "Cloudflare Git integration (CI/CD)",
     ],
     llms: ["copilot"],
     deployment: "cloudflare-workers",
@@ -239,8 +308,11 @@ export const projects: Project[] = [
       en: "Born from a pre-pandemic ritual: back when everyone worked on-site, a big group of us went out for lunch together every day — and every day devolved into the same argument over where to go. The idea sat on the shelf for years until AI and vibe coding finally made it cheap to build. MealWheel lets each person add the places they like to eat, then spins a wheel to pick one at random from everyone's shared list — turning the daily standoff into a fair, one-tap decision. Under the hood it's a full-stack app, not just an animation: real accounts (Passport.js + bcrypt), session-based login, and a PostgreSQL database so your places and history persist. Built end to end on Replit as my first real dip into vibe coding.",
       pt: "Nasceu de um ritual pré-pandemia: na época em que todo mundo trabalhava presencial, um grupo grande de nós ia almoçar junto todo dia — e todo dia acabava na mesma discussão sobre onde ir. A ideia ficou guardada por anos, até a IA e o vibe coding finalmente tornarem barato tirá-la do papel. No MealWheel cada pessoa adiciona os lugares que gosta de comer, e o app gira uma roleta que sorteia um deles a partir da lista compartilhada de todos — transformando o impasse diário em uma decisão justa, a um toque. Por baixo é um app full-stack, não só uma animação: contas de verdade (Passport.js + bcrypt), login por sessão e um banco PostgreSQL para persistir seus lugares e histórico. Construído de ponta a ponta no Replit, meu primeiro mergulho de verdade no vibe coding.",
     },
-    tech: ["React", "TypeScript", "Node", "PostgreSQL", "Tailwind"],
+    tech: ["Node", "React", "TypeScript", "Tailwind", "PostgreSQL"],
     stack: [
+      "Node.js",
+      "Express",
+      "Passport.js",
       "React",
       "TypeScript",
       "Vite",
@@ -248,12 +320,10 @@ export const projects: Project[] = [
       "shadcn/ui",
       "Wouter",
       "TanStack Query",
-      "Node.js",
-      "Express",
-      "Passport.js",
       "PostgreSQL",
       "Drizzle ORM",
       "Neon",
+      "Replit Deployments (CI/CD)",
     ],
     llms: ["replit"],
     deployment: "replit",
@@ -304,7 +374,7 @@ export const projects: Project[] = [
       pt: "Engenheiro fundador na PayAqui, uma fintech de pagamentos tocada em paralelo. Projetei e construí os apps mobile nativos da empresa para Android e iOS de ponta a ponta — da arquitetura à publicação — participando ativamente também de funções não técnicas como descoberta de requisitos e UX, além de contribuir com o backend em Java.",
     },
     tech: ["Java", "Swift", "REST APIs"],
-    stack: ["Java (Android)", "Swift (iOS)", "Java (backend)", "REST APIs"],
+    stack: ["Java (Android)", "Swift (iOS)", "Java (backend)", "REST APIs", "Bamboo (CI/CD)"],
     llms: [],
     deployment: "aws",
   },
@@ -316,16 +386,40 @@ export const projects: Project[] = [
     start: 2013,
     end: 2016,
     tagline: {
-      en: "Social network for musicians — backend & infra. Continues today as amy.network.",
-      pt: "Rede social para músicos — backend & infra. Continua hoje como amy.network.",
+      en: "Social network for musicians, with a studio-booking system.",
+      pt: "Rede social para músicos, com sistema de agendamento para estúdios.",
     },
     description: {
-      en: "Co-founded a social network for musicians. Responsible for all technical decisions, backend development, infrastructure, and service integrations — with focus on performance and scalability. Continues today as amy.network.",
-      pt: "Cofundei uma rede social para músicos. Responsável por todas as decisões técnicas, desenvolvimento do backend, infraestrutura e integrações de serviços — com foco em performance e escalabilidade. Continua hoje como amy.network.",
+      en: "Co-founded a social network for musicians, with a booking system for rehearsal and recording studios. I built the entire backend of the social network (the frontend was done by someone else), plus the full stack — backend and frontend — of the studio-booking product, in Java with Apache Wicket. Search was built on Apache Lucene, inspired by LinkedIn's approach, which gave us fine-grained control over ranking; this was in a pre-AI era, very early days for Elasticsearch. Testing followed a BDD strategy with JBehave to guarantee natural-language search worked — a query like \"punk-rock drummer in São Paulo\" actually returned the right people. Feature set spanned a social timeline, a map to explore what's around you, direct messages, events, classifieds and reviews.",
+      pt: "Cofundei uma rede social para músicos, com sistema de agendamento para estúdios de ensaio e gravação. Implementei o backend inteiro da rede social (o front foi feito por outra pessoa), além do stack completo — backend e frontend — do produto de agendamento de estúdios, em Java com Apache Wicket. A busca foi construída sobre o Apache Lucene, inspirada pela busca do LinkedIn, o que nos dava controle fino sobre o ranking; isso numa era pré-IA e no comecinho do Elasticsearch. A estratégia de testes usava BDD com JBehave para garantir que a busca em linguagem natural funcionava — uma consulta como \"baterista que gosta de punk rock em São Paulo\" realmente retornava as pessoas certas. As funcionalidades incluíam timeline social, um mapa para explorar o que há ao seu redor, mensagens diretas, eventos, classificados e reviews.",
     },
-    tech: ["Java", "AWS", "Lucene", "JBehave", "Wicket"],
+    tech: ["Java", "AWS", "Apache Wicket", "Lucene", "JBehave"],
+    stack: [
+      "Java",
+      "Apache Wicket",
+      "Apache Lucene",
+      "JBehave",
+      "AWS",
+      "Bamboo (CI/CD)",
+    ],
     llms: [],
     deployment: "aws",
+    screenshots: [
+      {
+        src: "/projects/fleeber_timeline.jpg",
+        caption: {
+          en: "The social timeline — posts, events, classifieds and nearby opportunities.",
+          pt: "A timeline social — posts, eventos, classificados e oportunidades próximas.",
+        },
+      },
+      {
+        src: "/projects/fleeber_studio_email.jpg",
+        caption: {
+          en: "Studio-booking confirmation email from the fleeber Studio product.",
+          pt: "E-mail de confirmação de reserva do produto fleeber Studio.",
+        },
+      },
+    ],
   },
 ];
 
