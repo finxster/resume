@@ -44,13 +44,13 @@ export default function Home() {
               </p>
               <div className="flex flex-wrap gap-3">
                 <Button asChild>
-                  <a href="#contact">{t.hero.getInTouch}</a>
-                </Button>
-                <Button variant="outline" asChild>
                   <a href={resumeHref} download>
                     <Download className="mr-2 h-4 w-4" />
                     {t.hero.downloadResume}
                   </a>
+                </Button>
+                <Button variant="outline" asChild>
+                  <a href="#contact">{t.hero.getInTouch}</a>
                 </Button>
               </div>
               <div className="flex gap-4 mt-4">

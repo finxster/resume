@@ -10,8 +10,6 @@ export const dictionary = {
       experience: "Experience",
       projects: "Projects",
       contact: "Contact",
-      resume: "Resume",
-      toggleMenu: "Toggle menu",
     },
     hero: {
       role: "Staff Engineer & Founder",
@@ -106,8 +104,6 @@ export const dictionary = {
       experience: "Experiência",
       projects: "Projetos",
       contact: "Contato",
-      resume: "Currículo",
-      toggleMenu: "Abrir menu",
     },
     hero: {
       role: "Staff Engineer & Fundador",
