@@ -33,7 +33,10 @@ const lightPreset = {
 
   surface: "#FFFFFF",
   ink: "#14161A",
-  muted: "rgba(20,22,26,0.55)",
+  // 0.65, not 0.55: at 0.55 this lands on 3.9:1 over the canvas and 3.8:1 over
+  // the toggle track, both under the 4.5:1 WCAG AA floor. The dark twin below
+  // clears AA at 0.55 already, so only the light value moves.
+  muted: "rgba(20,22,26,0.65)",
   hairline: "rgba(20,22,26,0.10)",
   fte: "#4457E8",
   side: "#4B5563",
