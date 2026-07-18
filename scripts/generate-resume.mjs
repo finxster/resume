@@ -2,7 +2,7 @@
 //
 //   node scripts/generate-resume.mjs
 //
-// Outputs public/resume.pdf (EN) and public/resume-pt.pdf (PT). Re-run after
+// Outputs public/luis_alves_en.pdf (EN) and public/luis_alves_pt.pdf (PT). Re-run after
 // editing the content module so the site's "Download Resume" button stays fresh.
 
 import { fileURLToPath } from "node:url";
@@ -46,7 +46,7 @@ function build(lang) {
   const rawText = doc.text.bind(doc);
   doc.text = (txt, ...rest) => rawText(fix(txt), ...rest);
 
-  const outFile = join(publicDir, lang === "en" ? "resume.pdf" : "resume-pt.pdf");
+  const outFile = join(publicDir, lang === "en" ? "luis_alves_en.pdf" : "luis_alves_pt.pdf");
   doc.pipe(createWriteStream(outFile));
 
   const left = doc.page.margins.left;

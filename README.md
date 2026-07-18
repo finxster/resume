@@ -109,7 +109,7 @@ resume/
 
 The "Download Resume" button serves a real, print-ready PDF that is generated
 from a structured content file — **not** hand-edited. The PDFs are bilingual:
-the button links to `/resume.pdf` (English) or `/resume-pt.pdf` (Portuguese)
+the button links to `/luis_alves_en.pdf` (English) or `/luis_alves_pt.pdf` (Portuguese)
 depending on the site's current language.
 
 ### How it works
@@ -120,8 +120,8 @@ depending on the site's current language.
   but is intentionally denser/recruiter-focused, so it carries more detail than
   the timeline.
 - **Generator** is [`scripts/generate-resume.mjs`](scripts/generate-resume.mjs) —
-  it uses [`pdfkit`](https://pdfkit.org/) to render `public/resume.pdf` and
-  `public/resume-pt.pdf` in the site's cool-graphite brand style.
+  it uses [`pdfkit`](https://pdfkit.org/) to render `public/luis_alves_en.pdf` and
+  `public/luis_alves_pt.pdf` in the site's cool-graphite brand style.
 
 ### Regenerating
 

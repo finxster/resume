@@ -11,7 +11,7 @@ import LanguageSwitcher from "@/components/language-switcher"
 export default function Navbar() {
   const { lang } = useLang()
   const t = getDict(lang).nav
-  const resumeHref = lang === "pt" ? "/resume-pt.pdf" : "/resume.pdf"
+  const resumeHref = lang === "pt" ? "/luis_alves_pt.pdf" : "/luis_alves_en.pdf"
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const toggleMenu = () => {

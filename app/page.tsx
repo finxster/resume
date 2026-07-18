@@ -16,7 +16,7 @@ import { projects } from "@/lib/projects"
 export default function Home() {
   const { lang } = useLang()
   const t = getDict(lang)
-  const resumeHref = lang === "pt" ? "/resume-pt.pdf" : "/resume.pdf"
+  const resumeHref = lang === "pt" ? "/luis_alves_pt.pdf" : "/luis_alves_en.pdf"
 
   const skillGroups = [
     { key: "backend" as const, category: "backend", icon: Server, items: ["Java", "Spring Boot", "Kafka", "Python", "Drools"] },
