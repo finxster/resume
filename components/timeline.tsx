@@ -560,7 +560,9 @@ function TimelineMap({
   lang: Lang;
   t: TL;
 }) {
-  const ftes = EXPERIENCES.filter((e) => e.track === "fte");
+  // Chronological order: the trunk is drawn left to right, independent of the
+  // list order in lib/data.ts (which is newest-first).
+  const ftes = EXPERIENCES.filter((e) => e.track === "fte").sort((a, b) => a.start - b.start);
   const sides = EXPERIENCES.filter((e) => e.track === "side");
   const trunkPaint = preset.ink;
   const trunkOpacity = 0.78;
@@ -776,24 +778,11 @@ function DetailModal({ exp, onClose, lang, t }: { exp: Experience; onClose: () =
 // bottom and trivially machine-readable (real DOM text, semantic markup) for
 // anything crawling the page. Most-recent first; side ventures flagged inline.
 function ListView({ lang, t }: { lang: Lang; t: TL }) {
-  // Full-time roles form the spine (most recent first); each side venture is
-  // slotted right after the full-time role it overlapped (its `interchangeWith`
-  // host), so concurrent work always reads full-time first, then the venture.
-  const ftes = EXPERIENCES.filter((e) => e.track === "fte").sort((a, b) => b.start - a.start);
-  const sides = EXPERIENCES.filter((e) => e.track === "side");
-  const items: Experience[] = [];
-  for (const f of ftes) {
-    items.push(f);
-    sides
-      .filter((s) => s.interchangeWith === f.id)
-      .sort((a, b) => b.start - a.start)
-      .forEach((s) => items.push(s));
-  }
-  // Any venture without a matching host lands at the end, most recent first.
-  sides
-    .filter((s) => !ftes.some((f) => f.id === s.interchangeWith))
-    .sort((a, b) => b.start - a.start)
-    .forEach((s) => items.push(s));
+  // Reverse chronological, with the current full-time role pinned to the top so
+  // the list opens on what I'm doing now rather than on a side venture.
+  const items: Experience[] = [...EXPERIENCES].sort((a, b) => b.start - a.start);
+  const currentIdx = items.findIndex((e) => e.track === "fte" && e.end >= new Date().getFullYear());
+  if (currentIdx > 0) items.unshift(items.splice(currentIdx, 1)[0]);
   return (
     <ol className="tl-list">
       {items.map((exp) => {
