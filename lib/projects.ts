@@ -45,7 +45,7 @@ export const projects: Project[] = [
   {
     slug: "atipically",
     name: "AtipicALI",
-    logo: "/projects/atipicali.png",
+    logo: "/projects/atipicali.webp",
     status: "active",
     start: 2025,
     tagline: {
@@ -105,21 +105,21 @@ export const projects: Project[] = [
     brandDoc: "/finx-brand-system.pdf",
     screenshots: [
       {
-        src: "/projects/finxdev-timeline.png",
+        src: "/projects/finxdev-timeline.webp",
         caption: {
           en: "The centerpiece — a hand-built git-graph career timeline with country zones and forking side ventures.",
           pt: "A peça central — uma timeline de carreira em git-graph feita à mão, com zonas por país e side ventures forkando.",
         },
       },
       {
-        src: "/projects/finxdev-list.png",
+        src: "/projects/finxdev-list.webp",
         caption: {
           en: "A toggle switches the same data to a plain, print-friendly list view.",
           pt: "Um toggle troca os mesmos dados por uma visão em lista simples e amigável para impressão.",
         },
       },
       {
-        src: "/projects/finxdev-hero.png",
+        src: "/projects/finxdev-hero.webp",
         caption: {
           en: "The landing hero, over an animated constellation background.",
           pt: "O hero da landing, sobre um fundo animado de constelação.",
@@ -156,28 +156,28 @@ export const projects: Project[] = [
     link: "https://piggly.pages.dev",
     screenshots: [
       {
-        src: "/projects/piggly-dashboard.png",
+        src: "/projects/piggly-dashboard.webp",
         caption: {
           en: "Parent view — each child's balance and their next scheduled deposit.",
           pt: "Visão dos pais — o saldo de cada criança e o próximo depósito agendado.",
         },
       },
       {
-        src: "/projects/piggly-kidview-balance.png",
+        src: "/projects/piggly-kidview-balance.webp",
         caption: {
           en: "Kid view — balance and transaction history, deposits and spending.",
           pt: "Visão da criança — saldo e histórico de transações, depósitos e gastos.",
         },
       },
       {
-        src: "/projects/piggly-kidview-wish.png",
+        src: "/projects/piggly-kidview-wish.webp",
         caption: {
           en: "Wishes — the app estimates how long until the child can afford each goal.",
           pt: "Desejos — o app estima quanto tempo falta para a criança conquistar cada meta.",
         },
       },
       {
-        src: "/projects/piggly-pin-gate.png",
+        src: "/projects/piggly-pin-gate.webp",
         caption: {
           en: "PIN-gated operations — only adults can move money.",
           pt: "Operações protegidas por PIN — só adultos movimentam o dinheiro.",
@@ -205,14 +205,14 @@ export const projects: Project[] = [
     github: "https://github.com/finxster/uscis-tracker",
     screenshots: [
       {
-        src: "/projects/uscis_dashboard.png",
+        src: "/projects/uscis_dashboard.webp",
         caption: {
           en: "Dashboard — one card per receipt, flagging silent updates and every check with its content hash.",
           pt: "Dashboard — um cartão por recibo, sinalizando atualizações silenciosas e cada verificação com seu hash de conteúdo.",
         },
       },
       {
-        src: "/projects/uscis_detail.png",
+        src: "/projects/uscis_detail.webp",
         caption: {
           en: "Field-level diff — expanding a change shows exactly which fields moved, old value → new value.",
           pt: "Diff a nível de campo — ao expandir uma mudança, mostra exatamente quais campos mudaram, valor antigo → valor novo.",
@@ -251,14 +251,14 @@ export const projects: Project[] = [
     link: "https://sisosig.pages.dev/",
     screenshots: [
       {
-        src: "/projects/sisosig_top.png",
+        src: "/projects/sisosig_top.webp",
         caption: {
           en: "Neo-brutalist UI — Stay vs. Go head to head, with a live winner and score.",
           pt: "Interface neo-brutalista — Ficar vs. Ir lado a lado, com vencedor e pontuação ao vivo.",
         },
       },
       {
-        src: "/projects/sisosig_bottom.png",
+        src: "/projects/sisosig_bottom.webp",
         caption: {
           en: "Weighted pros & cons — each item gets a 1–5 weight that feeds the score.",
           pt: "Prós & contras com pesos — cada item recebe um peso de 1 a 5 que alimenta a pontuação.",
@@ -294,7 +294,7 @@ export const projects: Project[] = [
     github: "https://github.com/finxster/AnxiousPermBot",
     screenshots: [
       {
-        src: "/projects/anxiousperm_report.png",
+        src: "/projects/anxiousperm_report.webp",
         caption: {
           en: "Daily Telegram report — estimated date, queue position, and processing rate, each with a day-over-day delta.",
           pt: "Relatório diário no Telegram — data estimada, posição na fila e ritmo de processamento, cada um com o delta em relação ao dia anterior.",
@@ -305,7 +305,7 @@ export const projects: Project[] = [
   {
     slug: "mealwheel",
     name: "MealWheel",
-    logo: "/projects/mealwheel.jpeg",
+    logo: "/projects/mealwheel.webp",
     status: "sunset",
     start: 2025,
     end: 2025,
@@ -338,28 +338,28 @@ export const projects: Project[] = [
     deployment: "replit",
     screenshots: [
       {
-        src: "/projects/mealwheel-wheel.jpg",
+        src: "/projects/mealwheel-wheel.webp",
         caption: {
           en: "The wheel picks a winner from everyone's shared list of places.",
           pt: "A roleta sorteia um vencedor a partir da lista compartilhada de lugares.",
         },
       },
       {
-        src: "/projects/mealwheel-spin.jpg",
+        src: "/projects/mealwheel-spin.webp",
         caption: {
           en: "Pick your crew, the meal type, and the places in the running.",
           pt: "Escolha a galera, o tipo de refeição e os lugares que entram no sorteio.",
         },
       },
       {
-        src: "/projects/mealwheel-history.jpg",
+        src: "/projects/mealwheel-history.webp",
         caption: {
           en: "Every spin is saved — a full audit trail of past decisions.",
           pt: "Todo giro é salvo — um histórico completo das decisões anteriores.",
         },
       },
       {
-        src: "/projects/mealwheel-places.jpg",
+        src: "/projects/mealwheel-places.webp",
         caption: {
           en: "Manage places: add restaurants and toggle which ones are in play.",
           pt: "Gerencie lugares: adicione restaurantes e ative quais entram no sorteio.",
@@ -390,7 +390,7 @@ export const projects: Project[] = [
   {
     slug: "fleeber",
     name: "fleeber",
-    logo: "/projects/fleeber.png",
+    logo: "/projects/fleeber.webp",
     status: "sunset",
     start: 2013,
     end: 2016,
@@ -415,14 +415,14 @@ export const projects: Project[] = [
     deployment: "aws",
     screenshots: [
       {
-        src: "/projects/fleeber_timeline.jpg",
+        src: "/projects/fleeber_timeline.webp",
         caption: {
           en: "The social timeline — posts, events, classifieds and nearby opportunities.",
           pt: "A timeline social — posts, eventos, classificados e oportunidades próximas.",
         },
       },
       {
-        src: "/projects/fleeber_studio_email.jpg",
+        src: "/projects/fleeber_studio_email.webp",
         caption: {
           en: "Studio-booking confirmation email from the fleeber Studio product.",
           pt: "E-mail de confirmação de reserva do produto fleeber Studio.",

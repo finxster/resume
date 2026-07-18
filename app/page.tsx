@@ -81,7 +81,7 @@ export default function Home() {
             <div className="flex justify-center lg:justify-start">
               <div className="relative w-[280px] h-[280px] md:w-[320px] md:h-[320px] rounded-full overflow-hidden border-4 border-card shadow-xl">
                 <Image
-                  src="/profile.jpg"
+                  src="/profile.webp"
                   alt="Luis Alves"
                   fill
                   className="object-cover"
