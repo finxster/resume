@@ -24,8 +24,10 @@ const RULE = "#E5E7EB";
 const PAGE_MARGIN = 54;
 
 // The built-in Helvetica (WinAnsi) lacks a few Unicode glyphs the site uses.
-// Map them to close ASCII equivalents so nothing renders as tofu.
-const GLYPH_FIXES = [[/→/g, "->"]];
+// Map them to close ASCII equivalents so nothing renders as tofu. The arrow is
+// only ever a location separator, and "/" parses as one where "->" confuses
+// resume parsers splitting the location field.
+const GLYPH_FIXES = [[/→/g, "/"]];
 const fix = (s) => (typeof s === "string" ? GLYPH_FIXES.reduce((a, [re, to]) => a.replace(re, to), s) : s);
 
 function build(lang) {
@@ -71,8 +73,14 @@ function build(lang) {
     contact.linkedin,
     contact.github,
     contact.site,
-  ].join("   ·   ");
-  doc.font("Helvetica").fontSize(8.8).fillColor(MUTED).text(contactLine, { width });
+  ].join("  ·  ");
+  // Shrink until the whole line fits on a single row, so contact info never wraps.
+  let contactSize = 8.8;
+  doc.font("Helvetica");
+  while (contactSize > 6 && doc.fontSize(contactSize).widthOfString(contactLine) > width) {
+    contactSize -= 0.1;
+  }
+  doc.fontSize(contactSize).fillColor(MUTED).text(contactLine, { width, lineBreak: false });
   doc.moveDown(0.5);
   doc.moveTo(left, doc.y).lineTo(right, doc.y).lineWidth(1).strokeColor(INK).stroke();
   doc.moveDown(0.7);
@@ -89,20 +97,20 @@ function build(lang) {
   };
 
   const bulletList = (items) => {
-    doc.font("Helvetica").fontSize(9.3).fillColor(MUTED);
+    doc.font("Helvetica").fontSize(8.9).fillColor(MUTED);
     for (const it of items) {
       const h = doc.heightOfString(it, { width: width - 14 });
       ensure(h + 4);
       const y = doc.y;
       doc.fillColor(ACCENT).text("•", left, y, { continued: false });
       doc.fillColor(MUTED).text(it, left + 12, y, { width: width - 12 });
-      doc.moveDown(0.2);
+      doc.moveDown(0.15);
     }
   };
 
   // ── Summary ────────────────────────────────────────────────────────────
   section(L.summary);
-  doc.font("Helvetica").fontSize(9.6).fillColor(MUTED).text(c.summary, { width, align: "justify" });
+  doc.font("Helvetica").fontSize(9.0).fillColor(MUTED).text(c.summary, { width, align: "justify" });
   doc.moveDown(0.7);
 
   // ── Skills ─────────────────────────────────────────────────────────────
@@ -159,7 +167,7 @@ function build(lang) {
     });
     doc.font("Helvetica-Oblique").fontSize(9.3).fillColor(ACCENT).text(v.title, left, doc.y);
     doc.moveDown(0.15);
-    doc.font("Helvetica").fontSize(9.3).fillColor(MUTED).text(v.desc, { width, align: "justify" });
+    doc.font("Helvetica").fontSize(8.9).fillColor(MUTED).text(v.desc, { width, align: "justify" });
     doc.moveDown(0.2);
   });
   doc.moveDown(0.4);
