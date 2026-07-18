@@ -81,6 +81,43 @@ export const projects: Project[] = [
       { label: "Booking", url: "https://booking.atipicali.com" },
       { label: "Chatbot", url: "https://chatbot.atipicali.com" },
     ],
+    screenshots: [
+      {
+        src: "/projects/atipicali-home.webp",
+        caption: {
+          en: "The public web app — the directory's entry point, with search by name, type or location.",
+          pt: "O app web público — a porta de entrada do diretório, com busca por nome, tipo ou localização.",
+        },
+      },
+      {
+        src: "/projects/atipicali-search.webp",
+        caption: {
+          en: "Search results — distance, service type and insurance filters, with a toggle to a Leaflet map view.",
+          pt: "Resultados da busca — filtros de distância, tipo de serviço e convênio, com toggle para o mapa em Leaflet.",
+        },
+      },
+      {
+        src: "/projects/atipicali-admin.webp",
+        caption: {
+          en: "The admin app — approve places, moderate the community wall, publish news and handle reports (user data blurred).",
+          pt: "O app admin — aprovar lugares, moderar o mural da comunidade, publicar novidades e tratar reports (dados de usuários borrados).",
+        },
+      },
+      {
+        src: "/projects/atipicali-booking.webp",
+        caption: {
+          en: "Booking — a Calendly-style flow where users pick a date and time with a provider, in four steps.",
+          pt: "Booking — um fluxo estilo Calendly onde o usuário escolhe data e horário com o profissional, em quatro passos.",
+        },
+      },
+      {
+        src: "/projects/atipicali-chatbot.webp",
+        caption: {
+          en: "Chatbot — an AI lead-qualification service for professionals, with human takeover and extracted-info panel (mocked data).",
+          pt: "Chatbot — um serviço de IA para qualificação de leads, com assumir conversa e painel de informações extraídas (dados mockados).",
+        },
+      },
+    ],
   },
   {
     slug: "portfolio",
