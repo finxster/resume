@@ -9,6 +9,7 @@ import Timeline from "@/components/timeline"
 import ProjectCard from "@/components/project-card"
 import SkillBadge from "@/components/skill-badge"
 import ContactForm from "@/components/contact-form"
+import AvailabilityBadge from "@/components/availability-badge"
 import { useLang, tx, type L } from "@/lib/i18n"
 import { getDict } from "@/lib/dictionary"
 import { projects } from "@/lib/projects"
@@ -35,6 +36,8 @@ export default function Home() {
         <div className="container relative z-10 px-4 md:px-6">
           <div className="grid gap-8 lg:gap-16 lg:grid-cols-[minmax(0,600px)_320px] items-center lg:justify-center">
             <div className="flex flex-col justify-center space-y-4">
+              {/* mt clears the floating header overlay on narrow screens */}
+              <AvailabilityBadge className="mt-12 sm:mt-0" />
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">Luis Alves</h1>
                 <p className="text-xl text-muted-foreground md:text-2xl">{t.hero.role}</p>
@@ -196,6 +199,7 @@ export default function Home() {
               <p className="text-muted-foreground md:text-lg mb-6 max-w-md">
                 {t.contact.subtitle}
               </p>
+              <AvailabilityBadge className="mb-6" />
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <Mail className="h-5 w-5 text-muted-foreground" />

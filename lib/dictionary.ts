@@ -19,6 +19,12 @@ export const dictionary = {
       downloadResume: "Download Resume",
       scrollDown: "Scroll down",
     },
+    availability: {
+      availableFrom: "Consulting & mentoring from {date}",
+      available: "Taking on consulting & mentoring",
+      limited: "Limited consulting capacity",
+      unavailable: "Not taking on new engagements",
+    },
     about: {
       title: "About Me",
       p1: "I'm a staff software engineer with 21+ years of experience covering the full software lifecycle — analysis, architecture, development, testing, and delivery. My career started in 2005 building financial systems in Brazil (investment funds, custody, and payments) and grew from engineer into tech lead, Scrum Master, and product owner.",
@@ -112,6 +118,12 @@ export const dictionary = {
       getInTouch: "Entre em contato",
       downloadResume: "Baixar Currículo",
       scrollDown: "Rolar para baixo",
+    },
+    availability: {
+      availableFrom: "Consultorias e mentorias a partir de {date}",
+      available: "Aceitando consultorias e mentorias",
+      limited: "Capacidade limitada para consultorias",
+      unavailable: "Sem capacidade para novos projetos",
     },
     about: {
       title: "Sobre Mim",
