@@ -9,7 +9,7 @@ import { getProject } from "@/lib/projects"
 
 // Home-page sections tracked in document order. Ids match the DOM section ids;
 // "top" is the initial hero / intro state before any section.
-const SECTIONS = ["top", "about", "experience", "projects", "contact"]
+const SECTIONS = ["top", "about", "experience", "projects", "recommendations", "contact"]
 
 // The "F>" brand mark, theme-aware: the F inherits the foreground color, the
 // chevron keeps the accent.
@@ -43,6 +43,7 @@ export default function ScrollChip() {
     about: nav.about,
     experience: nav.experience,
     projects: nav.projects,
+    recommendations: getDict(lang).recommendations.title,
     contact: nav.contact,
   }
 

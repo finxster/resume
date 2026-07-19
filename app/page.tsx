@@ -10,6 +10,7 @@ import ProjectCard from "@/components/project-card"
 import SkillBadge from "@/components/skill-badge"
 import ContactForm from "@/components/contact-form"
 import AvailabilityBadge from "@/components/availability-badge"
+import Recommendations from "@/components/recommendations"
 import { useLang, tx, type L } from "@/lib/i18n"
 import { getDict } from "@/lib/dictionary"
 import { projects } from "@/lib/projects"
@@ -189,6 +190,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <Recommendations />
 
       {/* Contact Section */}
       <section id="contact" className="py-16 md:py-24 bg-card border-t border-border">

@@ -83,6 +83,20 @@ export const dictionary = {
       hostedOn: "Hosted on",
       runsLocally: "Runs locally",
     },
+    recommendations: {
+      title: "Recommendations",
+      subtitle: "What colleagues and clients have said, in their own words.",
+      seeAll: "See all recommendations",
+      readFull: "Read full",
+      source: "Source: LinkedIn",
+      backHome: "Back to home",
+      pageSubtitle:
+        "Unedited recommendations from colleagues, clients, and teammates — each in the language it was written, straight from LinkedIn.",
+      translatedFrom: "Translated · original in {lang}",
+      seeOriginal: "See original",
+      seeTranslation: "See translation",
+      langNames: { en: "English", pt: "Portuguese" },
+    },
     contact: {
       title: "Get In Touch",
       subtitle:
@@ -182,6 +196,20 @@ export const dictionary = {
       screenshotsSoon: "Prints em breve.",
       hostedOn: "Hospedado no",
       runsLocally: "Roda localmente",
+    },
+    recommendations: {
+      title: "Recomendações",
+      subtitle: "O que colegas e clientes disseram, nas palavras deles.",
+      seeAll: "Ver todas as recomendações",
+      readFull: "Ler completa",
+      source: "Fonte: LinkedIn",
+      backHome: "Voltar ao início",
+      pageSubtitle:
+        "Recomendações sem edição de colegas, clientes e parceiros de time — cada uma no idioma em que foi escrita, direto do LinkedIn.",
+      translatedFrom: "Tradução · original em {lang}",
+      seeOriginal: "Ver original",
+      seeTranslation: "Ver tradução",
+      langNames: { en: "Inglês", pt: "Português" },
     },
     contact: {
       title: "Vamos Conversar",
