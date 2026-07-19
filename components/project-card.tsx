@@ -99,7 +99,7 @@ export default function ProjectCard({ project }: { project: Project }) {
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary hover:text-primary/80 flex items-center text-sm font-medium transition-colors"
+              className="text-primary hover:text-primary/80 flex items-center py-2 -my-2 text-sm font-medium transition-colors"
             >
               <Github className="mr-1 h-3.5 w-3.5" /> {t.viewCode} <ExternalLink className="ml-1 h-3 w-3" />
             </a>
@@ -109,7 +109,7 @@ export default function ProjectCard({ project }: { project: Project }) {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary hover:text-primary/80 flex items-center text-sm font-medium transition-colors"
+              className="text-primary hover:text-primary/80 flex items-center py-2 -my-2 text-sm font-medium transition-colors"
             >
               {t.viewProject} <ExternalLink className="ml-1 h-3 w-3" />
             </a>
