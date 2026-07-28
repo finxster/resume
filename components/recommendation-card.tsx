@@ -64,10 +64,14 @@ export default function RecommendationCard({
         {text}
       </blockquote>
 
-      {translatable && (
-        <div className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">
-          <Languages className="h-3.5 w-3.5 shrink-0" />
-          {showingOriginal ? (
+      {/* The translation notice only exists when the site language differs from
+          the one the recommendation was written in — so switching languages
+          added or removed a whole row and resized the card. On the grid of
+          compact cards the row keeps its space either way. */}
+      {(translatable || compact) && (
+        <div className="mt-3 flex h-4 items-center gap-1.5 text-xs text-muted-foreground">
+          {translatable && <Languages className="h-3.5 w-3.5 shrink-0" />}
+          {!translatable ? null : showingOriginal ? (
             <button
               type="button"
               onClick={() => setShowOriginal(false)}
