@@ -78,7 +78,11 @@ export default function ProjectCard({ project }: { project: Project }) {
           </div>
         </div>
 
-        <p className="text-muted-foreground text-sm leading-relaxed">{tx(project.tagline, lang)}</p>
+        {/* Fixed two-line box: PT and EN taglines differ in length, and without this
+            the footer links shift up/down when the language changes. */}
+        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3 h-[4.3125rem]">
+          {tx(project.tagline, lang)}
+        </p>
 
         <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
           {t.viewDetails}
