@@ -63,6 +63,29 @@ const BR = { en: "São Paulo, Brazil", pt: "São Paulo, Brasil" };
 
 export const experiences: Experience[] = [
   {
+    id: "magnite",
+    track: "fte",
+    code: "MG",
+    initial: "Mg",
+    title: { en: "Staff Software Engineer", pt: "Staff Software Engineer" },
+    company: "Magnite",
+    shortCompany: "Magnite",
+    short: {
+      en: "New chapter at Magnite — started October 2026",
+      pt: "Novo capítulo na Magnite — início em outubro de 2026",
+    },
+    start: 2026,
+    end: 2026,
+    country: "US",
+    location: { en: "Remote", pt: "Remoto" },
+    description: {
+      en: "Joined Magnite in October 2026.",
+      pt: "Entrei na Magnite em outubro de 2026.",
+    },
+    roles: [],
+    tech: [],
+  },
+  {
     id: "avenuecode-2",
     track: "fte",
     code: "AC",
@@ -85,7 +108,7 @@ export const experiences: Experience[] = [
     roles: [R.techLead, R.seniorDeveloper, R.scrumMaster, R.mentor],
     progression: [
       {
-        years: "2025 – now",
+        years: "2025 – 2026",
         title: {
           en: "Williams Sonoma · AI Rules Engine",
           pt: "Williams Sonoma · Motor de Regras com IA",

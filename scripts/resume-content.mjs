@@ -38,10 +38,18 @@ export const content = {
     ],
     experience: [
       {
+        company: "Magnite",
+        title: "Staff Software Engineer",
+        place: "Remote",
+        period: "Oct 2026 – Present",
+        bullets: [],
+        tech: "",
+      },
+      {
         company: "Avenue Code",
         title: "Staff Software Engineer · Tech Lead",
         place: "SF Bay Area, USA",
-        period: "2022 – Present",
+        period: "2022 – 2026",
         bullets: [
           "Lead technical initiatives across supply chain, logistics, data engineering, and AI programs for Fortune 500 retail organizations.",
           "Built the proof of concept for a strategic internal rules platform, helping leadership evaluate the replacement of a commercial solution and establishing a foundation for future AI-driven capabilities.",
@@ -164,10 +172,18 @@ export const content = {
     ],
     experience: [
       {
+        company: "Magnite",
+        title: "Staff Software Engineer",
+        place: "Remoto",
+        period: "Out 2026 – Atual",
+        bullets: [],
+        tech: "",
+      },
+      {
         company: "Avenue Code",
         title: "Staff Software Engineer · Tech Lead",
         place: "SF Bay Area, EUA",
-        period: "2022 – Atual",
+        period: "2022 – 2026",
         bullets: [
           "Lidero iniciativas técnicas em supply chain, logística, engenharia de dados e programas de IA para organizações de varejo Fortune 500.",
           "Construí a prova de conceito de uma plataforma de regras interna estratégica, ajudando a liderança a avaliar a substituição de uma solução comercial e estabelecendo a base para futuras capacidades orientadas a IA.",
