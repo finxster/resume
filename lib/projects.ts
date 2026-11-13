@@ -165,6 +165,64 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "desembrick",
+    name: "Desembrick",
+    logo: "/projects/desembrick.svg",
+    status: "active",
+    start: 2026,
+    tagline: {
+      en: "Turns a LEGO® instruction manual into a \"reverse manual\" to sort a mixed set back into its bags.",
+      pt: "Transforma o manual de instruções LEGO® num \"manual reverso\" para separar um set misturado de volta nos sacos.",
+    },
+    description: {
+      en: "Anyone who builds sets knows the moment: everything ends up in one box, and rebuilding means hunting for parts across a mixed pile. Desembrick reads the official LEGO® PDF instruction manual and produces a reverse manual — one page per numbered bag, with every part and its summed quantity — so the set can be sorted back into its original bags. The core is a standalone Python engine that detects bag pages, parses each step's parts box, reads the quantities, aggregates per bag and writes a print-ready PDF plus JSON. Online it runs entirely on free tiers: a Vue 3 SPA on Cloudflare Pages, a Cloudflare Worker (Hono) API that takes the uploads into R2 and dispatches the engine as a GitHub Actions job — no database, anonymous jobs that expire in a day, Turnstile and per-IP rate limiting. Bilingual (EN/PT), with its own brand system designed with Claude Design.",
+      pt: "Quem monta sets conhece o momento: tudo acaba numa caixa só, e remontar vira caçar peça numa pilha misturada. O Desembrick lê o manual de instruções oficial em PDF da LEGO® e gera um manual reverso — uma página por saco numerado, com cada peça e sua quantidade somada — para separar o set de volta nos sacos originais. O núcleo é um engine standalone em Python que detecta as páginas de saco, interpreta o quadro de peças de cada passo, lê as quantidades, agrega por saco e gera um PDF pronto para impressão mais um JSON. Online roda inteiro em free tiers: uma SPA em Vue 3 no Cloudflare Pages, uma API em Cloudflare Worker (Hono) que recebe os uploads no R2 e dispara o engine como job no GitHub Actions — sem banco, jobs anônimos que expiram em um dia, Turnstile e rate limit por IP. Bilíngue (EN/PT), com brand system próprio desenhado com Claude Design.",
+    },
+    tech: ["Python", "Vue", "TypeScript", "Cloudflare Workers"],
+    stack: [
+      "Python",
+      "PyMuPDF",
+      "Pillow",
+      "ReportLab",
+      "Vue",
+      "Vite",
+      "TypeScript",
+      "Hono",
+      "Cloudflare Workers",
+      "Cloudflare R2",
+      "Cloudflare Turnstile",
+      "Cloudflare Pages",
+      "GitHub Actions (processing runner)",
+    ],
+    llms: ["claude"],
+    deployment: "cloudflare-pages",
+    link: "https://desembrick.finx.dev",
+    brandDoc: "/desembrick-brand-system.pdf",
+    screenshots: [
+      {
+        src: "/projects/desembrick-home.jpg",
+        caption: {
+          en: "Upload up to five PDF booklets of one set — free, no sign-up.",
+          pt: "Envie até cinco livretos em PDF de um set — grátis, sem cadastro.",
+        },
+      },
+      {
+        src: "/projects/desembrick-reverse-page.jpg",
+        caption: {
+          en: "The reverse manual — one page per bag, every part with its summed quantity.",
+          pt: "O manual reverso — uma página por saco, cada peça com a quantidade somada.",
+        },
+      },
+      {
+        src: "/projects/desembrick-how.jpg",
+        caption: {
+          en: "How it works — get the manual, upload it, sort by bag.",
+          pt: "Como funciona — pegue o manual, envie, separe por saco.",
+        },
+      },
+    ],
+  },
+  {
     slug: "piggly",
     name: "Piggly",
     logo: "/projects/piggly.svg",
